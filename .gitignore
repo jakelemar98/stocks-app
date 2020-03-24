@@ -1,1 +1,2 @@
-frontend/stocks/node_modules
+stocks-app/node_modules
+stocks-app/dist
