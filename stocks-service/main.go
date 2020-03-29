@@ -4,7 +4,6 @@ import (
 	context "context"
 	"encoding/json"
 	"flag"
-	"fmt"
 	"io/ioutil"
 	"log"
 	"net"
@@ -21,8 +20,8 @@ var (
 	apiKey  = "N8ECE7S8XE8QTU03"
 )
 
-type TimeSeriesDaily struct {
-	Data interface{} `json:"Time Series (Daily)"`
+type GlobalQuote struct {
+	Stock map[string]string `json:"Global Quote"`
 }
 
 func init() {
@@ -49,26 +48,23 @@ func (s *server) GetStockPrice(c context.Context, req *pb.Request) (*pb.Response
 }
 
 func stockPriceFetch(symbol string) string {
-	log.Println("fetching......")
-	var returnVal []byte
-	url := apiBase + "TIME_SERIES_DAILY&symbol=" + symbol + "&apikey=" + apiKey
+	var returnVal string
+	url := apiBase + "GLOBAL_QUOTE&symbol=" + symbol + "&apikey=" + apiKey
 	response, err := http.Get(url)
 	if err != nil {
 		log.Fatalf("server error -> %s\n", err)
 	} else {
+		defer response.Body.Close()
 		data, _ := ioutil.ReadAll(response.Body)
-		returnVal = data
+		var gq GlobalQuote
+		err = json.Unmarshal(data, &gq)
+		if err != nil {
+			log.Fatal(err)
+		}
+		jsonString, _ := json.Marshal(gq.Stock)
+		returnVal = string(jsonString)
 	}
-
-	var tsdi TimeSeriesDaily
-	err = json.Unmarshal(returnVal, &tsdi)
-	if err != nil {
-		log.Fatal(err)
-	}
-	tsd, _ := tsdi.Data.(map[string]interface{})
-	fmt.Println(tsd["2020-03-27"])
-	res := string(returnVal)
-	return res
+	return returnVal
 }
 
 func main() {
