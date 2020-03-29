@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = 'com.grpc.services'; 
+
+service StockService {
+    rpc GetStockPrice(Request) returns (Response);
+}
+
+message Request {
+    string stockSymbol = 1;
+}
+
+message Response {
+    string stockInfo = 1;
+}
