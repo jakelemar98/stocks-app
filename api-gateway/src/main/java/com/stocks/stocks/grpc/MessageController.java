@@ -1,7 +1,6 @@
 package com.stocks.stocks.grpc;
 
 import com.google.protobuf.util.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +16,7 @@ public class MessageController {
 
 	@GetMapping("/sendMessage")
 	public ResponseEntity<String> sendMessage(@RequestParam(value = "name") String name) {
+        System.out.println("hi");
         Response messageResponse = mc.getMessage(name);
 
         String jsonString = "";

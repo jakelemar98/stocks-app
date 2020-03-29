@@ -4,10 +4,12 @@ services:
   backend:
     container_name: spring-app
     build: 
-      context: ./stocks-api
+      context: ./api-gateway
       dockerfile: Dockerfile
     ports: 
       - "9000:8080"
+    depends_on: 
+      - stocks-service
 
   frontend:
     container_name: angular-app
@@ -22,3 +24,11 @@ services:
       NODE_ENV: development
     depends_on: 
       - backend
+  
+  stocks-service:
+    container_name: go-stocks
+    build:
+        context: ./stocks-service
+        dockerfile: Dockerfile
+    ports: 
+      - "8000:8000"

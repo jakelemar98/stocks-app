@@ -17,7 +17,7 @@ public class MessageClient {
 
 
     public Response getMessage(String name){
-        ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 8001)
+        ManagedChannel channel = ManagedChannelBuilder.forAddress("stocks-service", 8000)
         .usePlaintext()
         .build();
 

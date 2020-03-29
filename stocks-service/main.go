@@ -13,7 +13,7 @@ import (
 )
 
 var (
-	port = flag.String("port", "8001", "port")
+	port = flag.String("port", "8000", "port")
 )
 
 func init() {
