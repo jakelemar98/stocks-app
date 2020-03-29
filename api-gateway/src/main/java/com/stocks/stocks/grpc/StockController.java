@@ -5,18 +5,19 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 import com.grpc.services.Response;
 
-
 @RestController
+@CrossOrigin(origins = "*")
 public class StockController {
 
     StockClient sc = new StockClient();
 
 	@GetMapping("/stocks/price")
-	public ResponseEntity<String> sendResponse(@RequestParam(value = "name") String name) {
-        Response messageResponse = sc.getResponse(name);
+	public ResponseEntity<String> getStockPrice(@RequestParam(value = "symbol") String symbol) {
+        Response messageResponse = sc.getResponse(symbol, "price");
 
         String jsonString = "";
         try {
@@ -27,10 +28,18 @@ public class StockController {
 
         return new ResponseEntity<>(jsonString, HttpStatus.OK);
     }
-    
-    @GetMapping("/getMatches")
-	public String getMatches(@RequestParam(value = "name") String name) {
-        return "hey";
-    }
 
+    @GetMapping("/stocks/matches")
+	public ResponseEntity<String> getMatches(@RequestParam(value = "symbol") String symbol) {
+        Response messageResponse = sc.getResponse(symbol, "matches");
+
+        String jsonString = "";
+        try {
+            jsonString = JsonFormat.printer().print(messageResponse);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return new ResponseEntity<>(jsonString, HttpStatus.OK);
+    }
 }

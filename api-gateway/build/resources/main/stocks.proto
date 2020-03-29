@@ -5,6 +5,7 @@ option java_package = 'com.grpc.services';
 
 service StockService {
     rpc GetStockPrice(Request) returns (Response);
+    rpc GetStockOptions(Request) returns (Response);
 }
 
 message Request {

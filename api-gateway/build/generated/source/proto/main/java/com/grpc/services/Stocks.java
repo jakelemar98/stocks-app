@@ -34,8 +34,9 @@ public final class Stocks {
   static {
     java.lang.String[] descriptorData = {
       "\n\014stocks.proto\"\036\n\007Request\022\023\n\013stockSymbol" +
-      "\030\001 \001(\t\"\035\n\010Response\022\021\n\tstockInfo\030\001 \001(\t24\n" +
+      "\030\001 \001(\t\"\035\n\010Response\022\021\n\tstockInfo\030\001 \001(\t2\\\n" +
       "\014StockService\022$\n\rGetStockPrice\022\010.Request" +
+      "\032\t.Response\022&\n\017GetStockOptions\022\010.Request" +
       "\032\t.ResponseB\025\n\021com.grpc.servicesP\001b\006prot" +
       "o3"
     };

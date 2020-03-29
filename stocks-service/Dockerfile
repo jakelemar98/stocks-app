@@ -10,8 +10,8 @@ RUN go get github.com/golang/protobuf/proto
 RUN go get golang.org/x/net/context
 RUN go get google.golang.org/grpc
 
-RUN go build main.go
+RUN go build *.go
 
-ENTRYPOINT ["./main"]
+ENTRYPOINT ["./api"]
 
 
