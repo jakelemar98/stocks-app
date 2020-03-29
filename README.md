@@ -19,5 +19,5 @@ Stocks Application to get info about specific stocks. Services will be built out
   - protoc compiler commands
     - Java
       - proto files are compiled when the gradle wrapper runs a build (i.e. `./gradlew clean build` from api-gateway/)
-     -Go
+    - Go
       - will put command here soon
