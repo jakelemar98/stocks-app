@@ -20,4 +20,4 @@ Stocks Application to get info about specific stocks. Services will be built out
     - Java
       - proto files are compiled when the gradle wrapper runs a build (i.e. `./gradlew clean build` from api-gateway/)
     - Go
-      - will put command here soon
+      - `protoc  stocks.proto --go_out=plugins=grpc:.` (run this command from stocks-service/proto directory)
