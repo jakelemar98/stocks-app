@@ -1,16 +1,6 @@
 version: "3"
 services: 
 
-  backend:
-    container_name: spring-app
-    build: 
-      context: ./api-gateway
-      dockerfile: Dockerfile
-    ports: 
-      - "9000:8080"
-    depends_on: 
-      - stocks-service
-
   frontend:
     container_name: angular-app
     build:
@@ -23,7 +13,24 @@ services:
     environment: 
       NODE_ENV: development
     depends_on: 
-      - backend
+      - api-gateway
+
+  api-gateway:
+    container_name: api-gateway
+    build: 
+      context: ./api-gateway
+      dockerfile: Dockerfile
+    ports: 
+      - "9000:8080"
+    depends_on: 
+      - stocks-service
+      - redis
+
+  redis:
+    container_name: redis-cache
+    image: redis
+    ports:
+      - "6379:6379"
   
   stocks-service:
     container_name: go-stocks
@@ -32,3 +39,5 @@ services:
         dockerfile: Dockerfile
     ports: 
       - "8000:8000"
+
+  
