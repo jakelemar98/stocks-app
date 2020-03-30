@@ -20,6 +20,7 @@ dependencies {
 	compile group: 'io.grpc', name: 'grpc-stub', version: '1.19.0'
 	compile group: 'io.grpc', name: 'grpc-netty-shaded', version: '1.19.0'
 	compile group: 'io.grpc', name: 'grpc-netty', version: '1.19.0'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-redis', version: '2.2.6.RELEASE'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {

@@ -1,6 +1,8 @@
 package com.stocks.stocks.grpc;
 
 import com.google.protobuf.util.*;
+
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,8 +17,9 @@ public class StockController {
 
     StockClient sc = new StockClient();
 
-	@GetMapping("/stocks/price")
-	public ResponseEntity<String> getStockPrice(@RequestParam(value = "symbol") String symbol) {
+    @GetMapping("/stocks/price")
+    @Cacheable("getStockPrice")
+	public String getStockPrice(@RequestParam(value = "symbol") String symbol) {
         Response messageResponse = sc.getResponse(symbol, "price");
 
         String jsonString = "";
@@ -26,11 +29,12 @@ public class StockController {
             e.printStackTrace();
         }
 
-        return new ResponseEntity<>(jsonString, HttpStatus.OK);
+        return jsonString;
     }
 
     @GetMapping("/stocks/matches")
-	public ResponseEntity<String> getMatches(@RequestParam(value = "symbol") String symbol) {
+    @Cacheable("getMatches")
+	public String getMatches(@RequestParam(value = "symbol") String symbol) {
         Response messageResponse = sc.getResponse(symbol, "matches");
 
         String jsonString = "";
@@ -40,6 +44,6 @@ public class StockController {
             e.printStackTrace();
         }
 
-        return new ResponseEntity<>(jsonString, HttpStatus.OK);
+        return jsonString;
     }
 }
