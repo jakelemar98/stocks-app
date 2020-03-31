@@ -1,0 +1,22 @@
+// Java protoc complation done for you throug Gradle ( ./gradlew clean build )
+
+/* 
+    Go protoc complation command
+    run from /stocks-app/proto dir
+    protoc --go_out=plugins=grpc:../stocks-service/proto stocks.proto
+*/
+
+syntax = "proto3";
+
+service StockService {
+    rpc GetStockPrice(Request) returns (Response);
+    rpc GetStockOptions(Request) returns (Response);
+}
+
+message Request {
+    string stockSymbol = 1;
+}
+
+message Response {
+    string stockInfo = 1;
+}
