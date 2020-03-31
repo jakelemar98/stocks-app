@@ -3,9 +3,9 @@ package com.gateway.grpc.stocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
-import com.grpc.services.StockServiceGrpc;
-import com.grpc.services.Request;
-import com.grpc.services.Response;
+import com.grpc.services.stocks.StockServiceGrpc;
+import com.grpc.services.stocks.Request;
+import com.grpc.services.stocks.Response;
 
 public class StockClient {
 
