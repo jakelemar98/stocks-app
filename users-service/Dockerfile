@@ -1,6 +1,8 @@
 FROM python:3.6-onbuild
 
-ADD . .
+WORKDIR /app/python
+
+ADD . /app
 
 RUN python -m pip install grpcio
 RUN python -m pip install grpcio-tools
