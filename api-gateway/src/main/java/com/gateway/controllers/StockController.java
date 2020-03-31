@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 import com.google.protobuf.util.*;
-import com.grpc.services.Response;
+import com.grpc.services.stocks.Response;
 import com.gateway.grpc.stocks.StockClient;
 
 @RestController

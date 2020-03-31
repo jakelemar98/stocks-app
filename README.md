@@ -7,6 +7,7 @@ Stocks Application to get info about specific stocks. Services will be built out
   - Java api-gateway (uses Java 11)
   - Redis Data Store (Caches frequently made requests)
   - Go stocks service (Go 1.14)
+  - Python users service (Python 3.6)
   
  ### How To Use
   - Clone Repo
@@ -31,3 +32,5 @@ Stocks Application to get info about specific stocks. Services will be built out
         - `Docker pull redis && docker run -p 6379:6379 --name redis-container redis`
       - Build & Run Go Stocks Service
         - `cd stocks-service && docker build -t stocks-service . && docker run -p 8000:8000 -it stocks-service`
+      - Build & Run Python Users Service
+        - `cd users-service && docker build -t users-service . && docker run -p 8001:8001 -it users-service`

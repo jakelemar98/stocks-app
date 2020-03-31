@@ -3,17 +3,17 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <meta http-equiv="x-ua-compatible" content="IE=edge"/>
-<title>Test results - GatewayApplicationTests</title>
+<title>Test results - StocksApplicationTests</title>
 <link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
 <link href="../css/style.css" rel="stylesheet" type="text/css"/>
 <script src="../js/report.js" type="text/javascript"></script>
 </head>
 <body>
 <div id="content">
-<h1>GatewayApplicationTests</h1>
+<h1>StocksApplicationTests</h1>
 <div class="breadcrumbs">
 <a href="../index.html">all</a> &gt; 
-<a href="../packages/com.gateway.html">com.gateway</a> &gt; GatewayApplicationTests</div>
+<a href="../packages/com.gateway.html">com.gateway</a> &gt; StocksApplicationTests</div>
 <div id="summary">
 <table>
 <tr>
@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.205s</div>
+<div class="counter">0.227s</div>
 <p>duration</p>
 </div>
 </td>
@@ -79,7 +79,7 @@
 </thead>
 <tr>
 <td class="success">contextLoads()</td>
-<td class="success">0.205s</td>
+<td class="success">0.227s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -87,22 +87,22 @@
 <div id="tab1" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>21:36:24.364 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating CacheAwareContextLoaderDelegate from class [org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate]
-21:36:24.373 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating BootstrapContext using constructor [public org.springframework.test.context.support.DefaultBootstrapContext(java.lang.Class,org.springframework.test.context.CacheAwareContextLoaderDelegate)]
-21:36:24.393 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating TestContextBootstrapper for test class [com.gateway.StocksApplicationTests] from class [org.springframework.boot.test.context.SpringBootTestContextBootstrapper]
-21:36:24.409 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Neither @ContextConfiguration nor @ContextHierarchy found for test class [com.gateway.StocksApplicationTests], using SpringBootContextLoader
-21:36:24.411 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [com.gateway.StocksApplicationTests]: class path resource [com/gateway/StocksApplicationTests-context.xml] does not exist
-21:36:24.411 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [com.gateway.StocksApplicationTests]: class path resource [com/gateway/StocksApplicationTestsContext.groovy] does not exist
-21:36:24.412 [Test worker] INFO org.springframework.test.context.support.AbstractContextLoader - Could not detect default resource locations for test class [com.gateway.StocksApplicationTests]: no resource found for suffixes {-context.xml, Context.groovy}.
-21:36:24.412 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.gateway.StocksApplicationTests]: StocksApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-21:36:24.437 [Test worker] DEBUG org.springframework.test.context.support.ActiveProfilesUtils - Could not find an 'annotation declaring class' for annotation type [org.springframework.test.context.ActiveProfiles] and class [com.gateway.StocksApplicationTests]
-21:36:24.475 [Test worker] DEBUG org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider - Identified candidate component class: file [/home/big-daddy/code/stocks-app/api-gateway/build/classes/java/main/com/gateway/GatewayApplication.class]
-21:36:24.475 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.gateway.GatewayApplication for test class com.gateway.StocksApplicationTests
-21:36:24.531 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - @TestExecutionListeners is not present for class [com.gateway.StocksApplicationTests]: using defaults.
-21:36:24.531 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
-21:36:24.540 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@6f7f7234, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@599ac328, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@519360f9, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@50d644c0, org.springframework.test.context.support.DirtiesContextTestExecutionListener@44ac623c, org.springframework.test.context.transaction.TransactionalTestExecutionListener@4b206a02, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@1fe5f37, org.springframework.test.context.event.EventPublishingTestExecutionListener@636ceb8c, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@44f6d85f, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@ccedab9, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@7f3a3bf0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@7b0e9f10, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@9c8940e]
-21:36:24.542 [Test worker] DEBUG org.springframework.test.context.support.AbstractDirtiesContextTestExecutionListener - Before test class: context [DefaultTestContext@2f9a8a15 testClass = StocksApplicationTests, testInstance = [null], testMethod = [null], testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@7f6355d5 testClass = StocksApplicationTests, locations = '{}', classes = '{class com.gateway.GatewayApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@1ec15913, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@2cb62e61, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@657ff6e2, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@4ba24dab, org.springframework.boot.test.web.reactive.server.WebTestClientContextCustomizer@35860772], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -&gt; true]], class annotated with @DirtiesContext [false] with mode [null].
-21:36:24.559 [Test worker] DEBUG org.springframework.test.context.support.TestPropertySourceUtils - Adding inlined properties to environment: {spring.jmx.enabled=false, org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true, server.port=-1}
+<pre>02:03:41.971 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating CacheAwareContextLoaderDelegate from class [org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate]
+02:03:41.980 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating BootstrapContext using constructor [public org.springframework.test.context.support.DefaultBootstrapContext(java.lang.Class,org.springframework.test.context.CacheAwareContextLoaderDelegate)]
+02:03:42.020 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating TestContextBootstrapper for test class [com.gateway.StocksApplicationTests] from class [org.springframework.boot.test.context.SpringBootTestContextBootstrapper]
+02:03:42.035 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Neither @ContextConfiguration nor @ContextHierarchy found for test class [com.gateway.StocksApplicationTests], using SpringBootContextLoader
+02:03:42.039 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [com.gateway.StocksApplicationTests]: class path resource [com/gateway/StocksApplicationTests-context.xml] does not exist
+02:03:42.040 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [com.gateway.StocksApplicationTests]: class path resource [com/gateway/StocksApplicationTestsContext.groovy] does not exist
+02:03:42.041 [Test worker] INFO org.springframework.test.context.support.AbstractContextLoader - Could not detect default resource locations for test class [com.gateway.StocksApplicationTests]: no resource found for suffixes {-context.xml, Context.groovy}.
+02:03:42.041 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.gateway.StocksApplicationTests]: StocksApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+02:03:42.070 [Test worker] DEBUG org.springframework.test.context.support.ActiveProfilesUtils - Could not find an 'annotation declaring class' for annotation type [org.springframework.test.context.ActiveProfiles] and class [com.gateway.StocksApplicationTests]
+02:03:42.113 [Test worker] DEBUG org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider - Identified candidate component class: file [/home/big-daddy/code/stocks-app/api-gateway/build/classes/java/main/com/gateway/GatewayApplication.class]
+02:03:42.113 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.gateway.GatewayApplication for test class com.gateway.StocksApplicationTests
+02:03:42.171 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - @TestExecutionListeners is not present for class [com.gateway.StocksApplicationTests]: using defaults.
+02:03:42.172 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+02:03:42.180 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@5093ea37, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@18b29993, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@74fba792, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@27b62bb7, org.springframework.test.context.support.DirtiesContextTestExecutionListener@683baf24, org.springframework.test.context.transaction.TransactionalTestExecutionListener@6449cdb1, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@4d27219d, org.springframework.test.context.event.EventPublishingTestExecutionListener@5bda501d, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@6ead96cd, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@4423faec, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@307c003c, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@39aff496, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@3bb61690]
+02:03:42.183 [Test worker] DEBUG org.springframework.test.context.support.AbstractDirtiesContextTestExecutionListener - Before test class: context [DefaultTestContext@4d71b114 testClass = StocksApplicationTests, testInstance = [null], testMethod = [null], testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@2c3e2d6c testClass = StocksApplicationTests, locations = '{}', classes = '{class com.gateway.GatewayApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@6792125c, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@269d3903, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@41d5148, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@14e48def, org.springframework.boot.test.web.reactive.server.WebTestClientContextCustomizer@34d51a62], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -&gt; true]], class annotated with @DirtiesContext [false] with mode [null].
+02:03:42.199 [Test worker] DEBUG org.springframework.test.context.support.TestPropertySourceUtils - Adding inlined properties to environment: {spring.jmx.enabled=false, org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true, server.port=-1}
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -112,13 +112,13 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::        (v2.2.6.RELEASE)
 
-2020-03-30 21:36:24.738  INFO 12251 --- [    Test worker] com.gateway.StocksApplicationTests       : Starting StocksApplicationTests on bigDaddy-System-Product-Name with PID 12251 (started by big-daddy in /home/big-daddy/code/stocks-app/api-gateway)
-2020-03-30 21:36:24.739  INFO 12251 --- [    Test worker] com.gateway.StocksApplicationTests       : No active profile set, falling back to default profiles: default
-2020-03-30 21:36:25.163  INFO 12251 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
-2020-03-30 21:36:25.165  INFO 12251 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2020-03-30 21:36:25.185  INFO 12251 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 10ms. Found 0 Redis repository interfaces.
-2020-03-30 21:36:25.821  INFO 12251 --- [    Test worker] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2020-03-30 21:36:26.385  INFO 12251 --- [    Test worker] com.gateway.StocksApplicationTests       : Started StocksApplicationTests in 1.82 seconds (JVM running for 2.55)
+2020-03-31 02:03:42.396  INFO 25754 --- [    Test worker] com.gateway.StocksApplicationTests       : Starting StocksApplicationTests on bigDaddy-System-Product-Name with PID 25754 (started by big-daddy in /home/big-daddy/code/stocks-app/api-gateway)
+2020-03-31 02:03:42.397  INFO 25754 --- [    Test worker] com.gateway.StocksApplicationTests       : No active profile set, falling back to default profiles: default
+2020-03-31 02:03:42.823  INFO 25754 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2020-03-31 02:03:42.825  INFO 25754 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2020-03-31 02:03:42.845  INFO 25754 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 9ms. Found 0 Redis repository interfaces.
+2020-03-31 02:03:43.608  INFO 25754 --- [    Test worker] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-03-31 02:03:44.189  INFO 25754 --- [    Test worker] com.gateway.StocksApplicationTests       : Started StocksApplicationTests in 1.984 seconds (JVM running for 2.835)
 </pre>
 </span>
 </div>
@@ -130,7 +130,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 6.3</a> at Mar 30, 2020, 9:36:26 PM</p>
+<a href="http://www.gradle.org">Gradle 6.3</a> at Mar 31, 2020, 2:03:44 AM</p>
 </div>
 </div>
 </body>
