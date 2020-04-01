@@ -1,6 +1,8 @@
-// Java protoc complation done for you throug Gradle ( ./gradlew clean build )
+// Proto to connect Java Gateway to Python Users-service
 
 /* 
+    Java protoc complation done for you throug Gradle ( ./gradlew clean build )
+
     Python protoc complation command
     run from /stocks-app/proto dir
     python3 -m grpc_tools.protoc -I. --python_out=../users-service --grpc_python_out=../users-service  users.proto

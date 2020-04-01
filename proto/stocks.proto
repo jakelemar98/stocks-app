@@ -1,6 +1,8 @@
-// Java protoc complation done for you throug Gradle ( ./gradlew clean build )
+// Stocks Proto to connect Java Gateway to Go stocks-service
 
 /* 
+    Java protoc complation done for you throug Gradle ( ./gradlew clean build )
+
     Go protoc complation command
     run from /stocks-app/proto dir
     protoc --go_out=plugins=grpc:../stocks-service/proto stocks.proto
