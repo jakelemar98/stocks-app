@@ -40,6 +40,7 @@ services:
       - "8000:8000"
     depends_on: 
       - api-gateway
+      - email-service
 
   users-service:
     container_name: py-users
@@ -50,5 +51,15 @@ services:
       - "8001:8001"
     depends_on: 
       - api-gateway
+      - email-service
+
+  email-service:
+    container_name: node-email
+    build:
+      context: ./email-service
+      dockerfile: Dockerfile
+    ports: 
+      - "5001:5001"
+    
 
   

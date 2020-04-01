@@ -5,7 +5,7 @@ import (
 	"log"
 	"net"
 
-	pb "../proto"
+	pbS "../proto/stocks"
 	"google.golang.org/grpc"
 )
 
@@ -28,6 +28,7 @@ func StockService() *server {
 }
 
 func main() {
+	email()
 	log.Println("ZERO Server listening in :", *port)
 	lis, err := net.Listen("tcp", ":"+*port)
 	if err != nil {
@@ -36,7 +37,7 @@ func main() {
 
 	grpcServer := grpc.NewServer()
 	stockService := StockService()
-	pb.RegisterStockServiceServer(grpcServer, stockService)
+	pbS.RegisterStockServiceServer(grpcServer, stockService)
 
 	if err := grpcServer.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)

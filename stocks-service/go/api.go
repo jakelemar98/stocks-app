@@ -7,7 +7,7 @@ import (
 	"log"
 	"net/http"
 
-	pb "../proto"
+	pb "../proto/stocks"
 )
 
 var (
