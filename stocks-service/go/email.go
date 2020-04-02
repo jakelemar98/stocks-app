@@ -27,7 +27,7 @@ func email() {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
 	em := &pb.Email{
-		[]string{"jakelemar98@gmail.com", "jalema01@wsc.edu", "Temple2697@gmail.com"},
+		[]string{"jakelemar98@gmail.com"},
 		"Testing Out the Email",
 		"If this works thats fucking DOPE"}
 
