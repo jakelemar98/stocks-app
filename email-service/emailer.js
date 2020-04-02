@@ -1,17 +1,18 @@
 const nodemailer = require('nodemailer');
 
 let transport = nodemailer.createTransport({
-    host: "smtp.mailtrap.io",
-    port: 2525,
+    host: "smtp.zoho.com",
+    port: 465,
+    secure: true,
     auth: {
-      user: "b13d1aada039de",
-      pass: "f64b06a26aa93b"
+      user: "mail@stocks4fun.com",
+      pass: "qRtiyKsT6JVX"
     }
 });
 module.exports = {
-  sendEmail: function (to, from, subject, body) {
+  sendEmail: function (to, subject, body) {
     const message = {
-      from: from,
+      from: "mail@stocks4fun.com",
       to: to,
       subject: subject,
       html: body
