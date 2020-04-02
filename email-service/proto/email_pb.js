@@ -370,9 +370,8 @@ proto.Email.prototype.toObject = function(opt_includeInstance) {
 proto.Email.toObject = function(includeInstance, msg) {
   var f, obj = {
     toaddressList: jspb.Message.getRepeatedField(msg, 1),
-    fromaddress: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    subject: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    html: jspb.Message.getFieldWithDefault(msg, 4, "")
+    subject: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    html: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
   if (includeInstance) {
@@ -415,13 +414,9 @@ proto.Email.deserializeBinaryFromReader = function(msg, reader) {
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
-      msg.setFromaddress(value);
-      break;
-    case 3:
-      var value = /** @type {string} */ (reader.readString());
       msg.setSubject(value);
       break;
-    case 4:
+    case 3:
       var value = /** @type {string} */ (reader.readString());
       msg.setHtml(value);
       break;
@@ -461,24 +456,17 @@ proto.Email.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getFromaddress();
+  f = message.getSubject();
   if (f.length > 0) {
     writer.writeString(
       2,
       f
     );
   }
-  f = message.getSubject();
-  if (f.length > 0) {
-    writer.writeString(
-      3,
-      f
-    );
-  }
   f = message.getHtml();
   if (f.length > 0) {
     writer.writeString(
-      4,
+      3,
       f
     );
   }
@@ -515,47 +503,32 @@ proto.Email.prototype.clearToaddressList = function() {
 
 
 /**
- * optional string fromAddress = 2;
+ * optional string subject = 2;
  * @return {string}
  */
-proto.Email.prototype.getFromaddress = function() {
+proto.Email.prototype.getSubject = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
 
 /** @param {string} value */
-proto.Email.prototype.setFromaddress = function(value) {
+proto.Email.prototype.setSubject = function(value) {
   jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
 /**
- * optional string subject = 3;
+ * optional string html = 3;
  * @return {string}
  */
-proto.Email.prototype.getSubject = function() {
+proto.Email.prototype.getHtml = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
 };
 
 
 /** @param {string} value */
-proto.Email.prototype.setSubject = function(value) {
-  jspb.Message.setProto3StringField(this, 3, value);
-};
-
-
-/**
- * optional string html = 4;
- * @return {string}
- */
-proto.Email.prototype.getHtml = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
-};
-
-
-/** @param {string} value */
 proto.Email.prototype.setHtml = function(value) {
-  jspb.Message.setProto3StringField(this, 4, value);
+  jspb.Message.setProto3StringField(this, 3, value);
 };
 
 

@@ -1,7 +1,20 @@
 // GENERATED CODE -- DO NOT EDIT!
 
 // Original file comments:
-// Email proto file to connect 
+// Email proto file to connect services to Email-Service
+//
+// 
+// Command For Node Compolation
+// run from /stocks-app/proto dir
+// grpc_tools_node_protoc -I=. --js_out=import_style=commonjs,binary:../email-service/proto --grpc_out=../email-service/proto --plugin=protoc-gen-grpc=`which grpc_tools_node_protoc_plugin` email.proto 
+//
+// Go protoc complation command
+// run from /stocks-app/proto dir
+// protoc --go_out=plugins=grpc:../stocks-service/proto email.proto
+//
+// Python Protoc complation command
+// run from /stocks-app/proto dir
+// python3 -m grpc_tools.protoc -I. --python_out=../users-service/proto --grpc_python_out=../users-service/proto  email.proto
 //
 'use strict';
 var grpc = require('grpc');

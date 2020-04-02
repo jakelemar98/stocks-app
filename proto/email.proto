@@ -7,11 +7,11 @@
 
     Go protoc complation command
     run from /stocks-app/proto dir
-    protoc --go_out=plugins=grpc:../stocks-service/proto email.proto
+    protoc --go_out=plugins=grpc:../stocks-service/proto/email email.proto
 
     Python Protoc complation command
     run from /stocks-app/proto dir
-    python3 -m grpc_tools.protoc -I. --python_out=../users-service/proto --grpc_python_out=../users-service/proto  email.proto
+    python3 -m grpc_tools.protoc -I. --python_out=../users-service/proto/ --grpc_python_out=../users-service/proto  email.proto
 */
 
 syntax= "proto3";
@@ -30,7 +30,6 @@ message EmailReply {
 
 message Email {
     repeated string toAddress = 1;
-    string fromAddress = 2;
-    string subject = 3;
-    string html = 4;
+    string subject = 2;
+    string html = 3;
 }

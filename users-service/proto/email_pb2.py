@@ -18,7 +18,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=b'\n\x0b\x65mail.proto\"%\n\x0c\x45mailRequest\x12\x15\n\x05\x65mail\x18\x01 \x01(\x0b\x32\x06.Email\"\x1b\n\nEmailReply\x12\r\n\x05reply\x18\x01 \x01(\t\"N\n\x05\x45mail\x12\x11\n\ttoAddress\x18\x01 \x03(\t\x12\x13\n\x0b\x66romAddress\x18\x02 \x01(\t\x12\x0f\n\x07subject\x18\x03 \x01(\t\x12\x0c\n\x04html\x18\x04 \x01(\t28\n\x0c\x45mailService\x12(\n\x08SendMail\x12\r.EmailRequest\x1a\x0b.EmailReply\"\x00\x62\x06proto3'
+  serialized_pb=b'\n\x0b\x65mail.proto\"%\n\x0c\x45mailRequest\x12\x15\n\x05\x65mail\x18\x01 \x01(\x0b\x32\x06.Email\"\x1b\n\nEmailReply\x12\r\n\x05reply\x18\x01 \x01(\t\"9\n\x05\x45mail\x12\x11\n\ttoAddress\x18\x01 \x03(\t\x12\x0f\n\x07subject\x18\x02 \x01(\t\x12\x0c\n\x04html\x18\x03 \x01(\t28\n\x0c\x45mailService\x12(\n\x08SendMail\x12\r.EmailRequest\x1a\x0b.EmailReply\"\x00\x62\x06proto3'
 )
 
 
@@ -101,22 +101,15 @@ _EMAIL = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='fromAddress', full_name='Email.fromAddress', index=1,
+      name='subject', full_name='Email.subject', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='subject', full_name='Email.subject', index=2,
+      name='html', full_name='Email.html', index=2,
       number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='html', full_name='Email.html', index=3,
-      number=4, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -134,7 +127,7 @@ _EMAIL = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=83,
-  serialized_end=161,
+  serialized_end=140,
 )
 
 _EMAILREQUEST.fields_by_name['email'].message_type = _EMAIL
@@ -172,8 +165,8 @@ _EMAILSERVICE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=163,
-  serialized_end=219,
+  serialized_start=142,
+  serialized_end=198,
   methods=[
   _descriptor.MethodDescriptor(
     name='SendMail',

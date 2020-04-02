@@ -27,10 +27,9 @@ func email() {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
 	em := &pb.Email{
-		[]string{"jakelemar@gmail.com", "jake2@gmail.com"},
-		"Jake@gmail.com",
-		"nothing",
-		"this isnt workign weel"}
+		[]string{"jakelemar98@gmail.com", "jalema01@wsc.edu", "Temple2697@gmail.com"},
+		"Testing Out the Email",
+		"If this works thats fucking DOPE"}
 
 	r, err := c.SendMail(ctx, &pb.EmailRequest{Email: em})
 	if err != nil {
