@@ -1,13 +1,22 @@
 # This workflow will build a Java project with Gradle
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
 
-name: Build Dat Jar Boi
+name: Build Dat Jar Boi, then deploy dat Container
 
 on:
   push:
     branches: [ master ]
   pull_request:
     branches: [ master ]
+
+env:
+  GKE_PROJECT: ${{ secrets.GKE_PROJECT }}
+  GKE_EMAIL: ${{ secrets.GKE_EMAIL }}
+  GITHUB_SHA: ${{ github.sha }}
+  GKE_ZONE: us-central1
+  GKE_CLUSTER: stocks-cluster
+  IMAGE: api-gateway
+  REGISTRY_HOSTNAME: us.gcr.io
 
 jobs:
   build:
@@ -35,6 +44,8 @@ jobs:
         name: gateway
         path: ${{env.working-directory}}/build/libs
   deploy:
+    name: deploy
+    needs: [build]
     runs-on: ubuntu-latest
     env:
       working-directory: ./api-gateway
