@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
       - name: api-gateway
-        image: us.gcr.io/stocks-app-email/api-gateway:latest
+        image: us.gcr.io/stocks-app-email/api-gateway:$GITHUB_SHA
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
