@@ -57,5 +57,7 @@ jobs:
     - name: Build Image 
       run: docker build -t api-gateway --build-arg JAR_FILE=$GITHUB_WORKSPACE/gateway/*.jar .
       working-directory: ${{env.working-directory}}
+    - name: Run Image
+      run: docker run -it api-gateway
 
 
