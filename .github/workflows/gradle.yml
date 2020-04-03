@@ -31,7 +31,8 @@ jobs:
       working-directory: ${{env.working-directory}}
     - name: package jar file
       uses: actions/upload-artifact@v1
+      
       with:
         name: Package
-        path: build/libs
+        path: ${{env.working-directory}}/build/libs
 
