@@ -45,6 +45,7 @@ jobs:
         path: ${{env.working-directory}}/build/libs
   setup-build-publish-deploy:
     name: Setup, Build, Publish, and Deploy
+    needs: [build]
     runs-on: ubuntu-latest
     steps:
 
@@ -95,7 +96,7 @@ jobs:
         kubectl get services -o wide
   # deploy:
   #   name: deploy
-  #   needs: [build]
+    # needs: [build]
   #   runs-on: ubuntu-latest
   #   env:
   #     working-directory: ./api-gateway
