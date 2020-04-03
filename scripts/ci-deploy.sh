@@ -5,7 +5,6 @@ set -e
 GITHUB_SHA=$1
 DEPLOYMENT=$2
 
-echo $2
 # We must export it so it's available for envsubst
 export GITHUB_SHA=$1
 
@@ -15,4 +14,4 @@ export GITHUB_SHA=$1
 envsubst <./k8s/$2-deployment.yml >./k8s/$2-deployment.yml.out
 mv ./k8s/$2-deployment.yml.out ./k8s/$2-deployment.yml
 
-./kubectl apply -f ./k8s/$2-deployment.yml
+kubectl apply -f ./k8s/$2-deployment.yml
