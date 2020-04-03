@@ -33,6 +33,9 @@ https://ng.stocks4fun.com
       - `cd stocks-service && docker build -t stocks-service . && docker run -p 8000:8000 -it stocks-service`
     - Build & Run Python Users Service
       - `cd users-service && docker build -t users-service . && docker run -p 8001:8001 -it users-service`
+  - Kubernetes
+    - Context Help
+      - https://kubernetes.io/docs/tasks/administer-cluster/namespaces-walkthrough/
       
 ### Image for Reference
 ![App Traffic](https://raw.githubusercontent.com/jakelemar98/stocks-app/master/autodraw%204_2_2020.png)
