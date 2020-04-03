@@ -42,7 +42,7 @@ jobs:
       uses: actions/upload-artifact@v1  
       with:
         name: gateway
-        path: build/libs
+        path: ${{env.working-directory}}/build/libs
   deploy:
     name: deploy
     needs: [build]
@@ -54,7 +54,7 @@ jobs:
     - uses: actions/download-artifact@v1
       with:
           name: gateway
-          path: build/libs
+          path: ${{env.working-directory}}/build/libs
     - run: cat ${{env.working-directory}}/build/libs/gateway.jar
     - name: check for new Jar
       run: ls -la
