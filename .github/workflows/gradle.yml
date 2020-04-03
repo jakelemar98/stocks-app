@@ -55,7 +55,6 @@ jobs:
       with:
           name: gateway
           path: ${{env.working-directory}}/build/libs
-    - run: cat ${{env.working-directory}}/build/libs/gateway.jar
     - name: check for new Jar
       run: ls -la
       working-directory: ${{env.working-directory}}/build/libs
