@@ -32,10 +32,21 @@ jobs:
     - name: package jar file
       uses: actions/upload-artifact@v1  
       with:
-        name: Package
+        name: gateway
         path: ${{env.working-directory}}/build/libs
-    - name: check the package
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      working-directory: ./api-gateway
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/download-artifact@v1
+      with:
+          name: gateway
+          path: ${{env.working-directory}}/build/libs
+    - run: cat build/libs/gateway.jar
+      working-directory: ${{env.working-directory}}
+    - name: check for new Jar
       run: ls -la
-      working-directory: ${{env.working-directory}}/build/libs/
-
+      working-directory: ${{env.working-directory}}/build/libs
 
