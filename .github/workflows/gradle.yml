@@ -54,8 +54,6 @@ jobs:
     - uses: actions/download-artifact@v1
       with:
           name: gateway
-          path: ${{env.working-directory}}/build/libs
-    - name: check for new Jar
-      run: ls -la
-      working-directory: ${{env.working-directory}}/build/libs
+    - name: Build Image 
+      run: docker build -t api-gateway --build-arg JAR_FILE=$GITHUB_WORKSPACE/gateway/*.jar
 
