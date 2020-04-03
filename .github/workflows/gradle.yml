@@ -83,7 +83,8 @@ jobs:
     - name: Deploy
       run: |
         gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GKE_PROJECT
-        ./scripts/ci-deploy.sh ${GITHUB_SHA}
+        chmod +x ./scripts/ci-deploy.sh
+        ./scripts/ci-deploy.sh $GITHUB_SHA gateway
 
   # deploy:
   #   name: deploy
