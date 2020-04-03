@@ -28,6 +28,6 @@ spec:
     spec:
       containers:
       - name: ng-app
-        image: us.gcr.io/stocks-app-email/ng-app:latest
+        image: us.gcr.io/stocks-app-email/ng-app:$GITHUB_SHA
         ports:
         - containerPort: 80

@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
       - name: node-email
-        image: us.gcr.io/stocks-app-email/node-email:latest
+        image: us.gcr.io/stocks-app-email/node-email:$GITHUB_SHA
         imagePullPolicy: Always
         ports:
         - containerPort: 5001

@@ -68,7 +68,7 @@ jobs:
       with:
           name: gateway
     - name: check for jar file
-      run: ls JAR_FILE=$GITHUB_WORKSPACE/gateway/
+      run: ls $GITHUB_WORKSPACE/gateway/
     # Build the Docker image
     - name: Build
       run: |        
