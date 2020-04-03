@@ -32,3 +32,6 @@ Stocks Application to get info about specific stocks. Services will be built out
       - `cd stocks-service && docker build -t stocks-service . && docker run -p 8000:8000 -it stocks-service`
     - Build & Run Python Users Service
       - `cd users-service && docker build -t users-service . && docker run -p 8001:8001 -it users-service`
+      
+### Image for Reference
+![App Traffic](autodraw 4_2_2020.png)
