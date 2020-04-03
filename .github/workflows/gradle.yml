@@ -67,7 +67,8 @@ jobs:
     - uses: actions/download-artifact@v1
       with:
           name: gateway
-
+    - name: check for jar file
+      run: ls JAR_FILE=$GITHUB_WORKSPACE/gateway/
     # Build the Docker image
     - name: Build
       run: |        
