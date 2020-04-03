@@ -28,7 +28,6 @@ func StockService() *server {
 }
 
 func main() {
-	email()
 	log.Println("ZERO Server listening in :", *port)
 	lis, err := net.Listen("tcp", ":"+*port)
 	if err != nil {

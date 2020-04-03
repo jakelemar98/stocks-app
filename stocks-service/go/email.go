@@ -28,7 +28,7 @@ func email() {
 	defer cancel()
 	em := &pb.Email{
 		[]string{"jakelemar98@gmail.com"},
-		"Testing Out the Email",
+		"Testing Out the Email from GO",
 		"If this works thats fucking DOPE"}
 
 	r, err := c.SendMail(ctx, &pb.EmailRequest{Email: em})
