@@ -1,6 +1,7 @@
 # STOCKS APPLICATION
 
 Stocks Application to get info about specific stocks. Services will be built out over time
+https://stocks4fun.com
 
 ### List Of Services
   - Angular9 frontend (Node and NPM needed)
