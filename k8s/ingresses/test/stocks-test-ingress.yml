@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: stocks-ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  tls:
+  - hosts:
+    - test.ng.stocks4fun.com
+    - test.gateway.stocks4fun.com
+    secretName: letsencrypt-prod2
+  rules:
+  - host: test.ng.stocks4fun.com
+    http:
+      paths:
+      - backend:
+          serviceName: test-ng-service
+          servicePort: 8080
+  - host: test.gateway.stocks4fun.com
+    http:
+      paths:
+      - backend:
+          serviceName: test-gateway-service
+          servicePort: 8080
+
+    
