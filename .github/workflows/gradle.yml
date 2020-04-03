@@ -1,7 +1,7 @@
 # This workflow will build a Java project with Gradle
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
 
-name: Build Dat Jar Boi, then deploy dat Container
+name: Build Dat Jar & deploy dat Container
 
 on:
   push:
@@ -55,5 +55,5 @@ jobs:
       with:
           name: gateway
     - name: Build Image 
-      run: docker build -t api-gateway --build-arg JAR_FILE=$GITHUB_WORKSPACE/gateway/*.jar
+      run: docker build -t api-gateway --build-arg JAR_FILE=$GITHUB_WORKSPACE/gateway/*.jar .
 
