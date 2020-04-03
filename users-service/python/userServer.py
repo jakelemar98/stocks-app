@@ -18,7 +18,6 @@ class UsersServicer(users_pb2_grpc.UserServiceServicer):
 
 
 def serve():
-    emailClient.sendEmail()
     print("Serving....")
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     users_pb2_grpc.add_UserServiceServicer_to_server(UsersServicer(), server)

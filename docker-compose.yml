@@ -19,7 +19,7 @@ services:
     container_name: api-gateway
     build: 
       context: ./api-gateway
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile-dev
     ports: 
       - "9000:8080"
     depends_on: 

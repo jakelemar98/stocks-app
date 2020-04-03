@@ -19,5 +19,5 @@ COPY --from=compile-image /app/env /app/env
 ENV PATH="/app/env/bin:$PATH"
 WORKDIR /app/python
 COPY . /app
-
+EXPOSE 8001
 CMD ["python", "./userServer.py"]

@@ -12,6 +12,8 @@ RUN go get google.golang.org/grpc
 
 RUN go build *.go
 
+EXPOSE 8000
+
 ENTRYPOINT ["./api"]
 
 

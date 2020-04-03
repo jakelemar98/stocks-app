@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ng-service
+spec:
+  ports:
+  - port: 8080
+    targetPort: 80
+  selector:
+    app: ng
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ng
+  labels:
+    app: ng
+spec:
+  selector:
+    matchLabels:
+      app: ng
+      tier: web
+  template:
+    metadata:
+      labels:
+        app: ng
+        tier: web
+    spec:
+      containers:
+      - name: ng-app
+        image: us.gcr.io/stocks-app-email/ng-app:latest
+        ports:
+        - containerPort: 80

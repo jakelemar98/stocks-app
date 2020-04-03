@@ -7,11 +7,13 @@ RUN npm install
 
 COPY . .
 
-RUN npm run build
+RUN npm run ng build -- --prod
 
 #stage 2
 FROM nginx:1.13.12-alpine
 
 COPY --from=node /usr/src/app/dist/stocks-app /usr/share/nginx/html
+
+EXPOSE 80
 
 COPY ./nginx.conf /etc/nginx/conf.d/default.conf
