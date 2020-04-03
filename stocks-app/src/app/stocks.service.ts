@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class StocksService {
 
-  gatewayURL: string = "http://localhost:9000/stocks/"
+  gatewayURL: string = "https://gateway.stocks4fun.com/stocks/"
 
   constructor(private http: HttpClient) { }
 
