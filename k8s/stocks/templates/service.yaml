@@ -1,16 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "stocks.fullname" . }}
-  labels:
-{{ include "stocks.labels" . | indent 4 }}
+  name: {{ .Values.service.name }}
 spec:
-  type: {{ .Values.service.type }}
   ports:
     - port: {{ .Values.service.port }}
-      targetPort: http
-      protocol: TCP
-      name: http
+      targetPort: 8000
   selector:
-    app.kubernetes.io/name: {{ include "stocks.name" . }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
+    app: {{ .Values.service.app }}

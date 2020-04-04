@@ -2,20 +2,20 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-replicaCount: 2
+replicaCount: 1
 
 image:
-  name: go-stocks
-  repository: us.gcr.io/stocks-app-email/go-stocks
-  tag: 3a4edf40a61735ee80bf357d9c7e837cb8e4cbc2
+  name: test-go-stocks
+  repository: us.gcr.io/stocks-app-email/go-stocks-test
+  tag: latest
 
 deployment:
-  name: stocks
+  name: test-stocks
 
 service:
   port: 8000
-  name: stocks-service
-  app: stocks
+  name: test-stocks-service
+  app: test-stocks
 
 ingress:
   enabled: false
