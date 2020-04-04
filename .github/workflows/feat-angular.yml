@@ -21,7 +21,7 @@ env:
   GITHUB_SHA: ${{ github.sha }}
   GKE_ZONE: us-central1
   GKE_CLUSTER: stocks-cluster
-  IMAGE: ng-app-test/${GITHUB_REF##*/}
+  IMAGE: ng-app-test/${{ GITHUB_REF##*/ }}
   REGISTRY_HOSTNAME: us.gcr.io
   DEPLOYMENT_NAME: ng-pipeline
 
