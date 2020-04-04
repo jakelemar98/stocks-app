@@ -14,6 +14,11 @@ export GITHUB_SHA=$1
 envsubst <./k8s/$2/values.yaml >./k8s/$2/values.yaml.out
 mv ./k8s/$2/values.yaml.out ./k8s/$2/values.yaml
 
+kubectl config set-context prod --namespace=production \
+  --cluster=gke_stocks-app-email_us-central1_stocks-cluster \
+  --user=gke_stocks-app-email_us-central1_stocks-cluster
+
+
 kubectl config use-context $3
 
 curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
