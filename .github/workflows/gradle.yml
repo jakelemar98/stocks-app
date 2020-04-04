@@ -5,9 +5,9 @@ name: Build Dat Jar & deploy dat Container
 
 on:
   push:
-    branches: [ master2 ]
-  pull_request:
     branches: [ master ]
+  # pull_request:
+  #   branches: [ master ]
 
 env:
   GKE_PROJECT: ${{ secrets.GKE_PROJECT }}
@@ -33,7 +33,7 @@ jobs:
       run: chmod +x gradlew
       working-directory: ${{env.working-directory}}
     - name: Build with Gradle
-      run: ./gradlew build
+      run: ./gradlew clean build
       working-directory: ${{env.working-directory}}
     - name: package jar file
       uses: actions/upload-artifact@v1  
