@@ -72,6 +72,7 @@ jobs:
     # Build the Docker image
     - name: Build
       run: docker build . -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE":${GITHUB_SHA}
+      working-directory: ${{env.working-directory}}
 
     # Push the Docker image to Google Container Registry
     - name: Publish
