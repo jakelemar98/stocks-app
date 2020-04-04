@@ -4,9 +4,6 @@ metadata:
   name: {{ .Values.deployment.name }}
   labels:
     app: {{ .Values.deployment.name }}
-  annotations:
-    helm.sh/hook: pre-install
-    helm.sh/existing: replace
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
@@ -18,6 +15,8 @@ spec:
       labels:
         app: {{ .Values.deployment.name }}
         tier: web
+      annotations:
+        rollme: {{ randAlphaNum 5 | quote }}
     spec:
       containers:
         - name: {{ .Values.image.name }}
