@@ -25,10 +25,8 @@ curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scr
 chmod 700 get_helm.sh
 ./get_helm.sh
 
-if [[ $6 -eq 0 ]] ; then
-    echo "No 6th arg"
-else 
-    helm upgrade --install redis ./k8s/redis || true
+if [ $6 = "redis" ] ; then
+    helm upgrade --install redis ./k8s/redis || true 
 fi
 
 helm upgrade --install $2 ./k8s/$2 || true
