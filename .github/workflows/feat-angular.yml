@@ -21,7 +21,7 @@ env:
   GITHUB_SHA: ${{ github.sha }}
   GKE_ZONE: us-central1
   GKE_CLUSTER: stocks-cluster
-  IMAGE: ng-app-test/${{ GITHUB_REF##*/ }}
+  IMAGE: ng-app-test/${{ GITHUB_REF}}
   REGISTRY_HOSTNAME: us.gcr.io
   DEPLOYMENT_NAME: ng-pipeline
 
@@ -67,4 +67,4 @@ jobs:
       run: |
         gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GKE_PROJECT
         chmod +x ./scripts/ci-deploy.sh
-        ./scripts/ci-deploy.sh $GITHUB_SHA ng values-feat feat feature no ${GITHUB_REF##*/}
+        ./scripts/ci-deploy.sh $GITHUB_SHA ng values-feat feat feature no $GITHUB_REF
