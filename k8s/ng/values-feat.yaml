@@ -5,17 +5,17 @@
 replicaCount: 1
 
 image:
-  name: ng-app
-  repository: us.gcr.io/stocks-app-email/ng-app-test
+  name: ng-app-$BRANCH
+  repository: us.gcr.io/stocks-app-email/ng-app-features/$BRANCH
   tag: $GITHUB_SHA
 
 deployment:
-  name: test-ng-app
+  name: $BRANCH-ng-app
 
 service:
   port: 8080
-  name: ng-service
-  app: test-ng-app
+  name: $BRANCH-ng-service
+  app: $BRANCH-ng-app
 
 ingress:
   enabled: false
