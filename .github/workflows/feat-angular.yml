@@ -19,11 +19,11 @@ env:
   GKE_PROJECT: ${{ secrets.GKE_PROJECT }}
   GKE_EMAIL: ${{ secrets.GKE_EMAIL }}
   GITHUB_SHA: ${{ github.sha }}
-  GITHUB_BRANCH: ${{ github.ref }}
+  GITHUB_BRANCH: ${GITHUB_REF#refs/heads/}
   GKE_ZONE: us-central1
   GKE_CLUSTER: stocks-cluster
-  IMAGE: ng-app-features/${{ github.ref#refs/heads/ }}
   REGISTRY_HOSTNAME: us.gcr.io
+  IMAGE: ng-app-features
   DEPLOYMENT_NAME: ng-pipeline
 
 jobs:
@@ -53,7 +53,7 @@ jobs:
     # Build the Docker image
     - name: Build
       run: |        
-        docker build -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE":"$GITHUB_SHA" \
+        docker build -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE"/"$GITHUB_BRANCH":"$GITHUB_SHA" \
           --build-arg GITHUB_SHA="$GITHUB_SHA" \
           --build-arg GITHUB_REF="$GITHUB_BRANCH" .
       working-directory: ${{env.working-directory}}
