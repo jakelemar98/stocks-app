@@ -19,10 +19,10 @@ env:
   GKE_PROJECT: ${{ secrets.GKE_PROJECT }}
   GKE_EMAIL: ${{ secrets.GKE_EMAIL }}
   GITHUB_SHA: ${{ github.sha }}
-  GITHUB_BRANCH: ${GITHUB_REF##*/}
+  GITHUB_BRANCH: ${{ github.ref }}
   GKE_ZONE: us-central1
   GKE_CLUSTER: stocks-cluster
-  IMAGE: ng-app-features/${GITHUB_REF##*/}
+  IMAGE: ng-app-features/${{ github.ref }}
   REGISTRY_HOSTNAME: us.gcr.io
   DEPLOYMENT_NAME: ng-pipeline
 
