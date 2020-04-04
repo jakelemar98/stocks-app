@@ -44,13 +44,3 @@ app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end -}}
 
-{{/*
-Create the name of the service account to use
-*/}}
-{{- define "users.serviceAccountName" -}}
-{{- if .Values.serviceAccount.create -}}
-    {{ default (include "users.fullname" .) .Values.serviceAccount.name }}
-{{- else -}}
-    {{ default "default" .Values.serviceAccount.name }}
-{{- end -}}
-{{- end -}}
