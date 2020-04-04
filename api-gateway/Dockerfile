@@ -1,5 +1,5 @@
 FROM openjdk:11-jdk-slim
-ARG JAR_FILE
+ARG JAR_FILE=api-gatewau/build/libs/*.jar
 COPY ${JAR_FILE} app.jar
 EXPOSE 8080
 ENTRYPOINT [ "java", "-jar", "app.jar" ] 
