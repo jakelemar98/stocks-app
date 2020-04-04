@@ -4,9 +4,7 @@ metadata:
   name: {{ .Values.deployment.name }}
   labels:
     app: {{ .Values.deployment.name }}
-  annotations:
-    helm.sh/hook: pre-install
-    helm.sh/existing: replace
+
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
