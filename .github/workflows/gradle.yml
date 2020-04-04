@@ -85,23 +85,4 @@ jobs:
       run: |
         gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GKE_PROJECT
         chmod +x ./scripts/ci-deploy.sh
-        ./scripts/ci-deploy.sh $GITHUB_SHA gateway
-
-  # deploy:
-  #   name: deploy
-    # needs: [build]
-  #   runs-on: ubuntu-latest
-  #   env:
-  #     working-directory: ./api-gateway
-  #   steps:
-    # - uses: actions/checkout@v2
-    # - uses: actions/download-artifact@v1
-    #   with:
-    #       name: gateway
-  #   - name: Build Image 
-  #     run: docker build -t api-gateway --build-arg JAR_FILE=$GITHUB_WORKSPACE/gateway/*.jar .
-  #     working-directory: ${{env.working-directory}}
-  #   - name: Run Image
-  #     run: docker run -it api-gateway
-
-
+        ./scripts/ci-deploy.sh $GITHUB_SHA gateway values prod production
