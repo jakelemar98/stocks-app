@@ -14,6 +14,8 @@ export BRANCH=$7
 envsubst <./k8s/$2/$3.yaml >./k8s/$2/$3.yaml.out
 mv ./k8s/$2/$3.yaml.out ./k8s/$2/$3.yaml
 
+envsubst <./k8s/ingresses/feature/stocks-feat-ingress.yml >./k8s/ingresses/feature/stocks-feat-ingress.yml.out
+mv ./k8s/ingresses/feature/stocks-feat-ingress.yml.out ./k8s/ingresses/feature/stocks-feat-ingress.yml
 kubectl config set-context $4 --namespace=$5 \
   --cluster=gke_stocks-app-email_us-central1_stocks-cluster \
   --user=gke_stocks-app-email_us-central1_stocks-cluster
@@ -29,4 +31,4 @@ if [ $6 = "redis" ] ; then
     helm upgrade --install redis ./k8s/redis || true 
 fi
 
-helm upgrade --install $2 ./k8s/$2 || true
+helm upgrade --install -f ./k8s/$2/$3.yaml $2 ./k8s/$2 || true
