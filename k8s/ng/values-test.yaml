@@ -2,19 +2,20 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-replicaCount: 2
+replicaCount: 1
 
 image:
-  name: py-users
-  repository: us.gcr.io/stocks-app-email/py-users
+  name: ng-app
+  repository: us.gcr.io/stocks-app-email/ng-app-test
   tag: $GITHUB_SHA
+
 deployment:
-  name: users
+  name: ng-app
 
 service:
-  port: 8001
-  name: users-service
-  app: users
+  port: 8080
+  name: ng-service
+  app: ng
 
 ingress:
   enabled: false

@@ -7,7 +7,7 @@ replicaCount: 2
 image:
   name: go-stocks
   repository: us.gcr.io/stocks-app-email/go-stocks
-  tag: 3a4edf40a61735ee80bf357d9c7e837cb8e4cbc2
+  tag: $GITHUB_SHA
 
 deployment:
   name: stocks

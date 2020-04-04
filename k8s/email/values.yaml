@@ -7,7 +7,7 @@ replicaCount: 2
 image:
   name: node-email
   repository: us.gcr.io/stocks-app-email/node-email
-  tag: latest
+  tag: $GITHUB_SHA
 
 deployment:
   name: email

@@ -2,19 +2,19 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-replicaCount: 2
+replicaCount: 1
 
 image:
-  name: py-users
-  repository: us.gcr.io/stocks-app-email/py-users
+  name: test-py-users
+  repository: us.gcr.io/stocks-app-email/py-users-test
   tag: $GITHUB_SHA
 deployment:
-  name: users
+  name: test-users
 
 service:
   port: 8001
-  name: users-service
-  app: users
+  name: test-users-service
+  app: test-users
 
 ingress:
   enabled: false

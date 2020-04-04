@@ -12,7 +12,7 @@ name: Node! Noder Dame
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master2 ]
   pull_request:
     branches: [ master ]
 # Environment variables available to all jobs and steps in this workflow

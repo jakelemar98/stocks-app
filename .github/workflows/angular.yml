@@ -13,8 +13,7 @@ name: Build Dat ng & Send it to the ClOuDs
 on:
   push:
     branches: [ master ]
-  pull_request:
-    branches: [ master ]
+  
 # Environment variables available to all jobs and steps in this workflow
 env:
   GKE_PROJECT: ${{ secrets.GKE_PROJECT }}
@@ -68,4 +67,4 @@ jobs:
       run: |
         gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GKE_PROJECT
         chmod +x ./scripts/ci-deploy.sh
-        ./scripts/ci-deploy.sh $GITHUB_SHA ng
+        ./scripts/ci-deploy.sh $GITHUB_SHA ng prod
