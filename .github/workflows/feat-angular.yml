@@ -22,7 +22,7 @@ env:
   GITHUB_BRANCH: ${{ github.ref }}
   GKE_ZONE: us-central1
   GKE_CLUSTER: stocks-cluster
-  IMAGE: ng-app-features/${{ github.ref }}
+  IMAGE: ng-app-features/${{ github.ref#refs/heads/ }}
   REGISTRY_HOSTNAME: us.gcr.io
   DEPLOYMENT_NAME: ng-pipeline
 
