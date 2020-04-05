@@ -1,0 +1,47 @@
+name: Clean up Feature and Test env's 
+
+on:
+  delete:
+    branches: [ feat-* ]
+
+# Environment variables available to all jobs and steps in this workflow
+env:
+  GKE_PROJECT: ${{ secrets.GKE_PROJECT }}
+  GKE_EMAIL: ${{ secrets.GKE_EMAIL }}
+  GITHUB_SHA: ${{ github.sha }}
+  GKE_ZONE: us-central1
+  GKE_CLUSTER: stocks-cluster
+  REGISTRY_HOSTNAME: us.gcr.io
+  IMAGE: ng-app-test
+  DEPLOYMENT_NAME: ng-pipeline
+
+jobs:
+  setup-build-publish-deploy:
+    name: Setup, Build, Publish, and Deploy
+    runs-on: ubuntu-latest
+    env:
+      working-directory: ./stocks-app
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v2
+    
+    # Setup gcloud CLI
+    - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+      with:
+        version: '270.0.0'
+        service_account_email: ${{ secrets.GKE_EMAIL }}
+        service_account_key: ${{ secrets.GKE_KEY }}
+    
+    - name: Delete Feature Enviornment
+      run: |
+        gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GKE_PROJECT
+        kubectl config set-context feat --namespace=feature \
+          --cluster=gke_stocks-app-email_us-central1_stocks-cluster \
+          --user=gke_stocks-app-email_us-central1_stocks-cluster
+          kubectl config use-context feat
+          curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+          chmod 700 get_helm.sh
+          ./get_helm.sh
+          helm delete $(helm list --short)
+          kubectl delete ingress --all
