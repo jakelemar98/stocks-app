@@ -12,7 +12,7 @@ deployment:
 
 service:
   port: 6379
-  name: test-redis-service
+  name: redis-service
   app: test-redis
 
 ingress:

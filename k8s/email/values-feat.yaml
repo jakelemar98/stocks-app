@@ -14,7 +14,7 @@ deployment:
 
 service:
   port: 5001
-  name: $BRANCH-email-service
+  name: email-service
   app: $BRANCH-email
 
 ingress:

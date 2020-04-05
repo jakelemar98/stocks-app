@@ -13,7 +13,7 @@ deployment:
 
 service:
   port: 6379
-  name: $BRANCH-redis-service
+  name: redis-service
   app: $BRANCH-redis
 
 ingress:

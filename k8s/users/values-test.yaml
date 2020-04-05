@@ -13,7 +13,7 @@ deployment:
 
 service:
   port: 8001
-  name: test-users-service
+  name: users-service
   app: test-users
 
 ingress:
