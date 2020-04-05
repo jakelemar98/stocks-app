@@ -19,7 +19,7 @@ env:
   GKE_PROJECT: ${{ secrets.GKE_PROJECT }}
   GKE_EMAIL: ${{ secrets.GKE_EMAIL }}
   GITHUB_SHA: ${{ github.sha }}
-  GITHUB_BRANCH: echo ${GITHUB_REF##*/})
+  GITHUB_BRANCH: echo ${GITHUB_REF##*/}
   GKE_ZONE: us-central1
   GKE_CLUSTER: stocks-cluster
   REGISTRY_HOSTNAME: us.gcr.io
@@ -37,7 +37,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: check value
-      run: echo ${GITHUB_REF##*/}
+      run: echo $GITHUB_BRANCH
     # Setup gcloud CLI
     - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
       with:
@@ -54,7 +54,7 @@ jobs:
     # Build the Docker image
     - name: Build
       run: |        
-        docker build -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE"/"${GITHUB_BRANCH}":"$GITHUB_SHA" \
+        docker build -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE"/"$GITHUB_BRANCH":"$GITHUB_SHA" \
           --build-arg GITHUB_SHA="$GITHUB_SHA" \
           --build-arg GITHUB_REF="$GITHUB_BRANCH" .
       working-directory: ${{env.working-directory}}
