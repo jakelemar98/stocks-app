@@ -11,8 +11,8 @@
 name: Build Dat ng & Send it to the ClOuDs
 
 on:
-  push:
-    branches: [ feat-* ]
+  pull_request:
+    branches: [ master ]
   
 # Environment variables available to all jobs and steps in this workflow
 env:
@@ -22,7 +22,7 @@ env:
   GKE_ZONE: us-central1
   GKE_CLUSTER: stocks-cluster
   REGISTRY_HOSTNAME: us.gcr.io
-  IMAGE: ng-app-features
+  IMAGE: ng-app-test
   DEPLOYMENT_NAME: ng-pipeline
 
 jobs:
@@ -35,10 +35,7 @@ jobs:
 
     - name: Checkout
       uses: actions/checkout@v2
-    - name: Extract Branch
-      shell: bash
-      run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-      id: extract_branch
+    
     # Setup gcloud CLI
     - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
       with:
@@ -55,7 +52,7 @@ jobs:
     # Build the Docker image
     - name: Build
       run: |        
-        docker build -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE"/"${{ steps.extract_branch.outputs.branch }}":"$GITHUB_SHA" \
+        docker build -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE":"$GITHUB_SHA" \
           --build-arg GITHUB_SHA="$GITHUB_SHA" \
           --build-arg GITHUB_REF="$GITHUB_BRANCH" .
       working-directory: ${{env.working-directory}}
@@ -63,11 +60,11 @@ jobs:
     # Push the Docker image to Google Container Registry
     - name: Publish
       run: |
-        docker push $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE/${{ steps.extract_branch.outputs.branch }}:$GITHUB_SHA
+        docker push $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE:$GITHUB_SHA
 
     # Deploy the Docker image to the GKE cluster
     - name: Deploy
       run: |
         gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GKE_PROJECT
         chmod +x ./scripts/ci-deploy.sh
-        ./scripts/ci-deploy.sh $GITHUB_SHA ng values-feat feat feature no ${{ steps.extract_branch.outputs.branch }}
+        ./scripts/ci-deploy.sh $GITHUB_SHA ng values-test dev development no test
