@@ -44,3 +44,4 @@ jobs:
           chmod 700 get_helm.sh
           ./get_helm.sh
           helm delete $(helm list --short)
+          kubectl delete ingress --all
