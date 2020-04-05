@@ -31,4 +31,8 @@ if [ $6 = "redis" ] ; then
     helm upgrade --install redis ./k8s/redis || true 
 fi
 
+if [ $2 = "ng" ] ; then
+    kubectl apply -f ./k8s/ingresses/feature/stocks-feat-ingress.yml
+fi
+
 helm upgrade --install -f ./k8s/$2/$3.yaml $2-$7 ./k8s/$2 || true
