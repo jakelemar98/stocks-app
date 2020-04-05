@@ -19,7 +19,7 @@ env:
   GKE_PROJECT: ${{ secrets.GKE_PROJECT }}
   GKE_EMAIL: ${{ secrets.GKE_EMAIL }}
   GITHUB_SHA: ${{ github.sha }}
-  GITHUB_BRANCH: echo ${GITHUB_REF##*/}
+  GITHUB_BRANCH: (echo ${GITHUB_REF##*/})
   GKE_ZONE: us-central1
   GKE_CLUSTER: stocks-cluster
   REGISTRY_HOSTNAME: us.gcr.io
