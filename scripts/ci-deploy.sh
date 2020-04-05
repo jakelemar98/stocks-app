@@ -31,4 +31,4 @@ if [ $6 = "redis" ] ; then
     helm upgrade --install redis ./k8s/redis || true 
 fi
 
-helm upgrade --install -a -f ./k8s/$2/$3.yaml $2-$7 ./k8s/$2 || true
+helm upgrade --install -f ./k8s/$2/$3.yaml $2-$7 ./k8s/$2 || true
