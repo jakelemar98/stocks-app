@@ -8,7 +8,7 @@
 #
 # 3. Change the values for the GKE_ZONE, GKE_CLUSTER, IMAGE, REGISTRY_HOSTNAME and DEPLOYMENT_NAME environment variables (below).
 
-name: Build Dat ng & Send it to the ClOuDs
+name: Spring Test Env
 
 on:
   pull_request:
@@ -67,4 +67,4 @@ jobs:
       run: |
         gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GKE_PROJECT
         chmod +x ./scripts/ci-deploy.sh
-        ./scripts/ci-deploy.sh $GITHUB_SHA ng values-test dev development no test
+        ./scripts/ci-deploy.sh $GITHUB_SHA gateway values-test dev development redis test

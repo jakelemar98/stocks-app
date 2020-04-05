@@ -8,10 +8,10 @@
 #
 # 3. Change the values for the GKE_ZONE, GKE_CLUSTER, IMAGE, REGISTRY_HOSTNAME and DEPLOYMENT_NAME environment variables (below).
 
-name: Angular9 ds Crank
+name: Users Test Env
 
 on:
-  push:
+  pull_request:
     branches: [ master ]
   
 # Environment variables available to all jobs and steps in this workflow
@@ -21,8 +21,8 @@ env:
   GITHUB_SHA: ${{ github.sha }}
   GKE_ZONE: us-central1
   GKE_CLUSTER: stocks-cluster
-  IMAGE: ng-app
   REGISTRY_HOSTNAME: us.gcr.io
+  IMAGE: py-stocks-test
   DEPLOYMENT_NAME: ng-pipeline
 
 jobs:
@@ -30,12 +30,12 @@ jobs:
     name: Setup, Build, Publish, and Deploy
     runs-on: ubuntu-latest
     env:
-      working-directory: ./stocks-app
+      working-directory: ./users-service
     steps:
 
     - name: Checkout
       uses: actions/checkout@v2
-
+    
     # Setup gcloud CLI
     - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
       with:
@@ -54,7 +54,7 @@ jobs:
       run: |        
         docker build -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE":"$GITHUB_SHA" \
           --build-arg GITHUB_SHA="$GITHUB_SHA" \
-          --build-arg GITHUB_REF="$GITHUB_REF" .
+          --build-arg GITHUB_REF="$GITHUB_BRANCH" .
       working-directory: ${{env.working-directory}}
 
     # Push the Docker image to Google Container Registry
@@ -67,4 +67,4 @@ jobs:
       run: |
         gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GKE_PROJECT
         chmod +x ./scripts/ci-deploy.sh
-        ./scripts/ci-deploy.sh $GITHUB_SHA ng values prod production
+        ./scripts/ci-deploy.sh $GITHUB_SHA users values-test dev development no test
