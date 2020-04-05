@@ -39,5 +39,5 @@ if [ $4 = "dev" ] || [ $4 = "feat" ] ; then
   helm upgrade --install -f ./k8s/$2/$3.yaml $2-$7 ./k8s/$2 || true
 else
   helm upgrade --install $2 ./k8s/$2 || true
-  
+fi  
 
