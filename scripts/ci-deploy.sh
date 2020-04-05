@@ -31,13 +31,16 @@ if [ $6 = "redis" ] ; then
     helm upgrade --install redis ./k8s/redis || true 
 fi
 
-if [ $4 = "feat" ] && [ $2 = "ng" ] ; then 
+if [ $4 = "feat" ] && [ $2 = "ng" ] ; then
+  echo "changing feature ingress"
   kubectl apply -f ./k8s/ingresses/feature/stocks-feat-ingress.yml
 fi
 
 if [ $4 = "dev" ] || [ $4 = "feat" ] ; then 
+  echo "test or feature install"
   helm upgrade --install -f ./k8s/$2/$3.yaml $2-$7 ./k8s/$2 || true
 else
+  echo "prod install"
   helm upgrade --install $2 ./k8s/$2 || true
 fi  
 
