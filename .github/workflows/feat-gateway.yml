@@ -8,7 +8,7 @@
 #
 # 3. Change the values for the GKE_ZONE, GKE_CLUSTER, IMAGE, REGISTRY_HOSTNAME and DEPLOYMENT_NAME environment variables (below).
 
-name: Angular Feature Env
+name: Spring Feature Env
 
 on:
   push:
@@ -22,7 +22,7 @@ env:
   GKE_ZONE: us-central1
   GKE_CLUSTER: stocks-cluster
   REGISTRY_HOSTNAME: us.gcr.io
-  IMAGE: ng-app-features
+  IMAGE: api-gateway-features
   DEPLOYMENT_NAME: ng-pipeline
 
 jobs:
@@ -30,7 +30,7 @@ jobs:
     name: Setup, Build, Publish, and Deploy
     runs-on: ubuntu-latest
     env:
-      working-directory: ./stocks-app
+      working-directory: ./api-gateway
     steps:
 
     - name: Checkout
@@ -70,4 +70,4 @@ jobs:
       run: |
         gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GKE_PROJECT
         chmod +x ./scripts/ci-deploy.sh
-        ./scripts/ci-deploy.sh $GITHUB_SHA ng values-feat feat feature no ${{ steps.extract_branch.outputs.branch }}
+        ./scripts/ci-deploy.sh $GITHUB_SHA gateway values-feat feat feature redis ${{ steps.extract_branch.outputs.branch }}
