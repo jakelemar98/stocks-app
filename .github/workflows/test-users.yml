@@ -22,7 +22,7 @@ env:
   GKE_ZONE: us-central1
   GKE_CLUSTER: stocks-cluster
   REGISTRY_HOSTNAME: us.gcr.io
-  IMAGE: py-stocks-test
+  IMAGE: py-users-test
   DEPLOYMENT_NAME: ng-pipeline
 
 jobs:
