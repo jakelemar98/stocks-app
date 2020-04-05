@@ -70,4 +70,5 @@ jobs:
       run: |
         gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GKE_PROJECT
         chmod +x ./scripts/ci-deploy.sh
+        kubectl apply -f ./k8s/ingresses/feature/stocks-feat-ingress.yml
         ./scripts/ci-deploy.sh $GITHUB_SHA ng values-feat feat feature no ${{ steps.extract_branch.outputs.branch }}
