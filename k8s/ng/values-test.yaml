@@ -14,7 +14,7 @@ deployment:
 
 service:
   port: 8080
-  name: ng-service
+  name: test-ng-service
   app: test-ng-app
 
 ingress:
