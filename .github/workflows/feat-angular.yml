@@ -37,7 +37,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: check value
-      run: echo ${GITHUB_REF##/}
+      run: echo ${GITHUB_REF##*/}
     # Setup gcloud CLI
     - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
       with:
