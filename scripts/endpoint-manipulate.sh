@@ -1,4 +1,4 @@
-files_array=(../stocks-app/src/environments/environment.ts)
+files_array=(stocks-app/src/environments/environment.ts)
 
 API_ENDPOINT=https://test.gateway.stocks4fun.com
 
