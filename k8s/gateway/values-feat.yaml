@@ -14,7 +14,7 @@ deployment:
 
 service:
   port: 8080
-  name: $BRANCH-gateway-service
+  name: gateway-service
   app: $BRANCH-gateway
 
 ingress:

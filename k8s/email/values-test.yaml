@@ -14,7 +14,7 @@ deployment:
 
 service:
   port: 5001
-  name: test-email-service
+  name: email-service
   app: test-email
 
 ingress:

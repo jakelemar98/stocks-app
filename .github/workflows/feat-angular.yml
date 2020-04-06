@@ -51,11 +51,15 @@ jobs:
         # Set up docker to authenticate
         # via gcloud command-line tool.
         gcloud auth configure-docker
+    
+    - run: |
+        chmod +x ./scripts/endpoint-manipulate.sh
+        ./scripts/endpoint-manipulate.sh feat ${{ steps.extract_branch.outputs.branch }}
       
     # Build the Docker image
     - name: Build
       run: |        
-        docker build -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE"/"${{ steps.extract_branch.outputs.branch }}":"$GITHUB_SHA" \
+        docker build -f Dockerfile-dev -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE"/"${{ steps.extract_branch.outputs.branch }}":"$GITHUB_SHA" \
           --build-arg GITHUB_SHA="$GITHUB_SHA" \
           --build-arg GITHUB_REF="$GITHUB_BRANCH" .
       working-directory: ${{env.working-directory}}
@@ -69,5 +73,6 @@ jobs:
     - name: Deploy
       run: |
         gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GKE_PROJECT
+
         chmod +x ./scripts/ci-deploy.sh
         ./scripts/ci-deploy.sh $GITHUB_SHA ng values-feat feat feature no ${{ steps.extract_branch.outputs.branch }}

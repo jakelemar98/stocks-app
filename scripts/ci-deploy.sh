@@ -30,6 +30,9 @@ chmod 700 get_helm.sh
 if [ $6 = "redis" ] ; then
     echo "Trying to deploy redis"
     helm upgrade --install redis ./k8s/redis || true 
+    if [ $4 = "dev" ] || [ $4 = "feat" ] ; then 
+      helm upgrade --install -f k8s/redis/$3.yaml redis-$7 ./k8s/redis || true
+    fi
 fi
 
 if [ $4 = "feat" ] && [ $2 = "ng" ] ; then

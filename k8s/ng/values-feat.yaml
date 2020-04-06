@@ -14,7 +14,7 @@ deployment:
 
 service:
   port: 8080
-  name: $BRANCH-ng-service
+  name: ng-service
   app: $BRANCH-ng-app
 
 ingress:

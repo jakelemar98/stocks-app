@@ -14,7 +14,7 @@ deployment:
 
 service:
   port: 8080
-  name: test-gateway-service
+  name: gateway-service
   app: test-gateway
 
 ingress:

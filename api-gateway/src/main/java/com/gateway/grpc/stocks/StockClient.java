@@ -1,6 +1,8 @@
 package com.gateway.grpc.stocks;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import com.grpc.services.stocks.StockServiceGrpc;
@@ -11,6 +13,7 @@ public class StockClient {
 
     @Autowired
     ManagedChannel managedChannel;
+
 
     private Response response;
 
