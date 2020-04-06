@@ -6,8 +6,6 @@ name: SPRING (boot) ME TO THE CLOUD!
 on:
   push:
     branches: [ master ]
-  # pull_request:
-  #   branches: [ master ]
 
 env:
   GKE_PROJECT: ${{ secrets.GKE_PROJECT }}
@@ -21,7 +19,6 @@ env:
 jobs:
   setup-build-publish-deploy:
     name: Setup, Build, Publish, and Deploy
-    needs: [build]
     runs-on: ubuntu-latest
     env:
       working-directory: ./api-gateway
