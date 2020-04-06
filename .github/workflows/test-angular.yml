@@ -48,7 +48,11 @@ jobs:
         # Set up docker to authenticate
         # via gcloud command-line tool.
         gcloud auth configure-docker
-      
+    
+    - run: |
+        chmod +x ./scripts/endpoint-manipulate.sh
+        ./scripts/endpoint-manipulate.sh test no
+
     # Build the Docker image
     - name: Build
       run: |        
@@ -66,7 +70,5 @@ jobs:
     - name: Deploy
       run: |
         gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GKE_PROJECT
-        chmod +x ./scripts/endpoint-manipulate.sh
-        ./scripts/endpoint-manipulate.sh test no
         chmod +x ./scripts/ci-deploy.sh
         ./scripts/ci-deploy.sh $GITHUB_SHA ng values-test dev development no test

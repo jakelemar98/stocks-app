@@ -1,7 +1,7 @@
 package com.gateway.grpc.stocks;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
@@ -14,16 +14,11 @@ public class StockClient {
     @Autowired
     ManagedChannel managedChannel;
 
-    @Value("${stocks.endpoint}")
-    private String stocksEndpoint;
-
-    @Value("${stocks.endpoint}")
-    private Integer stocksPort;
 
     private Response response;
 
     public Response getResponse(final String symbol, final String option) {
-        final ManagedChannel channel = ManagedChannelBuilder.forAddress(stocksEndpoint, stocksPort).usePlaintext().build();
+        final ManagedChannel channel = ManagedChannelBuilder.forAddress("stocks-service", 8000).usePlaintext().build();
 
         final StockServiceGrpc.StockServiceBlockingStub stub = StockServiceGrpc.newBlockingStub(channel);
 
