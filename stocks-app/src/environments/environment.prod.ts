@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: "gateway.stocks4fun.com"
+  apiUrl: "https://gateway.stocks4fun.com"
 };

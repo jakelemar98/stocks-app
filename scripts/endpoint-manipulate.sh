@@ -1,9 +1,9 @@
 files_array=(.../stocks-app/src/environments/environment.ts)
 
-API_ENDPOINT=test.gateway.stocks4fun.com
+API_ENDPOINT=https://test.gateway.stocks4fun.com
 
 if [ $1 = "feat" ] ; then
-    API_ENDPOINT=$2.feat.gateway.stocks4fun.com
+    API_ENDPOINT=https://$2.feat.gateway.stocks4fun.com
 fi
  
 export API_ENDPOINT=$API_ENDPOINT
