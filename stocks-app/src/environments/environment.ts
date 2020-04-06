@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: $API_ENDPOINT
+  apiUrl: "$API_ENDPOINT"
 };
 
 /*
