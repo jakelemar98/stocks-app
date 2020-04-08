@@ -19,6 +19,11 @@ class UserServiceStub(object):
         request_serializer=users__pb2.UserRequest.SerializeToString,
         response_deserializer=users__pb2.UserResponse.FromString,
         )
+    self.CreateUser = channel.unary_unary(
+        '/UserService/CreateUser',
+        request_serializer=users__pb2.NewUserRequest.SerializeToString,
+        response_deserializer=users__pb2.UserResponse.FromString,
+        )
 
 
 class UserServiceServicer(object):
@@ -32,12 +37,24 @@ class UserServiceServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def CreateUser(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
 
 def add_UserServiceServicer_to_server(servicer, server):
   rpc_method_handlers = {
       'GetUser': grpc.unary_unary_rpc_method_handler(
           servicer.GetUser,
           request_deserializer=users__pb2.UserRequest.FromString,
+          response_serializer=users__pb2.UserResponse.SerializeToString,
+      ),
+      'CreateUser': grpc.unary_unary_rpc_method_handler(
+          servicer.CreateUser,
+          request_deserializer=users__pb2.NewUserRequest.FromString,
           response_serializer=users__pb2.UserResponse.SerializeToString,
       ),
   }

@@ -16,6 +16,11 @@ class UsersServicer(users_pb2_grpc.UserServiceServicer):
         print("Request made")
         return users_pb2.UserResponse(message='Hello, %s!' % request.message)
 
+    def CreateUser(self, request, context):
+        print("request made to create user")
+        print(request)
+        return users_pb2.UserResponse(message='sorry.... we are unable to create users right now')
+
 
 def serve():
     print("Serving....")

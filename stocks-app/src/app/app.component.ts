@@ -16,18 +16,18 @@ export class AppComponent {
   constructor(private stockHttp: StocksService, private userHttp: UsersService) { }
 
   ngOnInit() {
-    this.stockHttp.getStockMatches().subscribe(data => {
-      this.matches = data
-      var json = JSON.parse(this.matches["stockInfo"])
-      console.log(json);
+    // this.stockHttp.getStockMatches().subscribe(data => {
+    //   this.matches = data
+    //   var json = JSON.parse(this.matches["stockInfo"])
+    //   console.log(json);
       
-    })
+    // })
 
-    this.stockHttp.getStockPrice().subscribe(data => {
-      this.price = data      
-      var json = JSON.parse(this.price["stockInfo"])
-      console.log(json);
-    })
+    // this.stockHttp.getStockPrice().subscribe(data => {
+    //   this.price = data      
+    //   var json = JSON.parse(this.price["stockInfo"])
+    //   console.log(json);
+    // })
 
     this.userHttp.getUser().subscribe(data => {
       this.user = data      

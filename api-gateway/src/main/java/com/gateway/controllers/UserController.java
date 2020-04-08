@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.google.protobuf.util.*;
 import com.grpc.services.users.UserResponse;
 import com.gateway.grpc.users.UserClient;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import com.gateway.models.NewUser;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -17,8 +20,8 @@ public class UserController {
 
     @GetMapping("/users")
     @Cacheable("getUsers")
-	public String getUsers(@RequestParam(value = "symbol") String symbol) {
-        UserResponse messageResponse = uc.getResponse(symbol, "price");
+	public String getUsers(@RequestParam(value = "id") String id) {
+        UserResponse messageResponse = uc.getUser(id);
 
         String jsonString = "";
         try {
@@ -29,5 +32,20 @@ public class UserController {
 
         return jsonString;
     }
+
+    @PostMapping(value="/users")
+    public String createUser(@RequestBody NewUser user) {
+        UserResponse messageResponse = uc.createUser(user);
+        
+        String jsonString = "";
+        try {
+            jsonString = JsonFormat.printer().print(messageResponse);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return jsonString;
+    }
+    
 
 }

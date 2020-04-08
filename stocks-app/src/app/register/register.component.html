@@ -1,0 +1,36 @@
+<form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+  
+    <label>
+      First name:
+      <input type="text" placeholder="first" formControlName="firstname">
+    </label>
+    <br>
+    <label>
+     Last name:
+      <input type="text" placeholder="last" formControlName="lastname">
+    </label>
+    <br>
+    <label>
+        Email:
+        <input type="email" placeholder="name@example.com" formControlName="email">
+    </label>
+    <br>
+    <label>
+        Confirm Email:
+        <input type="email" placeholder="name@example.com" formControlName="confirmEmail">
+    </label>
+    <br>
+    <label>
+        password:
+        <input type="password" placeholder="password" formControlName="password">
+    </label>
+    <br>
+    <label>
+        Confirm password:
+        <input type="password" placeholder="password" formControlName="confirmPass">
+    </label>
+    <br>
+    <button type="submit" [disabled]="!registerForm.valid">Submit</button>
+    <div> Valid: {{ registerForm.valid ? '👍' : '👎' }} </div>
+
+</form>

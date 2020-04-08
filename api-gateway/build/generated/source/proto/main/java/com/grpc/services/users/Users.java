@@ -24,6 +24,11 @@ public final class Users {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_UserResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_NewUserRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_NewUserRequest_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -34,10 +39,13 @@ public final class Users {
   static {
     java.lang.String[] descriptorData = {
       "\n\013users.proto\"\036\n\013UserRequest\022\017\n\007message\030" +
-      "\001 \001(\t\"\037\n\014UserResponse\022\017\n\007message\030\001 \001(\t25" +
-      "\n\013UserService\022&\n\007GetUser\022\014.UserRequest\032\r" +
-      ".UserResponseB\033\n\027com.grpc.services.users" +
-      "P\001b\006proto3"
+      "\001 \001(\t\"\037\n\014UserResponse\022\017\n\007message\030\001 \001(\t\"V" +
+      "\n\016NewUserRequest\022\021\n\tfirstname\030\001 \001(\t\022\020\n\010l" +
+      "astname\030\002 \001(\t\022\r\n\005email\030\003 \001(\t\022\020\n\010password" +
+      "\030\004 \001(\t2c\n\013UserService\022&\n\007GetUser\022\014.UserR" +
+      "equest\032\r.UserResponse\022,\n\nCreateUser\022\017.Ne" +
+      "wUserRequest\032\r.UserResponseB\033\n\027com.grpc." +
+      "services.usersP\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -63,6 +71,12 @@ public final class Users {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_UserResponse_descriptor,
         new java.lang.String[] { "Message", });
+    internal_static_NewUserRequest_descriptor =
+      getDescriptor().getMessageTypes().get(2);
+    internal_static_NewUserRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_NewUserRequest_descriptor,
+        new java.lang.String[] { "Firstname", "Lastname", "Email", "Password", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

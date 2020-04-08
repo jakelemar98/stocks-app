@@ -5,7 +5,7 @@
 
     Python protoc complation command
     run from /stocks-app/proto dir
-    python3 -m grpc_tools.protoc -I. --python_out=../users-service --grpc_python_out=../users-service  users.proto
+    python3 -m grpc_tools.protoc -I. --python_out=../users-service/proto --grpc_python_out=../users-service/proto  users.proto
 */
 
 syntax = "proto3";
@@ -15,6 +15,7 @@ option java_package = 'com.grpc.services.users';
 
 service UserService {
     rpc GetUser(UserRequest) returns (UserResponse);
+    rpc CreateUser(NewUserRequest) returns(UserResponse);
 }
 
 message UserRequest {
@@ -23,4 +24,11 @@ message UserRequest {
 
 message UserResponse {
     string message = 1;
+}
+
+message NewUserRequest {
+    string firstname = 1;
+    string lastname = 2;
+    string email = 3;
+    string password = 4;
 }
