@@ -21,24 +21,20 @@ public class NewUser {
     public String getPassword() {
         return this.password;
     }
-    public String setFirstname(String firstname) {
+    public void setFirstname(String firstname) {
         this.firstname = firstname;
-        return this.firstname;
     }
 
-    public String setLastname(String lastname) {
+    public void setLastname(String lastname) {
         this.lastname = lastname;
-        return this.lastname;
     }
 
-    public String setEmail(String email) {
+    public void setEmail(String email) {
         this.email = email;
-        return this.email;
     }
 
-    public String setPassword(String password) {
+    public void setPassword(String password) {
         this.password = password;
-        return this.password;
     }
     
 }

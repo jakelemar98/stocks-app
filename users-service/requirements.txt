@@ -1,3 +1,4 @@
 grpcio==1.28.0.dev0
 grpcio-tools==1.28.0.dev0
-google-cloud-data-store
+pymongo
+dnspython=1.16.0

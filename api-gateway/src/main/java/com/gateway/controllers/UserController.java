@@ -10,7 +10,7 @@ import com.grpc.services.users.UserResponse;
 import com.gateway.grpc.users.UserClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import com.gateway.models.NewUser;
+import com.gateway.models.*;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -18,10 +18,9 @@ public class UserController {
 
     UserClient uc = new UserClient();
 
-    @GetMapping("/users")
-    @Cacheable("getUsers")
-	public String getUsers(@RequestParam(value = "id") String id) {
-        UserResponse messageResponse = uc.getUser(id);
+    @PostMapping("/users/login")
+	public String getUser(@RequestBody Login login) {
+        UserResponse messageResponse = uc.getUser(login);
 
         String jsonString = "";
         try {
@@ -33,7 +32,7 @@ public class UserController {
         return jsonString;
     }
 
-    @PostMapping(value="/users")
+    @PostMapping(value="/users/create")
     public String createUser(@RequestBody NewUser user) {
         UserResponse messageResponse = uc.createUser(user);
         

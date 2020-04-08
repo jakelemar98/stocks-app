@@ -1,30 +1,56 @@
-from google.cloud import datastore
 import bcrypt
 import json
+import pymongo
+import encoder
 
-datastore_client = datastore.Client(namespace="test")
-kind = 'user'
+client = pymongo.MongoClient("mongodb+srv://user-service:lFWXM1Icmscg4RCE@stocks-cluster-ciiim.gcp.mongodb.net/test?retryWrites=true&w=majority")
+db = client["app-database"]
+collection = db["users"]
 
 def createUser(request):
-    id = request.email
+
+    query = { "email": request.email }
+
+    check_email = collection.find(query).count()
+
+    if check_email > 0:
+        return "email exists"        
+
+    user = {
+        "first": request.firstname,
+        "last": request.lastname,
+        "email": request.email,
+        "password": hashPassword(request.password)
+    }
+
+    result = collection.insert_one(user)
+
+    result = encoder.JSONEncoder().encode(result.inserted_id)
+
+    return result
     
-    user_key = datastore_client.key(kind, id)
+   
 
-    user = datastore.Entity(key=user_key)
-    user['email'] = request.email
-    user['first'] = request.firstname
-    user['last'] = request.lastname
+def getUser(request):
+    id = request.email
 
-    hashPW = hashPassword(request.password)
+    query = { "email": request.email }
 
-    user['password'] = hashPW
-    # Saves the entity
-    datastore_client.put(user)
+    user = collection.find(query).count()
 
-    del user['password']
+    if user == 0:
+        return "no email"
 
-    userJson = json.dumps(user)
-    return userJson
+    user = collection.find_one(query)
+
+    if not checkPass(request.password, user['password']):
+        return "wrong password"
+
+    user.pop('password')
+
+    result = encoder.JSONEncoder().encode(user)
+
+    return result
 
 def hashPassword(password):
     # Hash a password for the first time, with a randomly-generated salt
@@ -34,6 +60,6 @@ def hashPassword(password):
 def checkPass(password, hash):
     # previously been hashed
     if bcrypt.hashpw(password, hash) == hash:
-            print ("It matches")
+            return True
     else:
-            print ("It does not match")
+            return False

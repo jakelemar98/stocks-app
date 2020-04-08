@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from './../environments/environment'
-import { Observable } from 'rxjs';
 import { NewUser } from './new-user'
-import { User } from './user'
+import { Login } from './login';
+
 
 @Injectable({
   providedIn: 'root'
@@ -14,11 +14,13 @@ export class UsersService {
 
   constructor(private http: HttpClient) { }
 
-  getUser(){
-    return this.http.get(this.gatewayURL + "?id=Jake");
+  getUser(login: Login){
+    console.log(login);
+    
+    return this.http.post(this.gatewayURL + "/login", login);
   }
 
   createUser(newUser: NewUser) {
-    return this.http.post(this.gatewayURL, newUser)
+    return this.http.post(this.gatewayURL + "/create", newUser)
   }
 }

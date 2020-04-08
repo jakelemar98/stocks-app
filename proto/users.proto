@@ -14,12 +14,8 @@ option java_multiple_files = true;
 option java_package = 'com.grpc.services.users'; 
 
 service UserService {
-    rpc GetUser(UserRequest) returns (UserResponse);
+    rpc GetUser(UserLogin) returns (UserResponse);
     rpc CreateUser(NewUserRequest) returns(UserResponse);
-}
-
-message UserRequest {
-    string message = 1;
 }
 
 message UserResponse {
@@ -31,4 +27,9 @@ message NewUserRequest {
     string lastname = 2;
     string email = 3;
     string password = 4;
+}
+
+message UserLogin {
+    string email = 1;
+    string password = 2;
 }

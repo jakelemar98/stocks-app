@@ -29,10 +29,10 @@ export class AppComponent {
     //   console.log(json);
     // })
 
-    this.userHttp.getUser().subscribe(data => {
-      this.user = data      
-      console.log(this.user['message']);
-    })
+    // this.userHttp.getUser().subscribe(data => {
+    //   this.user = data      
+    //   console.log(this.user['message']);
+    // })
     
   }
 }

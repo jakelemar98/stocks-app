@@ -27,28 +27,28 @@ public final class UserServiceGrpc {
   public static final String SERVICE_NAME = "UserService";
 
   // Static method descriptors that strictly reflect the proto.
-  private static volatile io.grpc.MethodDescriptor<com.grpc.services.users.UserRequest,
+  private static volatile io.grpc.MethodDescriptor<com.grpc.services.users.UserLogin,
       com.grpc.services.users.UserResponse> getGetUserMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "GetUser",
-      requestType = com.grpc.services.users.UserRequest.class,
+      requestType = com.grpc.services.users.UserLogin.class,
       responseType = com.grpc.services.users.UserResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<com.grpc.services.users.UserRequest,
+  public static io.grpc.MethodDescriptor<com.grpc.services.users.UserLogin,
       com.grpc.services.users.UserResponse> getGetUserMethod() {
-    io.grpc.MethodDescriptor<com.grpc.services.users.UserRequest, com.grpc.services.users.UserResponse> getGetUserMethod;
+    io.grpc.MethodDescriptor<com.grpc.services.users.UserLogin, com.grpc.services.users.UserResponse> getGetUserMethod;
     if ((getGetUserMethod = UserServiceGrpc.getGetUserMethod) == null) {
       synchronized (UserServiceGrpc.class) {
         if ((getGetUserMethod = UserServiceGrpc.getGetUserMethod) == null) {
           UserServiceGrpc.getGetUserMethod = getGetUserMethod = 
-              io.grpc.MethodDescriptor.<com.grpc.services.users.UserRequest, com.grpc.services.users.UserResponse>newBuilder()
+              io.grpc.MethodDescriptor.<com.grpc.services.users.UserLogin, com.grpc.services.users.UserResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(
                   "UserService", "GetUser"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.grpc.services.users.UserRequest.getDefaultInstance()))
+                  com.grpc.services.users.UserLogin.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   com.grpc.services.users.UserResponse.getDefaultInstance()))
                   .setSchemaDescriptor(new UserServiceMethodDescriptorSupplier("GetUser"))
@@ -120,7 +120,7 @@ public final class UserServiceGrpc {
 
     /**
      */
-    public void getUser(com.grpc.services.users.UserRequest request,
+    public void getUser(com.grpc.services.users.UserLogin request,
         io.grpc.stub.StreamObserver<com.grpc.services.users.UserResponse> responseObserver) {
       asyncUnimplementedUnaryCall(getGetUserMethod(), responseObserver);
     }
@@ -138,7 +138,7 @@ public final class UserServiceGrpc {
             getGetUserMethod(),
             asyncUnaryCall(
               new MethodHandlers<
-                com.grpc.services.users.UserRequest,
+                com.grpc.services.users.UserLogin,
                 com.grpc.services.users.UserResponse>(
                   this, METHODID_GET_USER)))
           .addMethod(
@@ -172,7 +172,7 @@ public final class UserServiceGrpc {
 
     /**
      */
-    public void getUser(com.grpc.services.users.UserRequest request,
+    public void getUser(com.grpc.services.users.UserLogin request,
         io.grpc.stub.StreamObserver<com.grpc.services.users.UserResponse> responseObserver) {
       asyncUnaryCall(
           getChannel().newCall(getGetUserMethod(), getCallOptions()), request, responseObserver);
@@ -207,7 +207,7 @@ public final class UserServiceGrpc {
 
     /**
      */
-    public com.grpc.services.users.UserResponse getUser(com.grpc.services.users.UserRequest request) {
+    public com.grpc.services.users.UserResponse getUser(com.grpc.services.users.UserLogin request) {
       return blockingUnaryCall(
           getChannel(), getGetUserMethod(), getCallOptions(), request);
     }
@@ -241,7 +241,7 @@ public final class UserServiceGrpc {
     /**
      */
     public com.google.common.util.concurrent.ListenableFuture<com.grpc.services.users.UserResponse> getUser(
-        com.grpc.services.users.UserRequest request) {
+        com.grpc.services.users.UserLogin request) {
       return futureUnaryCall(
           getChannel().newCall(getGetUserMethod(), getCallOptions()), request);
     }
@@ -276,7 +276,7 @@ public final class UserServiceGrpc {
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
         case METHODID_GET_USER:
-          serviceImpl.getUser((com.grpc.services.users.UserRequest) request,
+          serviceImpl.getUser((com.grpc.services.users.UserLogin) request,
               (io.grpc.stub.StreamObserver<com.grpc.services.users.UserResponse>) responseObserver);
           break;
         case METHODID_CREATE_USER:
