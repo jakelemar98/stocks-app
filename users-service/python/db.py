@@ -1,23 +1,39 @@
-# Imports the Google Cloud client library
 from google.cloud import datastore
+import bcrypt
+import json
 
-# Instantiates a client
 datastore_client = datastore.Client(namespace="test")
-# The kind for the new entity
 kind = 'user'
-# The name/ID for the new entity
-id = 'jtemple'
-# The Cloud Datastore key for the new entity
-user_key = datastore_client.key(kind, id)
 
-# Prepares the new entity
-user = datastore.Entity(key=user_key)
-user['email'] = 'temple2679@gmail.com'
-user['first'] = 'Jack'
-user['last'] = 'Temple'
-# just for test, will wont to hash the password when done
-user['password'] = 'testPassword'
-# Saves the entity
-datastore_client.put(user)
+def createUser(request):
+    id = request.email
+    
+    user_key = datastore_client.key(kind, id)
 
-print('Saved {}: {}'.format(user.key.name, user))
+    user = datastore.Entity(key=user_key)
+    user['email'] = request.email
+    user['first'] = request.firstname
+    user['last'] = request.lastname
+
+    hashPW = hashPassword(request.password)
+
+    user['password'] = hashPW
+    # Saves the entity
+    datastore_client.put(user)
+
+    del user['password']
+
+    userJson = json.dumps(user)
+    return userJson
+
+def hashPassword(password):
+    # Hash a password for the first time, with a randomly-generated salt
+    hashed = bcrypt.hashpw(password, bcrypt.gensalt())
+    return hashed
+
+def checkPass(password, hash):
+    # previously been hashed
+    if bcrypt.hashpw(password, hash) == hash:
+            print ("It matches")
+    else:
+            print ("It does not match")
