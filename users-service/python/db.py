@@ -43,7 +43,7 @@ def getUser(request):
 
     user = collection.find_one(query)
 
-    if not checkPass(request.password, user['password']):
+    if not checkPass(request.password.encode('utf8'), user['password']):
         return "wrong password", 401
 
     user.pop('password')
@@ -59,7 +59,7 @@ def hashPassword(password):
 
 def checkPass(password, hash):
     # previously been hashed
-    if bcrypt.hashpw(password.encode('utf8'), hash) == hash:
+    if bcrypt.hashpw(password.encode('utf8'), hash.encode(utf8)) == hash:
             return True
     else:
             return False
