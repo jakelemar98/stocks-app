@@ -2,3 +2,6 @@
 <div mat-dialog-content>
   <p>{{ data.message }}</p>
 </div>
+<div mat-dialog-actions>
+  <a mat-raised-button *ngIf="data.showButton" [mat-dialog-close] [routerLink]="['/dashboard', data._id]">Ok!</a>
+</div>

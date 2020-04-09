@@ -18,7 +18,7 @@ export class RegisterComponent implements OnInit {
   
   formData: Object;
   user: User;
-  response: Object;
+  response: any;
   error: any;
 
   dialogTemplate: MatDialogRef<DialogTemplateComponent>
@@ -52,23 +52,26 @@ export class RegisterComponent implements OnInit {
     this.userHttp.createUser(user).subscribe(
       data => {
         this.response = data
+        console.log(this.response);
+        
         this.dialogTemplate = this.dialog.open(DialogTemplateComponent, {
           width: "250px",
-          data: {message: "Your account has been created! lets get started!", title: "Nice!", showButton: true}
+          data: {message: "Your account has been created! lets get started!", title: "Nice!", showButton: true, _id: this.response.body}
+        });
+
+        this.dialogTemplate.afterClosed().subscribe(result => {
+          console.log('The dialog was closed');
         });
       },
       error =>  {
         this.error = error
-
-        if(this.error['status'] !== 201) {          
-          this.dialogTemplate = this.dialog.open(DialogTemplateComponent, {
-            width: "250px",
-            data: {message: this.error, title: "Whoops"}
-          });
-        }
+        console.log(this.error);
+              
+        this.dialogTemplate = this.dialog.open(DialogTemplateComponent, {
+          width: "250px",
+          data: {message: this.error, title: "Whoops", showButton: false}
+        });
       }
-
-      
     )    
   }
 

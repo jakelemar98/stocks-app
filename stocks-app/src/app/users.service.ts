@@ -17,7 +17,7 @@ export class UsersService {
   constructor(private http: HttpClient) { }
 
   getUser(login: Login){    
-    return this.http.post(this.gatewayURL + "/login", login);
+    return this.http.post(this.gatewayURL + "/login", login).pipe(catchError(this.handleError));
   }
 
   createUser(newUser: NewUser) {

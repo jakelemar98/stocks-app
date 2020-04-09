@@ -9,7 +9,8 @@ import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
-import { DialogTemplateComponent } from './dialog-template/dialog-template.component'
+import { DialogTemplateComponent } from './dialog-template/dialog-template.component';
+import { DashboardComponent } from './dashboard/dashboard.component'
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { DialogTemplateComponent } from './dialog-template/dialog-template.compo
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    DialogTemplateComponent
+    DialogTemplateComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

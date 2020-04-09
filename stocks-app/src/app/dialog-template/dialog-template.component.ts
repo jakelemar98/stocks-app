@@ -3,7 +3,10 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 
 export interface DialogData {
-  issue: string;
+  message: string;
+  title: string;
+  showButton: boolean;
+  _id: string;
 }
 
 
