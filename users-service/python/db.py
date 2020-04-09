@@ -54,12 +54,12 @@ def getUser(request):
 
 def hashPassword(password):
     # Hash a password for the first time, with a randomly-generated salt
-    hashed = bcrypt.hashpw(password, bcrypt.gensalt())
+    hashed = bcrypt.hashpw(password.encode('utf8'), bcrypt.gensalt())
     return hashed
 
 def checkPass(password, hash):
     # previously been hashed
-    if bcrypt.hashpw(password, hash) == hash:
+    if bcrypt.hashpw(password.encode('utf8'), hash) == hash:
             return True
     else:
             return False
