@@ -7,7 +7,7 @@
             Email
           </mat-label> 
           <input matInput type="text" placeholder="enter first name" formControlName="email">
-          <mat-error *ngIf="loginForm.controls.email.touched && loginForm.controls.email.errors && login.controls.email.errors.required">must enter an email</mat-error>
+          <mat-error *ngIf="loginForm.controls.email.touched && loginForm.controls.email.errors && loginForm.controls.email.errors.required">must enter an email</mat-error>
         </mat-form-field>
         <br>
         <mat-form-field appearance="outline" class="parent">
@@ -15,7 +15,7 @@
             Password:
           </mat-label>
           <input matInput type="password" placeholder="Password" formControlName="password">
-          <mat-error *ngIf="loginForm.controls.password.touched && loginForm.controls.password.errors && login.controls.password.errors.required">must enter an email</mat-error>
+          <mat-error *ngIf="loginForm.controls.password.touched && loginForm.controls.password.errors && loginForm.controls.password.errors.required">must enter an email</mat-error>
         </mat-form-field>
           <div class="parent">
             <button mat-raised-button type="submit" [disabled]="!loginForm.valid" color="accent">Login</button>
