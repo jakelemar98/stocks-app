@@ -8,12 +8,17 @@ public interface UserResponseOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>string message = 1;</code>
+   * <code>string body = 1;</code>
    */
-  java.lang.String getMessage();
+  java.lang.String getBody();
   /**
-   * <code>string message = 1;</code>
+   * <code>string body = 1;</code>
    */
   com.google.protobuf.ByteString
-      getMessageBytes();
+      getBodyBytes();
+
+  /**
+   * <code>int32 status = 2;</code>
+   */
+  int getStatus();
 }

@@ -1,16 +1,36 @@
+// Proto to connect Java Gateway to Python Users-service
+
+/* 
+    Java protoc complation done for you throug Gradle ( ./gradlew clean build )
+
+    Python protoc complation command
+    run from /stocks-app/proto dir
+    python3 -m grpc_tools.protoc -I. --python_out=../users-service/proto --grpc_python_out=../users-service/proto  users.proto
+*/
+
 syntax = "proto3";
 
 option java_multiple_files = true;
 option java_package = 'com.grpc.services.users'; 
 
 service UserService {
-    rpc GetUser(UserRequest) returns (UserResponse);
-}
-
-message UserRequest {
-    string message = 1;
+    rpc GetUser(UserLogin) returns (UserResponse);
+    rpc CreateUser(NewUserRequest) returns(UserResponse);
 }
 
 message UserResponse {
-    string message = 1;
+    string body = 1;
+    int32 status = 2;
+}
+
+message NewUserRequest {
+    string firstname = 1;
+    string lastname = 2;
+    string email = 3;
+    string password = 4;
+}
+
+message UserLogin {
+    string email = 1;
+    string password = 2;
 }
