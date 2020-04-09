@@ -16,7 +16,7 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private UserResponse() {
-    message_ = "";
+    body_ = "";
   }
 
   @java.lang.Override
@@ -46,7 +46,12 @@ private static final long serialVersionUID = 0L;
           case 10: {
             java.lang.String s = input.readStringRequireUtf8();
 
-            message_ = s;
+            body_ = s;
+            break;
+          }
+          case 16: {
+
+            status_ = input.readInt32();
             break;
           }
           default: {
@@ -81,38 +86,47 @@ private static final long serialVersionUID = 0L;
             com.grpc.services.users.UserResponse.class, com.grpc.services.users.UserResponse.Builder.class);
   }
 
-  public static final int MESSAGE_FIELD_NUMBER = 1;
-  private volatile java.lang.Object message_;
+  public static final int BODY_FIELD_NUMBER = 1;
+  private volatile java.lang.Object body_;
   /**
-   * <code>string message = 1;</code>
+   * <code>string body = 1;</code>
    */
-  public java.lang.String getMessage() {
-    java.lang.Object ref = message_;
+  public java.lang.String getBody() {
+    java.lang.Object ref = body_;
     if (ref instanceof java.lang.String) {
       return (java.lang.String) ref;
     } else {
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      message_ = s;
+      body_ = s;
       return s;
     }
   }
   /**
-   * <code>string message = 1;</code>
+   * <code>string body = 1;</code>
    */
   public com.google.protobuf.ByteString
-      getMessageBytes() {
-    java.lang.Object ref = message_;
+      getBodyBytes() {
+    java.lang.Object ref = body_;
     if (ref instanceof java.lang.String) {
       com.google.protobuf.ByteString b = 
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
-      message_ = b;
+      body_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
     }
+  }
+
+  public static final int STATUS_FIELD_NUMBER = 2;
+  private int status_;
+  /**
+   * <code>int32 status = 2;</code>
+   */
+  public int getStatus() {
+    return status_;
   }
 
   private byte memoizedIsInitialized = -1;
@@ -129,8 +143,11 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (!getMessageBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, message_);
+    if (!getBodyBytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, body_);
+    }
+    if (status_ != 0) {
+      output.writeInt32(2, status_);
     }
     unknownFields.writeTo(output);
   }
@@ -141,8 +158,12 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (!getMessageBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, message_);
+    if (!getBodyBytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, body_);
+    }
+    if (status_ != 0) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt32Size(2, status_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -159,8 +180,10 @@ private static final long serialVersionUID = 0L;
     }
     com.grpc.services.users.UserResponse other = (com.grpc.services.users.UserResponse) obj;
 
-    if (!getMessage()
-        .equals(other.getMessage())) return false;
+    if (!getBody()
+        .equals(other.getBody())) return false;
+    if (getStatus()
+        != other.getStatus()) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -172,8 +195,10 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + MESSAGE_FIELD_NUMBER;
-    hash = (53 * hash) + getMessage().hashCode();
+    hash = (37 * hash) + BODY_FIELD_NUMBER;
+    hash = (53 * hash) + getBody().hashCode();
+    hash = (37 * hash) + STATUS_FIELD_NUMBER;
+    hash = (53 * hash) + getStatus();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -307,7 +332,9 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      message_ = "";
+      body_ = "";
+
+      status_ = 0;
 
       return this;
     }
@@ -335,7 +362,8 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.grpc.services.users.UserResponse buildPartial() {
       com.grpc.services.users.UserResponse result = new com.grpc.services.users.UserResponse(this);
-      result.message_ = message_;
+      result.body_ = body_;
+      result.status_ = status_;
       onBuilt();
       return result;
     }
@@ -384,9 +412,12 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(com.grpc.services.users.UserResponse other) {
       if (other == com.grpc.services.users.UserResponse.getDefaultInstance()) return this;
-      if (!other.getMessage().isEmpty()) {
-        message_ = other.message_;
+      if (!other.getBody().isEmpty()) {
+        body_ = other.body_;
         onChanged();
+      }
+      if (other.getStatus() != 0) {
+        setStatus(other.getStatus());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -417,71 +448,97 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.lang.Object message_ = "";
+    private java.lang.Object body_ = "";
     /**
-     * <code>string message = 1;</code>
+     * <code>string body = 1;</code>
      */
-    public java.lang.String getMessage() {
-      java.lang.Object ref = message_;
+    public java.lang.String getBody() {
+      java.lang.Object ref = body_;
       if (!(ref instanceof java.lang.String)) {
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        message_ = s;
+        body_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
       }
     }
     /**
-     * <code>string message = 1;</code>
+     * <code>string body = 1;</code>
      */
     public com.google.protobuf.ByteString
-        getMessageBytes() {
-      java.lang.Object ref = message_;
+        getBodyBytes() {
+      java.lang.Object ref = body_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        message_ = b;
+        body_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
     /**
-     * <code>string message = 1;</code>
+     * <code>string body = 1;</code>
      */
-    public Builder setMessage(
+    public Builder setBody(
         java.lang.String value) {
       if (value == null) {
     throw new NullPointerException();
   }
   
-      message_ = value;
+      body_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>string message = 1;</code>
+     * <code>string body = 1;</code>
      */
-    public Builder clearMessage() {
+    public Builder clearBody() {
       
-      message_ = getDefaultInstance().getMessage();
+      body_ = getDefaultInstance().getBody();
       onChanged();
       return this;
     }
     /**
-     * <code>string message = 1;</code>
+     * <code>string body = 1;</code>
      */
-    public Builder setMessageBytes(
+    public Builder setBodyBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
       
-      message_ = value;
+      body_ = value;
+      onChanged();
+      return this;
+    }
+
+    private int status_ ;
+    /**
+     * <code>int32 status = 2;</code>
+     */
+    public int getStatus() {
+      return status_;
+    }
+    /**
+     * <code>int32 status = 2;</code>
+     */
+    public Builder setStatus(int value) {
+      
+      status_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>int32 status = 2;</code>
+     */
+    public Builder clearStatus() {
+      
+      status_ = 0;
       onChanged();
       return this;
     }

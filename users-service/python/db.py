@@ -14,7 +14,7 @@ def createUser(request):
     check_email = collection.find(query).count()
 
     if check_email > 0:
-        return "email exists"        
+        return "email already exists", 400       
 
     user = {
         "first": request.firstname,
@@ -27,7 +27,7 @@ def createUser(request):
 
     result = encoder.JSONEncoder().encode(result.inserted_id)
 
-    return result
+    return result, 201
     
    
 
@@ -39,18 +39,18 @@ def getUser(request):
     user = collection.find(query).count()
 
     if user == 0:
-        return "no email"
+        return "email does not exist", 404
 
     user = collection.find_one(query)
 
     if not checkPass(request.password, user['password']):
-        return "wrong password"
+        return "wrong password", 401
 
     user.pop('password')
 
     result = encoder.JSONEncoder().encode(user)
 
-    return result
+    return result, 200
 
 def hashPassword(password):
     # Hash a password for the first time, with a randomly-generated salt

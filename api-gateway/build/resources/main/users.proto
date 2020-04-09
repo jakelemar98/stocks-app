@@ -19,7 +19,8 @@ service UserService {
 }
 
 message UserResponse {
-    string message = 1;
+    string body = 1;
+    int32 status = 2;
 }
 
 message NewUserRequest {
