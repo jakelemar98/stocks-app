@@ -31,7 +31,7 @@ public class UserClient {
     }
 
     public UserResponse createUser(NewUser newUser) {
-        final ManagedChannel channel = ManagedChannelBuilder.forAddress("users-service", 8001).usePlaintext().build();
+        final ManagedChannel channel = ManagedChannelBuilder.forAddress("user-service", 8001).usePlaintext().build();
         String firstname = newUser.getFirstname();
         System.out.println(firstname);
         final UserServiceGrpc.UserServiceBlockingStub stub = UserServiceGrpc.newBlockingStub(channel);
