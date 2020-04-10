@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"sort"
 
 	pb "../proto/stocks"
 )
@@ -14,6 +15,19 @@ var (
 	apiBase = "https://www.alphavantage.co/query?function="
 	apiKey  = "N8ECE7S8XE8QTU03"
 )
+
+type Item struct {
+	Close  string `json:"4. close"`
+	High   string `json:"2. high"`
+	Low    string `json:"3. low"`
+	Open   string `json:"1. open"`
+	Volume string `json:"5. volume"`
+	Date   string
+}
+
+type TimeSeriesMonthly struct {
+	Monthly map[string]Item `json:"Monthly Time Series"`
+}
 
 type GlobalQuote struct {
 	Stock map[string]string `json:"Global Quote"`
@@ -26,7 +40,8 @@ type BestMatches struct {
 func (s *server) GetStockPrice(c context.Context, req *pb.Request) (*pb.Response, error) {
 	res := stockPriceFetch(req.StockSymbol)
 	response := &pb.Response{
-		StockInfo: res,
+		Response: res,
+		Status:   200,
 	}
 	return response, nil
 }
@@ -66,7 +81,8 @@ func stockPriceFetch(symbol string) string {
 func (s *server) GetStockOptions(c context.Context, req *pb.Request) (*pb.Response, error) {
 	res := stockOptionsFetch(req.StockSymbol)
 	response := &pb.Response{
-		StockInfo: res,
+		Response: res,
+		Status:   200,
 	}
 	return response, nil
 }
@@ -102,6 +118,51 @@ func stockOptionsFetch(symbol string) string {
 			i++
 		}
 		jsonString, _ := json.Marshal(om)
+		returnVal = string(jsonString)
+	}
+	return returnVal
+}
+
+func (s *server) GetMonthlyPrice(c context.Context, req *pb.Request) (*pb.Response, error) {
+	res := monthlyPriceFetch(req.StockSymbol)
+	response := &pb.Response{
+		Response: res,
+		Status:   200,
+	}
+	return response, nil
+}
+
+func monthlyPriceFetch(symbol string) string {
+	log.Println("Monthly price request.....")
+	var returnVal string
+	url := apiBase + "TIME_SERIES_MONTHLY&symbol=" + symbol + "&apikey=" + apiKey
+	response, err := http.Get(url)
+	if err != nil {
+		log.Fatalf("server error -> %s\n", err)
+	} else {
+		var results TimeSeriesMonthly
+		json.NewDecoder(response.Body).Decode(&results)
+
+		length := len(results.Monthly)
+		keys := make([]string, 0)
+
+		for k := range results.Monthly {
+			keys = append(keys, k)
+		}
+		sort.Strings(keys)
+		m := make(map[int]Item)
+		i := 0
+		for _, k := range keys {
+			if i >= (length - 12) {
+				r := results.Monthly[k]
+				r.Date = k
+				results.Monthly[k] = r
+				key := length - i - 1
+				m[key] = results.Monthly[k]
+			}
+			i++
+		}
+		jsonString, _ := json.Marshal(m)
 		returnVal = string(jsonString)
 	}
 	return returnVal

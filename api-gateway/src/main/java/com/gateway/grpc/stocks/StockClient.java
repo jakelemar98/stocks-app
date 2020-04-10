@@ -1,8 +1,6 @@
 package com.gateway.grpc.stocks;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import com.grpc.services.stocks.StockServiceGrpc;
@@ -26,6 +24,8 @@ public class StockClient {
             response = stub.getStockPrice(Request.newBuilder().setStockSymbol(symbol).build());
         } else if (option.equals("matches")) {
             response = stub.getStockOptions(Request.newBuilder().setStockSymbol(symbol).build());
+        } else if (option.equals("monthly")) {
+            response = stub.getMonthlyPrice(Request.newBuilder().setStockSymbol(symbol).build());
         }
 
         channel.shutdown();

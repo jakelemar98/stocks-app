@@ -34,11 +34,12 @@ public final class Stocks {
   static {
     java.lang.String[] descriptorData = {
       "\n\014stocks.proto\"\036\n\007Request\022\023\n\013stockSymbol" +
-      "\030\001 \001(\t\"\035\n\010Response\022\021\n\tstockInfo\030\001 \001(\t2\\\n" +
-      "\014StockService\022$\n\rGetStockPrice\022\010.Request" +
-      "\032\t.Response\022&\n\017GetStockOptions\022\010.Request" +
-      "\032\t.ResponseB\034\n\030com.grpc.services.stocksP" +
-      "\001b\006proto3"
+      "\030\001 \001(\t\",\n\010Response\022\020\n\010response\030\001 \001(\t\022\016\n\006" +
+      "status\030\002 \001(\0052\204\001\n\014StockService\022$\n\rGetStoc" +
+      "kPrice\022\010.Request\032\t.Response\022&\n\017GetStockO" +
+      "ptions\022\010.Request\032\t.Response\022&\n\017GetMonthl" +
+      "yPrice\022\010.Request\032\t.ResponseB\034\n\030com.grpc." +
+      "services.stocksP\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -63,7 +64,7 @@ public final class Stocks {
     internal_static_Response_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Response_descriptor,
-        new java.lang.String[] { "StockInfo", });
+        new java.lang.String[] { "Response", "Status", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

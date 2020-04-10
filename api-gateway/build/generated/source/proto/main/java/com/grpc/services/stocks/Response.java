@@ -16,7 +16,7 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private Response() {
-    stockInfo_ = "";
+    response_ = "";
   }
 
   @java.lang.Override
@@ -46,7 +46,12 @@ private static final long serialVersionUID = 0L;
           case 10: {
             java.lang.String s = input.readStringRequireUtf8();
 
-            stockInfo_ = s;
+            response_ = s;
+            break;
+          }
+          case 16: {
+
+            status_ = input.readInt32();
             break;
           }
           default: {
@@ -81,38 +86,47 @@ private static final long serialVersionUID = 0L;
             com.grpc.services.stocks.Response.class, com.grpc.services.stocks.Response.Builder.class);
   }
 
-  public static final int STOCKINFO_FIELD_NUMBER = 1;
-  private volatile java.lang.Object stockInfo_;
+  public static final int RESPONSE_FIELD_NUMBER = 1;
+  private volatile java.lang.Object response_;
   /**
-   * <code>string stockInfo = 1;</code>
+   * <code>string response = 1;</code>
    */
-  public java.lang.String getStockInfo() {
-    java.lang.Object ref = stockInfo_;
+  public java.lang.String getResponse() {
+    java.lang.Object ref = response_;
     if (ref instanceof java.lang.String) {
       return (java.lang.String) ref;
     } else {
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      stockInfo_ = s;
+      response_ = s;
       return s;
     }
   }
   /**
-   * <code>string stockInfo = 1;</code>
+   * <code>string response = 1;</code>
    */
   public com.google.protobuf.ByteString
-      getStockInfoBytes() {
-    java.lang.Object ref = stockInfo_;
+      getResponseBytes() {
+    java.lang.Object ref = response_;
     if (ref instanceof java.lang.String) {
       com.google.protobuf.ByteString b = 
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
-      stockInfo_ = b;
+      response_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
     }
+  }
+
+  public static final int STATUS_FIELD_NUMBER = 2;
+  private int status_;
+  /**
+   * <code>int32 status = 2;</code>
+   */
+  public int getStatus() {
+    return status_;
   }
 
   private byte memoizedIsInitialized = -1;
@@ -129,8 +143,11 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (!getStockInfoBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, stockInfo_);
+    if (!getResponseBytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, response_);
+    }
+    if (status_ != 0) {
+      output.writeInt32(2, status_);
     }
     unknownFields.writeTo(output);
   }
@@ -141,8 +158,12 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (!getStockInfoBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, stockInfo_);
+    if (!getResponseBytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, response_);
+    }
+    if (status_ != 0) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt32Size(2, status_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -159,8 +180,10 @@ private static final long serialVersionUID = 0L;
     }
     com.grpc.services.stocks.Response other = (com.grpc.services.stocks.Response) obj;
 
-    if (!getStockInfo()
-        .equals(other.getStockInfo())) return false;
+    if (!getResponse()
+        .equals(other.getResponse())) return false;
+    if (getStatus()
+        != other.getStatus()) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -172,8 +195,10 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + STOCKINFO_FIELD_NUMBER;
-    hash = (53 * hash) + getStockInfo().hashCode();
+    hash = (37 * hash) + RESPONSE_FIELD_NUMBER;
+    hash = (53 * hash) + getResponse().hashCode();
+    hash = (37 * hash) + STATUS_FIELD_NUMBER;
+    hash = (53 * hash) + getStatus();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -307,7 +332,9 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      stockInfo_ = "";
+      response_ = "";
+
+      status_ = 0;
 
       return this;
     }
@@ -335,7 +362,8 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.grpc.services.stocks.Response buildPartial() {
       com.grpc.services.stocks.Response result = new com.grpc.services.stocks.Response(this);
-      result.stockInfo_ = stockInfo_;
+      result.response_ = response_;
+      result.status_ = status_;
       onBuilt();
       return result;
     }
@@ -384,9 +412,12 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(com.grpc.services.stocks.Response other) {
       if (other == com.grpc.services.stocks.Response.getDefaultInstance()) return this;
-      if (!other.getStockInfo().isEmpty()) {
-        stockInfo_ = other.stockInfo_;
+      if (!other.getResponse().isEmpty()) {
+        response_ = other.response_;
         onChanged();
+      }
+      if (other.getStatus() != 0) {
+        setStatus(other.getStatus());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -417,71 +448,97 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.lang.Object stockInfo_ = "";
+    private java.lang.Object response_ = "";
     /**
-     * <code>string stockInfo = 1;</code>
+     * <code>string response = 1;</code>
      */
-    public java.lang.String getStockInfo() {
-      java.lang.Object ref = stockInfo_;
+    public java.lang.String getResponse() {
+      java.lang.Object ref = response_;
       if (!(ref instanceof java.lang.String)) {
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        stockInfo_ = s;
+        response_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
       }
     }
     /**
-     * <code>string stockInfo = 1;</code>
+     * <code>string response = 1;</code>
      */
     public com.google.protobuf.ByteString
-        getStockInfoBytes() {
-      java.lang.Object ref = stockInfo_;
+        getResponseBytes() {
+      java.lang.Object ref = response_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        stockInfo_ = b;
+        response_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
     /**
-     * <code>string stockInfo = 1;</code>
+     * <code>string response = 1;</code>
      */
-    public Builder setStockInfo(
+    public Builder setResponse(
         java.lang.String value) {
       if (value == null) {
     throw new NullPointerException();
   }
   
-      stockInfo_ = value;
+      response_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>string stockInfo = 1;</code>
+     * <code>string response = 1;</code>
      */
-    public Builder clearStockInfo() {
+    public Builder clearResponse() {
       
-      stockInfo_ = getDefaultInstance().getStockInfo();
+      response_ = getDefaultInstance().getResponse();
       onChanged();
       return this;
     }
     /**
-     * <code>string stockInfo = 1;</code>
+     * <code>string response = 1;</code>
      */
-    public Builder setStockInfoBytes(
+    public Builder setResponseBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
       
-      stockInfo_ = value;
+      response_ = value;
+      onChanged();
+      return this;
+    }
+
+    private int status_ ;
+    /**
+     * <code>int32 status = 2;</code>
+     */
+    public int getStatus() {
+      return status_;
+    }
+    /**
+     * <code>int32 status = 2;</code>
+     */
+    public Builder setStatus(int value) {
+      
+      status_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>int32 status = 2;</code>
+     */
+    public Builder clearStatus() {
+      
+      status_ = 0;
       onChanged();
       return this;
     }

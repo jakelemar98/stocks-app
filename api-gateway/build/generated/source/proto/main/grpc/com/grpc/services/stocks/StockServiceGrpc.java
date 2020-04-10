@@ -91,6 +91,38 @@ public final class StockServiceGrpc {
      return getGetStockOptionsMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<com.grpc.services.stocks.Request,
+      com.grpc.services.stocks.Response> getGetMonthlyPriceMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "GetMonthlyPrice",
+      requestType = com.grpc.services.stocks.Request.class,
+      responseType = com.grpc.services.stocks.Response.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.grpc.services.stocks.Request,
+      com.grpc.services.stocks.Response> getGetMonthlyPriceMethod() {
+    io.grpc.MethodDescriptor<com.grpc.services.stocks.Request, com.grpc.services.stocks.Response> getGetMonthlyPriceMethod;
+    if ((getGetMonthlyPriceMethod = StockServiceGrpc.getGetMonthlyPriceMethod) == null) {
+      synchronized (StockServiceGrpc.class) {
+        if ((getGetMonthlyPriceMethod = StockServiceGrpc.getGetMonthlyPriceMethod) == null) {
+          StockServiceGrpc.getGetMonthlyPriceMethod = getGetMonthlyPriceMethod = 
+              io.grpc.MethodDescriptor.<com.grpc.services.stocks.Request, com.grpc.services.stocks.Response>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(
+                  "StockService", "GetMonthlyPrice"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.grpc.services.stocks.Request.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.grpc.services.stocks.Response.getDefaultInstance()))
+                  .setSchemaDescriptor(new StockServiceMethodDescriptorSupplier("GetMonthlyPrice"))
+                  .build();
+          }
+        }
+     }
+     return getGetMonthlyPriceMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -132,6 +164,13 @@ public final class StockServiceGrpc {
       asyncUnimplementedUnaryCall(getGetStockOptionsMethod(), responseObserver);
     }
 
+    /**
+     */
+    public void getMonthlyPrice(com.grpc.services.stocks.Request request,
+        io.grpc.stub.StreamObserver<com.grpc.services.stocks.Response> responseObserver) {
+      asyncUnimplementedUnaryCall(getGetMonthlyPriceMethod(), responseObserver);
+    }
+
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -148,6 +187,13 @@ public final class StockServiceGrpc {
                 com.grpc.services.stocks.Request,
                 com.grpc.services.stocks.Response>(
                   this, METHODID_GET_STOCK_OPTIONS)))
+          .addMethod(
+            getGetMonthlyPriceMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                com.grpc.services.stocks.Request,
+                com.grpc.services.stocks.Response>(
+                  this, METHODID_GET_MONTHLY_PRICE)))
           .build();
     }
   }
@@ -185,6 +231,14 @@ public final class StockServiceGrpc {
       asyncUnaryCall(
           getChannel().newCall(getGetStockOptionsMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void getMonthlyPrice(com.grpc.services.stocks.Request request,
+        io.grpc.stub.StreamObserver<com.grpc.services.stocks.Response> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getGetMonthlyPriceMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -217,6 +271,13 @@ public final class StockServiceGrpc {
     public com.grpc.services.stocks.Response getStockOptions(com.grpc.services.stocks.Request request) {
       return blockingUnaryCall(
           getChannel(), getGetStockOptionsMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public com.grpc.services.stocks.Response getMonthlyPrice(com.grpc.services.stocks.Request request) {
+      return blockingUnaryCall(
+          getChannel(), getGetMonthlyPriceMethod(), getCallOptions(), request);
     }
   }
 
@@ -253,10 +314,19 @@ public final class StockServiceGrpc {
       return futureUnaryCall(
           getChannel().newCall(getGetStockOptionsMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.grpc.services.stocks.Response> getMonthlyPrice(
+        com.grpc.services.stocks.Request request) {
+      return futureUnaryCall(
+          getChannel().newCall(getGetMonthlyPriceMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_GET_STOCK_PRICE = 0;
   private static final int METHODID_GET_STOCK_OPTIONS = 1;
+  private static final int METHODID_GET_MONTHLY_PRICE = 2;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -281,6 +351,10 @@ public final class StockServiceGrpc {
           break;
         case METHODID_GET_STOCK_OPTIONS:
           serviceImpl.getStockOptions((com.grpc.services.stocks.Request) request,
+              (io.grpc.stub.StreamObserver<com.grpc.services.stocks.Response>) responseObserver);
+          break;
+        case METHODID_GET_MONTHLY_PRICE:
+          serviceImpl.getMonthlyPrice((com.grpc.services.stocks.Request) request,
               (io.grpc.stub.StreamObserver<com.grpc.services.stocks.Response>) responseObserver);
           break;
         default:
@@ -346,6 +420,7 @@ public final class StockServiceGrpc {
               .setSchemaDescriptor(new StockServiceFileDescriptorSupplier())
               .addMethod(getGetStockPriceMethod())
               .addMethod(getGetStockOptionsMethod())
+              .addMethod(getGetMonthlyPriceMethod())
               .build();
         }
       }

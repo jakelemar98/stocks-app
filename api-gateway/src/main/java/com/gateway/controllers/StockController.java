@@ -1,6 +1,8 @@
 package com.gateway.controllers;
 
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -44,4 +46,20 @@ public class StockController {
 
         return jsonString;
     }
+
+    @GetMapping("/stocks/monthly")
+    public ResponseEntity<String> getMonthly(@RequestParam(value = "symbol") String symbol) {
+        Response sr = sc.getResponse(symbol, "monthly");
+        System.out.println(sr);
+        String jsonString = "";
+        try {
+            jsonString = JsonFormat.printer().print(sr);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        return new ResponseEntity<>(jsonString, HttpStatus.OK);
+    }
+    
 }
