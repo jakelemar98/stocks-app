@@ -9,6 +9,7 @@ It is generated from these files:
 
 It has these top-level messages:
 	Request
+	TimeRequest
 	Response
 */
 package stocks
@@ -49,6 +50,30 @@ func (m *Request) GetStockSymbol() string {
 	return ""
 }
 
+type TimeRequest struct {
+	Symbol string `protobuf:"bytes,1,opt,name=Symbol,json=symbol" json:"Symbol,omitempty"`
+	Time   string `protobuf:"bytes,2,opt,name=time" json:"time,omitempty"`
+}
+
+func (m *TimeRequest) Reset()                    { *m = TimeRequest{} }
+func (m *TimeRequest) String() string            { return proto.CompactTextString(m) }
+func (*TimeRequest) ProtoMessage()               {}
+func (*TimeRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{1} }
+
+func (m *TimeRequest) GetSymbol() string {
+	if m != nil {
+		return m.Symbol
+	}
+	return ""
+}
+
+func (m *TimeRequest) GetTime() string {
+	if m != nil {
+		return m.Time
+	}
+	return ""
+}
+
 type Response struct {
 	Response string `protobuf:"bytes,1,opt,name=response" json:"response,omitempty"`
 	Status   int32  `protobuf:"varint,2,opt,name=status" json:"status,omitempty"`
@@ -57,7 +82,7 @@ type Response struct {
 func (m *Response) Reset()                    { *m = Response{} }
 func (m *Response) String() string            { return proto.CompactTextString(m) }
 func (*Response) ProtoMessage()               {}
-func (*Response) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{1} }
+func (*Response) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{2} }
 
 func (m *Response) GetResponse() string {
 	if m != nil {
@@ -75,6 +100,7 @@ func (m *Response) GetStatus() int32 {
 
 func init() {
 	proto.RegisterType((*Request)(nil), "Request")
+	proto.RegisterType((*TimeRequest)(nil), "TimeRequest")
 	proto.RegisterType((*Response)(nil), "Response")
 }
 
@@ -91,7 +117,7 @@ const _ = grpc.SupportPackageIsVersion4
 type StockServiceClient interface {
 	GetStockPrice(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error)
 	GetStockOptions(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error)
-	GetMonthlyPrice(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error)
+	GetTimeSeries(ctx context.Context, in *TimeRequest, opts ...grpc.CallOption) (*Response, error)
 }
 
 type stockServiceClient struct {
@@ -120,9 +146,9 @@ func (c *stockServiceClient) GetStockOptions(ctx context.Context, in *Request, o
 	return out, nil
 }
 
-func (c *stockServiceClient) GetMonthlyPrice(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error) {
+func (c *stockServiceClient) GetTimeSeries(ctx context.Context, in *TimeRequest, opts ...grpc.CallOption) (*Response, error) {
 	out := new(Response)
-	err := grpc.Invoke(ctx, "/StockService/GetMonthlyPrice", in, out, c.cc, opts...)
+	err := grpc.Invoke(ctx, "/StockService/GetTimeSeries", in, out, c.cc, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -134,7 +160,7 @@ func (c *stockServiceClient) GetMonthlyPrice(ctx context.Context, in *Request, o
 type StockServiceServer interface {
 	GetStockPrice(context.Context, *Request) (*Response, error)
 	GetStockOptions(context.Context, *Request) (*Response, error)
-	GetMonthlyPrice(context.Context, *Request) (*Response, error)
+	GetTimeSeries(context.Context, *TimeRequest) (*Response, error)
 }
 
 func RegisterStockServiceServer(s *grpc.Server, srv StockServiceServer) {
@@ -177,20 +203,20 @@ func _StockService_GetStockOptions_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
-func _StockService_GetMonthlyPrice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Request)
+func _StockService_GetTimeSeries_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TimeRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(StockServiceServer).GetMonthlyPrice(ctx, in)
+		return srv.(StockServiceServer).GetTimeSeries(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/StockService/GetMonthlyPrice",
+		FullMethod: "/StockService/GetTimeSeries",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(StockServiceServer).GetMonthlyPrice(ctx, req.(*Request))
+		return srv.(StockServiceServer).GetTimeSeries(ctx, req.(*TimeRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -208,8 +234,8 @@ var _StockService_serviceDesc = grpc.ServiceDesc{
 			Handler:    _StockService_GetStockOptions_Handler,
 		},
 		{
-			MethodName: "GetMonthlyPrice",
-			Handler:    _StockService_GetMonthlyPrice_Handler,
+			MethodName: "GetTimeSeries",
+			Handler:    _StockService_GetTimeSeries_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -219,16 +245,19 @@ var _StockService_serviceDesc = grpc.ServiceDesc{
 func init() { proto.RegisterFile("stocks.proto", fileDescriptor0) }
 
 var fileDescriptor0 = []byte{
-	// 176 bytes of a gzipped FileDescriptorProto
+	// 214 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0x29, 0x2e, 0xc9, 0x4f,
 	0xce, 0x2e, 0xd6, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x57, 0xd2, 0xe6, 0x62, 0x0f, 0x4a, 0x2d, 0x2c,
 	0x4d, 0x2d, 0x2e, 0x11, 0x52, 0xe0, 0xe2, 0x06, 0x4b, 0x05, 0x57, 0xe6, 0x26, 0xe5, 0xe7, 0x48,
-	0x30, 0x2a, 0x30, 0x6a, 0x70, 0x06, 0x21, 0x0b, 0x29, 0xd9, 0x71, 0x71, 0x04, 0xa5, 0x16, 0x17,
-	0xe4, 0xe7, 0x15, 0xa7, 0x0a, 0x49, 0x71, 0x71, 0x14, 0x41, 0xd9, 0x50, 0xa5, 0x70, 0xbe, 0x90,
-	0x18, 0x17, 0x5b, 0x71, 0x49, 0x62, 0x49, 0x69, 0xb1, 0x04, 0x93, 0x02, 0xa3, 0x06, 0x6b, 0x10,
-	0x94, 0x67, 0xd4, 0xc2, 0xc8, 0xc5, 0x13, 0x0c, 0x36, 0x2f, 0xb5, 0xa8, 0x2c, 0x33, 0x39, 0x55,
-	0x48, 0x85, 0x8b, 0xd7, 0x3d, 0xb5, 0x04, 0x2c, 0x14, 0x50, 0x04, 0x12, 0xe0, 0xd0, 0x83, 0xba,
-	0x46, 0x8a, 0x53, 0x0f, 0x6e, 0x95, 0x1a, 0x17, 0x3f, 0x4c, 0x95, 0x7f, 0x41, 0x49, 0x66, 0x7e,
-	0x5e, 0x31, 0x3e, 0x75, 0xbe, 0xf9, 0x79, 0x25, 0x19, 0x39, 0x95, 0xb8, 0xcd, 0x4b, 0x62, 0x03,
-	0x7b, 0xdd, 0x18, 0x10, 0x00, 0x00, 0xff, 0xff, 0x3b, 0x47, 0x9f, 0x89, 0x0a, 0x01, 0x00, 0x00,
+	0x30, 0x2a, 0x30, 0x6a, 0x70, 0x06, 0x21, 0x0b, 0x29, 0x59, 0x72, 0x71, 0x87, 0x64, 0xe6, 0xa6,
+	0xc2, 0x34, 0x88, 0x71, 0xb1, 0xa1, 0xa8, 0x65, 0x2b, 0x06, 0xf3, 0x84, 0x84, 0xb8, 0x58, 0x4a,
+	0x32, 0x73, 0x53, 0x25, 0x98, 0xc0, 0xa2, 0x60, 0xb6, 0x92, 0x1d, 0x17, 0x47, 0x50, 0x6a, 0x71,
+	0x41, 0x7e, 0x5e, 0x71, 0xaa, 0x90, 0x14, 0x17, 0x47, 0x11, 0x94, 0x0d, 0xd5, 0x09, 0xe7, 0x83,
+	0xcc, 0x2c, 0x2e, 0x49, 0x2c, 0x29, 0x2d, 0x06, 0xeb, 0x66, 0x0d, 0x82, 0xf2, 0x8c, 0xda, 0x18,
+	0xb9, 0x78, 0x82, 0xc1, 0x4e, 0x49, 0x2d, 0x2a, 0xcb, 0x4c, 0x4e, 0x15, 0x52, 0xe1, 0xe2, 0x75,
+	0x4f, 0x2d, 0x01, 0x0b, 0x05, 0x14, 0x81, 0x04, 0x38, 0xf4, 0xa0, 0xee, 0x92, 0xe2, 0xd4, 0x83,
+	0x5b, 0xa5, 0xc6, 0xc5, 0x0f, 0x53, 0xe5, 0x5f, 0x50, 0x92, 0x99, 0x9f, 0x57, 0x8c, 0x5d, 0x9d,
+	0x06, 0xd8, 0x34, 0x90, 0xe7, 0x82, 0x53, 0x8b, 0x32, 0x53, 0x8b, 0x85, 0x78, 0xf4, 0x90, 0x7c,
+	0x8a, 0xa4, 0x32, 0x89, 0x0d, 0x1c, 0x6e, 0xc6, 0x80, 0x00, 0x00, 0x00, 0xff, 0xff, 0x07, 0x3d,
+	0x26, 0x8c, 0x47, 0x01, 0x00, 0x00,
 }

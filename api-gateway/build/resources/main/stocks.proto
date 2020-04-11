@@ -6,11 +6,16 @@ option java_package = 'com.grpc.services.stocks';
 service StockService {
     rpc GetStockPrice(Request) returns (Response);
     rpc GetStockOptions(Request) returns (Response);
-    rpc GetMonthlyPrice(Request) returns (Response);
+    rpc GetTimeSeries(TimeRequest) returns (Response);
 }
 
 message Request {
     string stockSymbol = 1;
+}
+
+message TimeRequest {
+    string Symbol = 1;
+    string time = 2;
 }
 
 message Response {

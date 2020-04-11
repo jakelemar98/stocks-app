@@ -91,36 +91,36 @@ public final class StockServiceGrpc {
      return getGetStockOptionsMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<com.grpc.services.stocks.Request,
-      com.grpc.services.stocks.Response> getGetMonthlyPriceMethod;
+  private static volatile io.grpc.MethodDescriptor<com.grpc.services.stocks.TimeRequest,
+      com.grpc.services.stocks.Response> getGetTimeSeriesMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "GetMonthlyPrice",
-      requestType = com.grpc.services.stocks.Request.class,
+      fullMethodName = SERVICE_NAME + '/' + "GetTimeSeries",
+      requestType = com.grpc.services.stocks.TimeRequest.class,
       responseType = com.grpc.services.stocks.Response.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<com.grpc.services.stocks.Request,
-      com.grpc.services.stocks.Response> getGetMonthlyPriceMethod() {
-    io.grpc.MethodDescriptor<com.grpc.services.stocks.Request, com.grpc.services.stocks.Response> getGetMonthlyPriceMethod;
-    if ((getGetMonthlyPriceMethod = StockServiceGrpc.getGetMonthlyPriceMethod) == null) {
+  public static io.grpc.MethodDescriptor<com.grpc.services.stocks.TimeRequest,
+      com.grpc.services.stocks.Response> getGetTimeSeriesMethod() {
+    io.grpc.MethodDescriptor<com.grpc.services.stocks.TimeRequest, com.grpc.services.stocks.Response> getGetTimeSeriesMethod;
+    if ((getGetTimeSeriesMethod = StockServiceGrpc.getGetTimeSeriesMethod) == null) {
       synchronized (StockServiceGrpc.class) {
-        if ((getGetMonthlyPriceMethod = StockServiceGrpc.getGetMonthlyPriceMethod) == null) {
-          StockServiceGrpc.getGetMonthlyPriceMethod = getGetMonthlyPriceMethod = 
-              io.grpc.MethodDescriptor.<com.grpc.services.stocks.Request, com.grpc.services.stocks.Response>newBuilder()
+        if ((getGetTimeSeriesMethod = StockServiceGrpc.getGetTimeSeriesMethod) == null) {
+          StockServiceGrpc.getGetTimeSeriesMethod = getGetTimeSeriesMethod = 
+              io.grpc.MethodDescriptor.<com.grpc.services.stocks.TimeRequest, com.grpc.services.stocks.Response>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(
-                  "StockService", "GetMonthlyPrice"))
+                  "StockService", "GetTimeSeries"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.grpc.services.stocks.Request.getDefaultInstance()))
+                  com.grpc.services.stocks.TimeRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   com.grpc.services.stocks.Response.getDefaultInstance()))
-                  .setSchemaDescriptor(new StockServiceMethodDescriptorSupplier("GetMonthlyPrice"))
+                  .setSchemaDescriptor(new StockServiceMethodDescriptorSupplier("GetTimeSeries"))
                   .build();
           }
         }
      }
-     return getGetMonthlyPriceMethod;
+     return getGetTimeSeriesMethod;
   }
 
   /**
@@ -166,9 +166,9 @@ public final class StockServiceGrpc {
 
     /**
      */
-    public void getMonthlyPrice(com.grpc.services.stocks.Request request,
+    public void getTimeSeries(com.grpc.services.stocks.TimeRequest request,
         io.grpc.stub.StreamObserver<com.grpc.services.stocks.Response> responseObserver) {
-      asyncUnimplementedUnaryCall(getGetMonthlyPriceMethod(), responseObserver);
+      asyncUnimplementedUnaryCall(getGetTimeSeriesMethod(), responseObserver);
     }
 
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
@@ -188,12 +188,12 @@ public final class StockServiceGrpc {
                 com.grpc.services.stocks.Response>(
                   this, METHODID_GET_STOCK_OPTIONS)))
           .addMethod(
-            getGetMonthlyPriceMethod(),
+            getGetTimeSeriesMethod(),
             asyncUnaryCall(
               new MethodHandlers<
-                com.grpc.services.stocks.Request,
+                com.grpc.services.stocks.TimeRequest,
                 com.grpc.services.stocks.Response>(
-                  this, METHODID_GET_MONTHLY_PRICE)))
+                  this, METHODID_GET_TIME_SERIES)))
           .build();
     }
   }
@@ -234,10 +234,10 @@ public final class StockServiceGrpc {
 
     /**
      */
-    public void getMonthlyPrice(com.grpc.services.stocks.Request request,
+    public void getTimeSeries(com.grpc.services.stocks.TimeRequest request,
         io.grpc.stub.StreamObserver<com.grpc.services.stocks.Response> responseObserver) {
       asyncUnaryCall(
-          getChannel().newCall(getGetMonthlyPriceMethod(), getCallOptions()), request, responseObserver);
+          getChannel().newCall(getGetTimeSeriesMethod(), getCallOptions()), request, responseObserver);
     }
   }
 
@@ -275,9 +275,9 @@ public final class StockServiceGrpc {
 
     /**
      */
-    public com.grpc.services.stocks.Response getMonthlyPrice(com.grpc.services.stocks.Request request) {
+    public com.grpc.services.stocks.Response getTimeSeries(com.grpc.services.stocks.TimeRequest request) {
       return blockingUnaryCall(
-          getChannel(), getGetMonthlyPriceMethod(), getCallOptions(), request);
+          getChannel(), getGetTimeSeriesMethod(), getCallOptions(), request);
     }
   }
 
@@ -317,16 +317,16 @@ public final class StockServiceGrpc {
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<com.grpc.services.stocks.Response> getMonthlyPrice(
-        com.grpc.services.stocks.Request request) {
+    public com.google.common.util.concurrent.ListenableFuture<com.grpc.services.stocks.Response> getTimeSeries(
+        com.grpc.services.stocks.TimeRequest request) {
       return futureUnaryCall(
-          getChannel().newCall(getGetMonthlyPriceMethod(), getCallOptions()), request);
+          getChannel().newCall(getGetTimeSeriesMethod(), getCallOptions()), request);
     }
   }
 
   private static final int METHODID_GET_STOCK_PRICE = 0;
   private static final int METHODID_GET_STOCK_OPTIONS = 1;
-  private static final int METHODID_GET_MONTHLY_PRICE = 2;
+  private static final int METHODID_GET_TIME_SERIES = 2;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -353,8 +353,8 @@ public final class StockServiceGrpc {
           serviceImpl.getStockOptions((com.grpc.services.stocks.Request) request,
               (io.grpc.stub.StreamObserver<com.grpc.services.stocks.Response>) responseObserver);
           break;
-        case METHODID_GET_MONTHLY_PRICE:
-          serviceImpl.getMonthlyPrice((com.grpc.services.stocks.Request) request,
+        case METHODID_GET_TIME_SERIES:
+          serviceImpl.getTimeSeries((com.grpc.services.stocks.TimeRequest) request,
               (io.grpc.stub.StreamObserver<com.grpc.services.stocks.Response>) responseObserver);
           break;
         default:
@@ -420,7 +420,7 @@ public final class StockServiceGrpc {
               .setSchemaDescriptor(new StockServiceFileDescriptorSupplier())
               .addMethod(getGetStockPriceMethod())
               .addMethod(getGetStockOptionsMethod())
-              .addMethod(getGetMonthlyPriceMethod())
+              .addMethod(getGetTimeSeriesMethod())
               .build();
         }
       }

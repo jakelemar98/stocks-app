@@ -1,14 +1,12 @@
 package main
 
 import (
-	"context"
 	"encoding/json"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"sort"
-
-	pb "../proto/stocks"
+	"strings"
 )
 
 var (
@@ -29,21 +27,20 @@ type TimeSeriesMonthly struct {
 	Monthly map[string]Item `json:"Monthly Time Series"`
 }
 
+type TimeSeriesWeekly struct {
+	Weekly map[string]Item `json:"Weekly Time Series"`
+}
+
+type TimeSeriesDaily struct {
+	Daily map[string]Item `json:"Time Series (Daily)"`
+}
+
 type GlobalQuote struct {
 	Stock map[string]string `json:"Global Quote"`
 }
 
 type BestMatches struct {
 	Matches []map[string]string `json:"BestMatches"`
-}
-
-func (s *server) GetStockPrice(c context.Context, req *pb.Request) (*pb.Response, error) {
-	res := stockPriceFetch(req.StockSymbol)
-	response := &pb.Response{
-		Response: res,
-		Status:   200,
-	}
-	return response, nil
 }
 
 func stockPriceFetch(symbol string) string {
@@ -76,15 +73,6 @@ func stockPriceFetch(symbol string) string {
 		returnVal = string(jsonString)
 	}
 	return returnVal
-}
-
-func (s *server) GetStockOptions(c context.Context, req *pb.Request) (*pb.Response, error) {
-	res := stockOptionsFetch(req.StockSymbol)
-	response := &pb.Response{
-		Response: res,
-		Status:   200,
-	}
-	return response, nil
 }
 
 func stockOptionsFetch(symbol string) string {
@@ -123,47 +111,118 @@ func stockOptionsFetch(symbol string) string {
 	return returnVal
 }
 
-func (s *server) GetMonthlyPrice(c context.Context, req *pb.Request) (*pb.Response, error) {
-	res := monthlyPriceFetch(req.StockSymbol)
-	response := &pb.Response{
-		Response: res,
-		Status:   200,
-	}
-	return response, nil
-}
-
-func monthlyPriceFetch(symbol string) string {
-	log.Println("Monthly price request.....")
-	var returnVal string
-	url := apiBase + "TIME_SERIES_MONTHLY&symbol=" + symbol + "&apikey=" + apiKey
+func apiFetch(path string) *http.Response {
+	url := apiBase + path
 	response, err := http.Get(url)
 	if err != nil {
 		log.Fatalf("server error -> %s\n", err)
-	} else {
-		var results TimeSeriesMonthly
-		json.NewDecoder(response.Body).Decode(&results)
-
-		length := len(results.Monthly)
-		keys := make([]string, 0)
-
-		for k := range results.Monthly {
-			keys = append(keys, k)
-		}
-		sort.Strings(keys)
-		m := make(map[int]Item)
-		i := 0
-		for _, k := range keys {
-			if i >= (length - 12) {
-				r := results.Monthly[k]
-				r.Date = k
-				results.Monthly[k] = r
-				key := length - i - 1
-				m[key] = results.Monthly[k]
-			}
-			i++
-		}
-		jsonString, _ := json.Marshal(m)
-		returnVal = string(jsonString)
 	}
+	return response
+}
+
+func timeSeriesFetch(symbol string, time string) string {
+	log.Println(time + " price request.....")
+
+	var returnVal string
+
+	response := apiFetch("TIME_SERIES_" + strings.ToUpper(time) + "&symbol=" + symbol + "&outputsize=compact&apikey=" + apiKey)
+
+	switch time {
+	case "monthly":
+		returnVal = monthLogic(response)
+	case "weekly":
+		returnVal = weekLogic(response)
+	case "daily":
+		returnVal = dayLogic(response)
+	}
+
 	return returnVal
+}
+
+func monthLogic(response *http.Response) string {
+	var results TimeSeriesMonthly
+	json.NewDecoder(response.Body).Decode(&results)
+
+	length := len(results.Monthly)
+	keys := make([]string, 0)
+
+	for k := range results.Monthly {
+		keys = append(keys, k)
+	}
+
+	sort.Strings(keys)
+
+	m := make(map[int]Item)
+	i := 0
+	for _, k := range keys {
+		if i >= (length - 12) {
+			r := results.Monthly[k]
+			r.Date = k
+			results.Monthly[k] = r
+			key := length - i - 1
+			m[key] = results.Monthly[k]
+		}
+		i++
+	}
+	jsonString, _ := json.Marshal(m)
+	return string(jsonString)
+}
+
+func weekLogic(response *http.Response) string {
+	var results TimeSeriesWeekly
+	json.NewDecoder(response.Body).Decode(&results)
+
+	length := len(results.Weekly)
+	keys := make([]string, 0)
+
+	for k := range results.Weekly {
+		keys = append(keys, k)
+	}
+
+	sort.Strings(keys)
+
+	m := make(map[int]Item)
+	i := 0
+	for _, k := range keys {
+		if i >= (length - 15) {
+			r := results.Weekly[k]
+			r.Date = k
+			results.Weekly[k] = r
+			key := length - i - 1
+			m[key] = results.Weekly[k]
+		}
+		i++
+	}
+	jsonString, _ := json.Marshal(m)
+	return string(jsonString)
+}
+
+func dayLogic(response *http.Response) string {
+	var results TimeSeriesDaily
+	json.NewDecoder(response.Body).Decode(&results)
+
+	length := len(results.Daily)
+	keys := make([]string, 0)
+
+	for k := range results.Daily {
+		keys = append(keys, k)
+	}
+
+	sort.Strings(keys)
+
+	m := make(map[int]Item)
+	i := 0
+	for _, k := range keys {
+		if i >= (length - 30) {
+			r := results.Daily[k]
+			r.Date = k
+			results.Daily[k] = r
+			key := length - i - 1
+			m[key] = results.Daily[k]
+		}
+		i++
+	}
+	log.Println(m)
+	jsonString, _ := json.Marshal(m)
+	return string(jsonString)
 }

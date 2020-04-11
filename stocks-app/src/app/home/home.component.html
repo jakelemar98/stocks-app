@@ -1,8 +1,26 @@
-<mat-card class="center">
+<mat-card class="center" style="display: {{monthChartVisible}};">
     <mat-card-title>
-        Microsoft Stock Price
+        Microsoft Stock Price Past 12 Months
     </mat-card-title>
     <mat-card-content>
-        <canvas style="height: 5000px; width: 8000px; margin-left: auto; margin-right: auto;" id="myChart"></canvas>
+        <canvas style="height: 500px; width: 800px; margin-left: auto; margin-right: auto;" id="monthChart"></canvas>
+    </mat-card-content>
+</mat-card>
+
+<mat-card class="center" style="display: {{weekChartVisible}};">
+    <mat-card-title>
+        Apple Stock Price Past 15 Weeks
+    </mat-card-title>
+    <mat-card-content>
+        <canvas style="height: 500px; width: 800px; margin-left: auto; margin-right: auto;" id="weekChart"></canvas>
+    </mat-card-content>
+</mat-card>
+
+<mat-card class="center" style="display: {{dayChartVisible}};">
+    <mat-card-title>
+        Google Stock Price Last 30 Days
+    </mat-card-title>
+    <mat-card-content>
+        <canvas style="height: 500px; width: 800px; margin-left: auto; margin-right: auto;" id="dayChart"></canvas>
     </mat-card-content>
 </mat-card>

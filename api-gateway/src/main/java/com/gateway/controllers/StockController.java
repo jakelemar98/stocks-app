@@ -20,7 +20,7 @@ public class StockController {
     @GetMapping("/stocks/price")
     @Cacheable("getStockPrice")
 	public String getStockPrice(@RequestParam(value = "symbol") String symbol) {
-        Response messageResponse = sc.getResponse(symbol, "price");
+        Response messageResponse = sc.getResponse(symbol, "price", "NA");
 
         String jsonString = "";
         try {
@@ -35,7 +35,7 @@ public class StockController {
     @GetMapping("/stocks/matches")
     @Cacheable("getMatches")
 	public String getMatches(@RequestParam(value = "symbol") String symbol) {
-        Response messageResponse = sc.getResponse(symbol, "matches");
+        Response messageResponse = sc.getResponse(symbol, "matches", "NA");
 
         String jsonString = "";
         try {
@@ -47,9 +47,10 @@ public class StockController {
         return jsonString;
     }
 
-    @GetMapping("/stocks/monthly")
-    public ResponseEntity<String> getMonthly(@RequestParam(value = "symbol") String symbol) {
-        Response sr = sc.getResponse(symbol, "monthly");
+    @GetMapping("/stocks/timeSeries")
+    @Cacheable("getTimeSeries")
+    public String getTimeSeries(@RequestParam(value = "symbol") String symbol, @RequestParam(value = "time") String time) {
+        Response sr = sc.getResponse(symbol, "time", time);
         System.out.println(sr);
         String jsonString = "";
         try {
@@ -57,9 +58,6 @@ public class StockController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
-        return new ResponseEntity<>(jsonString, HttpStatus.OK);
+        return jsonString;
     }
-    
 }

@@ -21,8 +21,8 @@ export class StocksService {
     return this.http.get(this.gatewayURL + "price?symbol=msft")
   }
 
-  getTimeSeriesMonthly(symbol){
-    return this.http.get(this.gatewayURL + "monthly?symbol=" + symbol).pipe(catchError(this.handleError))
+  getTimeSeries(time, symbol){
+    return this.http.get(this.gatewayURL + "timeSeries?symbol=" + symbol + "&time=" + time).pipe(catchError(this.handleError))
   }
 
   private handleError(error: HttpErrorResponse) {
