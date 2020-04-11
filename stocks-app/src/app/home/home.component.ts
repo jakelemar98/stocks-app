@@ -7,7 +7,7 @@ import { StocksService } from '../stocks.service'
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  title = 'Sample Stock Chart';
+  title = 'Stock Chart';
   canvas: any;
   ctx: any;
   res: any
