@@ -17,7 +17,7 @@ public class StockClient {
     private Response response;
 
     public Response getResponse(final String symbol, final String option, final String time) {
-        final ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 8000).usePlaintext().build();
+        final ManagedChannel channel = ManagedChannelBuilder.forAddress("stocks-service", 8000).usePlaintext().build();
 
         final StockServiceGrpc.StockServiceBlockingStub stub = StockServiceGrpc.newBlockingStub(channel);
 
