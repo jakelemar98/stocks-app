@@ -49,9 +49,7 @@ export class HomeComponent implements OnInit {
       const intPrice = parseInt(price)
       labelArr[length - index] = date
       dataArr[length - index] = intPrice  
-    }
-    console.log(dataArr, labelArr);
-    
+    }    
     this.createChart(chart, labelArr, dataArr)        
     this.dayChartVisible = "block"
   }
