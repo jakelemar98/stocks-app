@@ -222,7 +222,6 @@ func dayLogic(response *http.Response) string {
 		}
 		i++
 	}
-	log.Println(m)
 	jsonString, _ := json.Marshal(m)
 	return string(jsonString)
 }
