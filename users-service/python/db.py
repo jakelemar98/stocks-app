@@ -44,7 +44,7 @@ def getUser(request):
 
     user = collection.find_one(query)
 
-    if not checkPass(request.password.encode('utf8'), user['password']):
+    if not checkPass(request.password.encode('utf8'), user['password'].encode('utf8):
         return "wrong password", "", 401
 
     user.pop('password')
