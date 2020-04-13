@@ -12,13 +12,17 @@ import com.grpc.services.users.UserResponse;
 import com.gateway.grpc.users.UserClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+
 import com.gateway.models.*;
+import com.gateway.utils.JWTVerify;
 
 @RestController
 @CrossOrigin(origins = "*")
 public class UserController {
 
     UserClient uc = new UserClient();
+    JWTVerify jwtVerify = new JWTVerify();
 
     @PostMapping("/users/login")
 	public ResponseEntity<String> getUser(@RequestBody Login login) {
@@ -75,6 +79,14 @@ public class UserController {
           }
 
         return new ResponseEntity<>(jsonString, status);
+    }
+
+    @GetMapping(value="/users/verify")
+    public ResponseEntity<String> verify(@RequestHeader("authorization") String token) {
+        String[] bearer = token.split(" ");
+        Boolean verified = jwtVerify.verifyToken(bearer[1]);
+        System.out.println(verified);
+        return new ResponseEntity<>(verified.toString(), HttpStatus.OK);
     }
     
 

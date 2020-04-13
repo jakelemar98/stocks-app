@@ -5,6 +5,7 @@ import { Login } from '../login'
 import { UsersService } from '../users.service';
 import { DialogTemplateComponent } from '../dialog-template/dialog-template.component'
 import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +17,7 @@ export class LoginComponent {
   formData: Object;
   error: any;
   data: any;
+  token: any;
 
   dialogTemplate: MatDialogRef<DialogTemplateComponent>
 
@@ -25,7 +27,7 @@ export class LoginComponent {
     password: ['', Validators.required]
   })
 
-  constructor(private fb: FormBuilder, private userHttp: UsersService, private dialog: MatDialog){ }
+  constructor(private fb: FormBuilder, private userHttp: UsersService, private dialog: MatDialog, private router: Router){ }
 
   onLogin() {
     this.formData = this.loginForm.value
@@ -38,17 +40,13 @@ export class LoginComponent {
     this.userHttp.getUser(login).subscribe(
       data => {
         this.data = data
+        
+        this.token =  this.data.token
         this.data = JSON.parse(this.data.body);
+        console.log(this.data._id);
         
-        this.dialogTemplate = this.dialog.open(DialogTemplateComponent, {
-          width: "250px",
-          data: {message: "Your account has been created! lets get started!", title: "Nice!", showButton: true, _id: this.data._id}
-        });
-
-        this.dialogTemplate.afterClosed().subscribe(result => {
-          console.log('The dialog was closed');
-        });
-        
+        localStorage.setItem("token", this.token)
+        this.router.navigateByUrl("dashboard")
       },
       error => {
         this.error = error

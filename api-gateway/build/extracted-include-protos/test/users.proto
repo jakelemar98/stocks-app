@@ -20,7 +20,8 @@ service UserService {
 
 message UserResponse {
     string body = 1;
-    int32 status = 2;
+    string token = 2;
+    int32 status = 3;
 }
 
 message NewUserRequest {

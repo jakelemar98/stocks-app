@@ -18,7 +18,17 @@ public interface UserResponseOrBuilder extends
       getBodyBytes();
 
   /**
-   * <code>int32 status = 2;</code>
+   * <code>string token = 2;</code>
+   */
+  java.lang.String getToken();
+  /**
+   * <code>string token = 2;</code>
+   */
+  com.google.protobuf.ByteString
+      getTokenBytes();
+
+  /**
+   * <code>int32 status = 3;</code>
    */
   int getStatus();
 }

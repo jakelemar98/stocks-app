@@ -14,28 +14,25 @@ public class UserClient {
     ManagedChannel managedChannel;
 
     private UserResponse response;
-
+    
+   
     public UserResponse getUser(Login login) {
         final ManagedChannel channel = ManagedChannelBuilder.forAddress("users-service", 8001).usePlaintext().build();
-
         final UserServiceGrpc.UserServiceBlockingStub stub = UserServiceGrpc.newBlockingStub(channel);
-
+    
         response = stub.getUser(UserLogin.newBuilder()
                 .setEmail(login.getEmail())
                 .setPassword(login.getPassword())
                 .build()
             );
-
         channel.shutdown();
         return response;
     }
 
     public UserResponse createUser(NewUser newUser) {
         final ManagedChannel channel = ManagedChannelBuilder.forAddress("users-service", 8001).usePlaintext().build();
-        String firstname = newUser.getFirstname();
-        System.out.println(firstname);
         final UserServiceGrpc.UserServiceBlockingStub stub = UserServiceGrpc.newBlockingStub(channel);
-
+    
         response = stub.createUser(NewUserRequest.newBuilder()
                         .setFirstname(newUser.getFirstname())
                         .setLastname(newUser.getLastname())
@@ -43,9 +40,7 @@ public class UserClient {
                         .setPassword(newUser.getPassword())
                         .build()
                     );
-        
         channel.shutdown();
-
         return response;
     }
 }

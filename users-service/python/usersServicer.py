@@ -12,10 +12,10 @@ class UsersServicer(users_pb2_grpc.UserServiceServicer):
     
     def GetUser(self, request, context):
         print("Request made to get user %s", request.email)
-        body, status = db.getUser(request)
-        return users_pb2.UserResponse(body = body, status = status)
+        body, token, status = db.getUser(request)
+        return users_pb2.UserResponse(body = body, token = token, status = status)
 
     def CreateUser(self, request, context):
         print("request made to create user")
-        body, status = db.createUser(request)
-        return users_pb2.UserResponse(body = body, status = status)
+        body, token, status = db.createUser(request)
+        return users_pb2.UserResponse(body = body, token = token, status = status)

@@ -53,7 +53,7 @@ export class RegisterComponent implements OnInit {
       data => {
         this.response = data
         console.log(this.response);
-        
+        localStorage.setItem('token', this.response.token)
         this.dialogTemplate = this.dialog.open(DialogTemplateComponent, {
           width: "250px",
           data: {message: "Your account has been created! lets get started!", title: "Nice!", showButton: true, _id: this.response.body}
