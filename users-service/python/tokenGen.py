@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 import jwt
+import config
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives import serialization
 
@@ -13,6 +14,7 @@ with open("keypair.pem", "rb") as key_file:
         password=None,
         backend=default_backend()
     )
+
 
 def createJWT(user_id, user):
     payload = {
