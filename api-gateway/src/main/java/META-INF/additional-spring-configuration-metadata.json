@@ -1,0 +1,17 @@
+{"properties": [
+  {
+    "name": "users.url",
+    "type": "java.lang.String",
+    "description": "A description for 'users.url'"
+  },
+  {
+    "name": "users.port",
+    "type": "java.lang.int",
+    "description": "A description for 'users.port'"
+  },
+  {
+    "name": "stocks.url",
+    "type": "java.lang.String",
+    "description": "A description for 'stocks.url'"
+  }
+]}

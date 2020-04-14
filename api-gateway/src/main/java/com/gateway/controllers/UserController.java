@@ -1,5 +1,6 @@
 package com.gateway.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 
 import com.gateway.models.*;
+import com.gateway.utils.ConfigProperties;
 import com.gateway.utils.JWTVerify;
 
 @RestController
@@ -24,9 +26,13 @@ public class UserController {
     UserClient uc = new UserClient();
     JWTVerify jwtVerify = new JWTVerify();
 
+    @Autowired
+    ConfigProperties config;
+
     @PostMapping("/users/login")
 	public ResponseEntity<String> getUser(@RequestBody Login login) {
-        UserResponse ur = uc.getUser(login);
+        String url = config.getConfigValue("users.url");
+        UserResponse ur = uc.getUser(login, url);
         HttpStatus status;
 
         String jsonString = "";
@@ -56,7 +62,8 @@ public class UserController {
 
     @PostMapping(value="/users/create")
     public ResponseEntity<String> createUser(@RequestBody NewUser user) {
-        UserResponse ur = uc.createUser(user);
+        String url = config.getConfigValue("users.url");
+        UserResponse ur = uc.createUser(user, url);
         HttpStatus status;
 
         String jsonString = "";
