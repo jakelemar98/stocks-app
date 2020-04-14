@@ -17,7 +17,7 @@ public class UserClient {
     
    
     public UserResponse getUser(Login login) {
-        final ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 8001).usePlaintext().build();
+        final ManagedChannel channel = ManagedChannelBuilder.forAddress("users-service", 8001).usePlaintext().build();
         final UserServiceGrpc.UserServiceBlockingStub stub = UserServiceGrpc.newBlockingStub(channel);
     
         response = stub.getUser(UserLogin.newBuilder()
@@ -30,7 +30,7 @@ public class UserClient {
     }
 
     public UserResponse createUser(NewUser newUser) {
-        final ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 8001).usePlaintext().build();
+        final ManagedChannel channel = ManagedChannelBuilder.forAddress("users-service", 8001).usePlaintext().build();
         final UserServiceGrpc.UserServiceBlockingStub stub = UserServiceGrpc.newBlockingStub(channel);
     
         response = stub.createUser(NewUserRequest.newBuilder()
