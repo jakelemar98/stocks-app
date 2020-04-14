@@ -1,6 +1,6 @@
 # STOCKS APPLICATION
 
-Stocks Application to get info about specific stocks. Services will be built out over time.
+Stocks Application to get info about specific stocks. Services will be built out over time
 https://ng.stocks4fun.com
 
 ### List Of Services
