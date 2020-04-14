@@ -1,6 +1,5 @@
 from datetime import datetime, timedelta
 import jwt
-import config
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives import serialization
 
