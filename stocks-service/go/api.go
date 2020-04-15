@@ -40,7 +40,7 @@ type GlobalQuote struct {
 }
 
 type CryptoQuote struct {
-	Crypto map[string]string `json:"Crypto Quote"`
+	Crypto map[string]string `json:"Realtime Currency Exchange Rate"`
 }
 
 type BestMatches struct {

@@ -34,7 +34,12 @@ public class StockClient {
                 .setSymbol(symbol)
                 .setTime(time)
                 .build());
-        } 
+        } else if (option.equals("crypto")) {
+            response = stub.getCryptoPrice(Request.newBuilder()
+                .setStockSymbol(symbol)
+                .build());
+        }
+         
 
         channel.shutdown();
         return response;

@@ -63,4 +63,19 @@ public class StockController {
         }
         return jsonString;
     }
+
+    @GetMapping("/stocks/crypto")
+    @Cacheable("getCrpyto")
+	public String getCrypto(@RequestParam(value = "symbol") String symbol) {
+        Response messageResponse = sc.getResponse(symbol, config.getConfigValue("stocks.url"),"price", "NA");
+
+        String jsonString = "";
+        try {
+            jsonString = JsonFormat.printer().print(messageResponse);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return jsonString;
+    }
 }

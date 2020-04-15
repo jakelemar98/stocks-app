@@ -14,6 +14,8 @@ service StockService {
     rpc GetStockPrice(Request) returns (Response);
     rpc GetStockOptions(Request) returns (Response);
     rpc GetTimeSeries(TimeRequest) returns (Response);
+    rpc GetCryptoPrice(Request) returns (Response);
+
 }
 
 message Request {
