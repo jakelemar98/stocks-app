@@ -1,4 +1,4 @@
 export interface VerifyEmail {
-    user_id: string;
+    id: string;
     email: string;
 }

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 import com.google.protobuf.util.*;
+import com.grpc.services.email.EmailReply;
 import com.gateway.grpc.email.EmailClient;
 import com.gateway.utils.ConfigProperties;
 import com.gateway.models.VerifyEmail;
@@ -25,10 +26,17 @@ public class EmailController {
     @PostMapping("/email/verify")
 	public ResponseEntity<String> sendVerificationEmail(@RequestBody VerifyEmail email, @RequestHeader("authorization") String token) {
 
-        // UserResponse ur = uc.createUser(user, url);
+        EmailReply er = ec.verifyEmail(email);
+
+        String jsonString = "";
+        try {
+            jsonString = JsonFormat.printer().print(er);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
-        return new ResponseEntity<>(token, HttpStatus.OK);
+        return new ResponseEntity<>(jsonString, HttpStatus.OK);
     }
 
    

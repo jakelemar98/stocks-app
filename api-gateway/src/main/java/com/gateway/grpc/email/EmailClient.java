@@ -16,7 +16,7 @@ public class EmailClient {
 
     private EmailReply response;
 
-    public EmailReply getUser(VerifyEmail email) {
+    public EmailReply verifyEmail(VerifyEmail email) {
         final ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 5001).usePlaintext().build();
         final EmailServiceGrpc.EmailServiceBlockingStub stub = EmailServiceGrpc.newBlockingStub(channel);
     

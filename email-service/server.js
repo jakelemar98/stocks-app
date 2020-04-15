@@ -5,18 +5,16 @@ var messages = require('./proto/email_pb');
 var services = require('./proto/email_grpc_pb');
 
 function VerifyEmail(call, callback) {           
-    // emailer.sendEmail(
-    //         call.request.array[0][0],
-    //         call.request.array[0][1],
-    //         call.request.array[0][2]
-    //     )
-    // var reply = new messages.EmailReply();
-    // reply.setReply('hello email');
-    // callback(null, reply)
-    console.log(call);
+    emailer.sendEmail(
+            call.request.array[1],
+            "Please Verify Your Email",
+            "code will go here"
+        )
+
     var reply = new messages.EmailReply();
     reply.setBody("not working yet");
     reply.setStatus(200);
+    callback(null,reply)
 }
 
 function main() {
