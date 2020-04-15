@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
-import { Login } from '../login' 
+import { Login } from '../login';
 import { UsersService } from '../users.service';
-import { DialogTemplateComponent } from '../dialog-template/dialog-template.component'
+import { DialogTemplateComponent } from '../dialog-template/dialog-template.component';
 import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -27,7 +28,11 @@ export class LoginComponent {
     password: ['', Validators.required]
   })
 
-  constructor(private fb: FormBuilder, private userHttp: UsersService, private dialog: MatDialog, private router: Router){ }
+  constructor(private fb: FormBuilder, private userHttp: UsersService, private dialog: MatDialog, private router: Router, private auth: AuthService){
+    if (this.auth.isAuthenticated()) {
+      router.navigate(['dashboard'])
+    }
+  }
 
   onLogin() {
     this.formData = this.loginForm.value
