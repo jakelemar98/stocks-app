@@ -55,7 +55,6 @@ public class StockController {
     @Cacheable("getTimeSeries")
     public String getTimeSeries(@RequestParam(value = "symbol") String symbol, @RequestParam(value = "time") String time) {
         Response sr = sc.getResponse(symbol, config.getConfigValue("stocks.url"),"time", time);
-        System.out.println(sr);
         String jsonString = "";
         try {
             jsonString = JsonFormat.printer().print(sr);

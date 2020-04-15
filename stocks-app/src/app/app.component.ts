@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatIconRegistry } from "@angular/material/icon";
 import { DomSanitizer } from "@angular/platform-browser";
-import { AuthService } from './auth/auth.service';
+import { AuthService } from './services/auth/auth.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -10,6 +10,7 @@ import { AuthService } from './auth/auth.service';
 export class AppComponent {
   title = 'stocks 4 Fun';
   auth: boolean;
+  verified: boolean = false;
 
   constructor(private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer, private authService: AuthService) {    
     this.matIconRegistry.addSvgIcon(

@@ -17,7 +17,7 @@
 syntax= "proto3";
 
 service EmailService {
-    rpc SendMail (EmailRequest) returns (EmailReply) {}
+    rpc VerifyEmail (VerifyRequest) returns (EmailReply) {}
 }
 
 message EmailRequest {
@@ -25,7 +25,13 @@ message EmailRequest {
 }
 
 message EmailReply {
-    string reply = 1;
+    string body = 1;
+    int32 status = 2;
+}
+
+message VerifyRequest {
+    string id = 1;
+    string email = 2;
 }
 
 message Email {

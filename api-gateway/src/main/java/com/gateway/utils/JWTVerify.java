@@ -68,13 +68,10 @@ public class JWTVerify {
         } catch (final FileNotFoundException e) {
             e.printStackTrace();
         } catch (NoSuchAlgorithmException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (InvalidKeySpecException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return pk;

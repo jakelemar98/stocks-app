@@ -32,7 +32,6 @@ public class UserController {
     @PostMapping("/users/login")
 	public ResponseEntity<String> getUser(@RequestBody Login login) {
         String url = config.getConfigValue("users.url");
-        System.out.println(url);
         UserResponse ur = uc.getUser(login, url);
         HttpStatus status;
 
@@ -93,7 +92,6 @@ public class UserController {
     public ResponseEntity<String> verify(@RequestHeader("authorization") String token) {
         String[] bearer = token.split(" ");
         Boolean verified = jwtVerify.verifyToken(bearer[1]);
-        System.out.println(verified);
         return new ResponseEntity<>(verified.toString(), HttpStatus.OK);
     }
     

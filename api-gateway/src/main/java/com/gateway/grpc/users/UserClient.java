@@ -13,7 +13,6 @@ import com.grpc.services.users.UserResponse;
 import com.grpc.services.users.NewUserRequest;
 import com.grpc.services.users.UserLogin;
 import com.gateway.models.*;
-import com.gateway.utils.ConfigProperties;
 
 public class UserClient {
 
@@ -21,9 +20,6 @@ public class UserClient {
     ManagedChannel managedChannel;
 
     private UserResponse response;
-
-    @Autowired
-    ConfigProperties configProp;
 
     public UserResponse getUser(Login login, String url) {
         final ManagedChannel channel = ManagedChannelBuilder.forAddress(url, 8001).usePlaintext().build();

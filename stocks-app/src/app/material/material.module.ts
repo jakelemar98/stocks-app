@@ -14,7 +14,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTabsModule, MatTab } from '@angular/material/tabs';
-import { MatMenuModule } from '@angular/material/menu'
+import { MatMenuModule } from '@angular/material/menu';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 @NgModule({
   imports: [ 
@@ -33,7 +34,8 @@ import { MatMenuModule } from '@angular/material/menu'
     MatIconModule,
     MatDialogModule,
     MatTabsModule,
-    MatMenuModule
+    MatMenuModule,
+    MatGridListModule
    ],
   exports: [ 
     MatAutocompleteModule,
@@ -51,7 +53,8 @@ import { MatMenuModule } from '@angular/material/menu'
     MatIconModule,
     MatDialogModule,
     MatTabsModule,
-    MatMenuModule
+    MatMenuModule,
+    MatGridListModule
   ]
 })
 
