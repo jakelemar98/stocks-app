@@ -35,6 +35,7 @@ public class StockClient {
                 .setTime(time)
                 .build());
         } else if (option.equals("crypto")) {
+            System.out.print("HERE");
             response = stub.getCryptoPrice(Request.newBuilder()
                 .setStockSymbol(symbol)
                 .build());

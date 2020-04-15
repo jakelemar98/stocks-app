@@ -67,7 +67,7 @@ public class StockController {
     @GetMapping("/stocks/crypto")
     @Cacheable("getCrpyto")
 	public String getCrypto(@RequestParam(value = "symbol") String symbol) {
-        Response messageResponse = sc.getResponse(symbol, config.getConfigValue("stocks.url"),"price", "NA");
+        Response messageResponse = sc.getResponse(symbol, config.getConfigValue("stocks.url"),"crypto", "NA");
 
         String jsonString = "";
         try {

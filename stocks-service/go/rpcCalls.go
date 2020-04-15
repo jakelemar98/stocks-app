@@ -33,11 +33,11 @@ func (s *server) GetTimeSeries(c context.Context, req *pb.TimeRequest) (*pb.Resp
 	return response, nil
 }
 
-// func (s *server) GetCryptoPrice(c context.Context, req *pb.Request) (*pb.Response, error) {
-// 	res := cryptoPriceFetch(req.CryptoSymbol)
-// 	response := &pb.Response{
-// 		Response: res,
-// 		Status:   200,
-// 	}
-// 	return response, nil
-// }
+func (s *server) GetCryptoPrice(c context.Context, req *pb.Request) (*pb.Response, error) {
+	res := cryptoPriceFetch(req.StockSymbol)
+	response := &pb.Response{
+		Response: res,
+		Status:   200,
+	}
+	return response, nil
+}
