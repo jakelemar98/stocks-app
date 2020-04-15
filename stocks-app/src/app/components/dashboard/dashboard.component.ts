@@ -23,7 +23,7 @@ export class DashboardComponent implements OnInit {
 
   verifyEmail(): void {
     const email: VerifyEmail = {
-      user_id: this.tokenInfo['user_id'],
+      id: this.tokenInfo['user_id'],
       email: this.tokenInfo['email']
     }
     console.log(email);
