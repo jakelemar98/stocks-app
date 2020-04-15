@@ -21,10 +21,18 @@
           <mat-icon>dashboard</mat-icon>
           <span>Dashboard</span>
         </button>
-        <button mat-menu-item>
-          <mat-icon>cloud_download</mat-icon>
-          <span>Stock Information</span>
-        </button>
+        <div *ngIf="verified; else disabled">
+          <button mat-menu-item [disabled]="false">
+            <mat-icon>cloud_download</mat-icon>
+            <span>Stock Information</span>
+          </button>
+        </div>
+        <ng-template #disabled>
+          <button mat-menu-item [disabled]="true">
+            <mat-icon>cloud_download</mat-icon>
+            <span>Stock Information</span>
+          </button>
+        </ng-template>
       </mat-menu>
       </ng-template>
   </mat-toolbar-row>
