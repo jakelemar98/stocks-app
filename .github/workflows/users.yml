@@ -51,7 +51,7 @@ jobs:
     - name: create key
       run: |
         #publish private key to file for the applicaiton to use
-        echo "${{ secrets.JWT_PRIVATE }}" > keypair.pem
+        echo "${{ secrets.JWT_PRIVATE }}" > rsa_private.pem
       working-directory: ./users-service/python
 
     # Build the Docker image

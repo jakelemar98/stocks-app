@@ -7,7 +7,7 @@ JWT_SECRET = 'secret'
 JWT_ALGORITHM = 'RS256'
 JWT_EXP_DELTA_SECONDS = 3600
 
-with open("keypair.pem", "rb") as key_file:
+with open("rsa_private.pem", "rb") as key_file:
     private_key = serialization.load_pem_private_key(
         key_file.read(),
         password=None,

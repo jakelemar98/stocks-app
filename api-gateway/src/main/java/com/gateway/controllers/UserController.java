@@ -32,6 +32,7 @@ public class UserController {
     @PostMapping("/users/login")
 	public ResponseEntity<String> getUser(@RequestBody Login login) {
         String url = config.getConfigValue("users.url");
+        System.out.println(url);
         UserResponse ur = uc.getUser(login, url);
         HttpStatus status;
 

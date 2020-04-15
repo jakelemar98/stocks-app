@@ -48,7 +48,13 @@ jobs:
         # Set up docker to authenticate
         # via gcloud command-line tool.
         gcloud auth configure-docker
-      
+    
+    - name: create key
+      run: |
+        #publish private key to file for the applicaiton to use
+        echo "${{ secrets.JWT_PRIVATE }}" > rsa_private.pem
+      working-directory: ./users-service/python
+
     # Build the Docker image
     - name: Build
       run: |        

@@ -16,7 +16,7 @@ def createUser(request):
 
     if check_email > 0:
         return "email already exists", "",400       
-    hashed = hashPassword(request.password.encode('utf8'))
+    hashed = hashPassword(request.password)
     user = {
         "first": request.firstname,
         "last": request.lastname,
@@ -44,7 +44,7 @@ def getUser(request):
 
     user = collection.find_one(query)
 
-    if not checkPass(request.password.encode('utf8'), user['password'].encode('utf8')):
+    if not checkPass(request.password, user['password']):
         return "wrong password", "", 401
 
     user.pop('password')
@@ -59,12 +59,12 @@ def getUser(request):
 
 def hashPassword(password):
     # Hash a password for the first time, with a randomly-generated salt
-    hashed = bcrypt.hashpw(password, bcrypt.gensalt())
+    hashed = bcrypt.hashpw(password.encode(), bcrypt.gensalt())
     return hashed
 
 def checkPass(password, hash):
     # previously been hashed
-    if bcrypt.hashpw(password, hash) == hash:
+    if bcrypt.hashpw(password.encode(), hash) == hash:
             return True
     else:
             return False
