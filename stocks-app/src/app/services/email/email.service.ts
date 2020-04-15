@@ -4,7 +4,6 @@ import { VerifyEmail } from '../../interfaces/verify-email';
 import { environment } from './../../../environments/environment'
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { verify } from 'crypto';
 
 
 @Injectable({
@@ -17,11 +16,11 @@ export class EmailService {
   token: string = localStorage.getItem('token')
   
   headers_object: Object = new HttpHeaders({
-    'Authorization': "Bearer "+ this.token
+    'Authorization': "Bearer "+ this.token,
   });
 
   httpOptions: Object = {
-        headers: this.headers_object
+        headers: this.headers_object,
   };
 
   constructor(private http: HttpClient) { }
@@ -35,6 +34,7 @@ export class EmailService {
       // A client-side or network error occurred. Handle it accordingly.
       console.error('An error occurred:', error.error.message);
     } else {
+      console.error(error)
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong,
       console.error(

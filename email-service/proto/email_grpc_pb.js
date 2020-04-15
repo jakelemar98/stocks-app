@@ -10,11 +10,11 @@
 //
 // Go protoc complation command
 // run from /stocks-app/proto dir
-// protoc --go_out=plugins=grpc:../stocks-service/proto email.proto
+// protoc --go_out=plugins=grpc:../stocks-service/proto/email email.proto
 //
 // Python Protoc complation command
 // run from /stocks-app/proto dir
-// python3 -m grpc_tools.protoc -I. --python_out=../users-service/proto --grpc_python_out=../users-service/proto  email.proto
+// python3 -m grpc_tools.protoc -I. --python_out=../users-service/proto/ --grpc_python_out=../users-service/proto  email.proto
 //
 'use strict';
 var grpc = require('grpc');
@@ -31,27 +31,27 @@ function deserialize_EmailReply(buffer_arg) {
   return email_pb.EmailReply.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
-function serialize_EmailRequest(arg) {
-  if (!(arg instanceof email_pb.EmailRequest)) {
-    throw new Error('Expected argument of type EmailRequest');
+function serialize_VerifyRequest(arg) {
+  if (!(arg instanceof email_pb.VerifyRequest)) {
+    throw new Error('Expected argument of type VerifyRequest');
   }
   return Buffer.from(arg.serializeBinary());
 }
 
-function deserialize_EmailRequest(buffer_arg) {
-  return email_pb.EmailRequest.deserializeBinary(new Uint8Array(buffer_arg));
+function deserialize_VerifyRequest(buffer_arg) {
+  return email_pb.VerifyRequest.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 
 var EmailServiceService = exports.EmailServiceService = {
-  sendMail: {
-    path: '/EmailService/SendMail',
+  verifyEmail: {
+    path: '/EmailService/VerifyEmail',
     requestStream: false,
     responseStream: false,
-    requestType: email_pb.EmailRequest,
+    requestType: email_pb.VerifyRequest,
     responseType: email_pb.EmailReply,
-    requestSerialize: serialize_EmailRequest,
-    requestDeserialize: deserialize_EmailRequest,
+    requestSerialize: serialize_VerifyRequest,
+    requestDeserialize: deserialize_VerifyRequest,
     responseSerialize: serialize_EmailReply,
     responseDeserialize: deserialize_EmailReply,
   },
