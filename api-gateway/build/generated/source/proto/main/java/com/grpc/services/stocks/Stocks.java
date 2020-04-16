@@ -41,11 +41,12 @@ public final class Stocks {
       "\n\014stocks.proto\"\036\n\007Request\022\023\n\013stockSymbol" +
       "\030\001 \001(\t\"+\n\013TimeRequest\022\016\n\006Symbol\030\001 \001(\t\022\014\n" +
       "\004time\030\002 \001(\t\",\n\010Response\022\020\n\010response\030\001 \001(" +
-      "\t\022\016\n\006status\030\002 \001(\0052\206\001\n\014StockService\022$\n\rGe" +
+      "\t\022\016\n\006status\030\002 \001(\0052\255\001\n\014StockService\022$\n\rGe" +
       "tStockPrice\022\010.Request\032\t.Response\022&\n\017GetS" +
       "tockOptions\022\010.Request\032\t.Response\022(\n\rGetT" +
-      "imeSeries\022\014.TimeRequest\032\t.ResponseB\034\n\030co" +
-      "m.grpc.services.stocksP\001b\006proto3"
+      "imeSeries\022\014.TimeRequest\032\t.Response\022%\n\016Ge" +
+      "tCryptoPrice\022\010.Request\032\t.ResponseB\034\n\030com" +
+      ".grpc.services.stocksP\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

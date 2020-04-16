@@ -28,6 +28,9 @@ func StockService() *server {
 }
 
 func main() {
+	// val := cryptoPriceFetch("BTC")
+	// log.Print(val)
+	// stockPriceFetch("AAPL")
 	log.Println("ZERO Server listening in :", *port)
 	lis, err := net.Listen("tcp", ":"+*port)
 	if err != nil {
