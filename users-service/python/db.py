@@ -5,7 +5,7 @@ import encoder
 import tokenGen
 
 client = pymongo.MongoClient("mongodb+srv://user-service:lFWXM1Icmscg4RCE@stocks-cluster-ciiim.gcp.mongodb.net/test?retryWrites=true&w=majority")
-db = client["app-database"]
+db = client["user-database"]
 collection = db["users"]
 
 def createUser(request):

@@ -10,20 +10,19 @@ let transport = nodemailer.createTransport({
     }
 });
 module.exports = {
-  sendEmail: function (to, subject, body) {
+  sendEmail: function (to, subject, body, callback) {
     const message = {
       from: "mail@stocks4fun.com",
       to: to,
       subject: subject,
       html: body
     };
-    transport.sendMail(message, function(err, info) {
+    transport.sendMail(message, (err, info) => {
         if (err) {
-          return(err)
-        } else {
-          return(info);
+          callback(null, err)
+        } else {          
+          callback(info, null);
         }
-    });
-}
-
+    });    
+  }
 }

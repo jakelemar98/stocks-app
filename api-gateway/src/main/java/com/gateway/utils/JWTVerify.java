@@ -17,10 +17,12 @@ import java.security.interfaces.RSAPublicKey;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
+import java.util.Map;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.TokenExpiredException;
+import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.auth0.jwt.interfaces.JWTVerifier;
 
@@ -33,18 +35,27 @@ public class JWTVerify {
     PublicKey pk;
     DecodedJWT jwt;
 
-    public Boolean verifyToken(String token) {
+    public VerifiedAndClaims verifyTokenAndReturnClaims(String token, String[] claims) {
+
         final PublicKey pubkey = getPublicKey();
         Algorithm rsaAlgorithm = Algorithm.RSA256((RSAPublicKey) pubkey);
+        
+        String[] returnClaims = new String[claims.length];
+
         try {
-            JWTVerifier verifier = JWT.require(rsaAlgorithm)
-                .build(); //Reusable verifier instance
+            JWTVerifier verifier = JWT.require(rsaAlgorithm).build();
             jwt = verifier.verify(token);
-        } catch (TokenExpiredException e) {
+
+            for (int i = 0; i < claims.length; i++) {
+                String claimVal = jwt.getClaim(claims[i]).asString();
+                returnClaims[i] = claimVal;
+                System.out.println(returnClaims[i]);
+            }
+        } catch (Exception e) {
             e.printStackTrace();
-            return false;
+            return new VerifiedAndClaims(false, new String[]{""});
         }
-        return true;
+        return new VerifiedAndClaims(true, returnClaims);
     }
 
     public PublicKey getPublicKey() {

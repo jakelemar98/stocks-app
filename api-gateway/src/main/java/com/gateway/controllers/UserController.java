@@ -88,12 +88,12 @@ public class UserController {
         return new ResponseEntity<>(jsonString, status);
     }
 
-    @GetMapping(value="/users/verify")
-    public ResponseEntity<String> verify(@RequestHeader("authorization") String token) {
-        String[] bearer = token.split(" ");
-        Boolean verified = jwtVerify.verifyToken(bearer[1]);
-        return new ResponseEntity<>(verified.toString(), HttpStatus.OK);
-    }
+    // @GetMapping(value="/users/verify")
+    // public ResponseEntity<String> verify(@RequestHeader("authorization") String token) {
+    //     String[] bearer = token.split(" ");
+    //     Boolean verified = jwtVerify.verifyToken(bearer[1]);
+    //     return new ResponseEntity<>(verified.toString(), HttpStatus.OK);
+    // }
     
 
 }
