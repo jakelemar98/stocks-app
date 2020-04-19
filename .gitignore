@@ -2,5 +2,3 @@ stocks-app/node_modules
 stocks-app/dist
 api-gateway/.settings
 users-service/python/rsa_private.pem
-users-service/python/publickey.crt
-api-gateway/src/main/resources/publickey.crt
