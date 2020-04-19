@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.security.KeyFactory;
 import java.security.NoSuchAlgorithmException;
@@ -60,10 +61,11 @@ public class JWTVerify {
 
     public PublicKey getPublicKey() {
         try {
-            File pubFile = ResourceUtils.getFile("classpath:publickey.crt");
-            fis = new FileInputStream(pubFile);
-            DataInputStream dis = new DataInputStream(fis);
-            byte[] keyBytes = new byte[(int) pubFile.length()];
+            // File pubFile = ResourceUtils.getFile("classpath:publickey.crt");
+            // fis = new FileInputStream(pubFile);
+            InputStream stream = getClass().getResourceAsStream("/publickey.crt");
+            DataInputStream dis = new DataInputStream(stream);
+            byte[] keyBytes = new byte[(int) stream.available()];
             dis.readFully(keyBytes);
             dis.close();
 
