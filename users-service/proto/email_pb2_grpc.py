@@ -14,9 +14,14 @@ class EmailServiceStub(object):
     Args:
       channel: A grpc.Channel.
     """
-    self.SendMail = channel.unary_unary(
-        '/EmailService/SendMail',
-        request_serializer=email__pb2.EmailRequest.SerializeToString,
+    self.VerifyEmail = channel.unary_unary(
+        '/EmailService/VerifyEmail',
+        request_serializer=email__pb2.VerifyRequest.SerializeToString,
+        response_deserializer=email__pb2.EmailReply.FromString,
+        )
+    self.CheckVerified = channel.unary_unary(
+        '/EmailService/CheckVerified',
+        request_serializer=email__pb2.CheckRequest.SerializeToString,
         response_deserializer=email__pb2.EmailReply.FromString,
         )
 
@@ -25,7 +30,14 @@ class EmailServiceServicer(object):
   # missing associated documentation comment in .proto file
   pass
 
-  def SendMail(self, request, context):
+  def VerifyEmail(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def CheckVerified(self, request, context):
     # missing associated documentation comment in .proto file
     pass
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -35,9 +47,14 @@ class EmailServiceServicer(object):
 
 def add_EmailServiceServicer_to_server(servicer, server):
   rpc_method_handlers = {
-      'SendMail': grpc.unary_unary_rpc_method_handler(
-          servicer.SendMail,
-          request_deserializer=email__pb2.EmailRequest.FromString,
+      'VerifyEmail': grpc.unary_unary_rpc_method_handler(
+          servicer.VerifyEmail,
+          request_deserializer=email__pb2.VerifyRequest.FromString,
+          response_serializer=email__pb2.EmailReply.SerializeToString,
+      ),
+      'CheckVerified': grpc.unary_unary_rpc_method_handler(
+          servicer.CheckVerified,
+          request_deserializer=email__pb2.CheckRequest.FromString,
           response_serializer=email__pb2.EmailReply.SerializeToString,
       ),
   }

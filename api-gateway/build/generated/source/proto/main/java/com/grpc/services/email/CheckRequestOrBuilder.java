@@ -16,4 +16,9 @@ public interface CheckRequestOrBuilder extends
    */
   com.google.protobuf.ByteString
       getIdBytes();
+
+  /**
+   * <code>int32 code = 2;</code>
+   */
+  int getCode();
 }

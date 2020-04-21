@@ -3,6 +3,7 @@ import json
 import pymongo
 import encoder
 import tokenGen
+from bson.objectid import ObjectId
 
 client = pymongo.MongoClient("mongodb+srv://user-service:lFWXM1Icmscg4RCE@stocks-cluster-ciiim.gcp.mongodb.net/test?retryWrites=true&w=majority")
 db = client["user-database"]
@@ -68,3 +69,14 @@ def checkPass(password, hash):
             return True
     else:
             return False
+
+def verifyUser(request): 
+    id = request.id
+
+    query = { '_id': ObjectId(id) }
+    
+    newField = {"$set": {"verified": True}}
+
+    result = collection.update_one(query, newField)
+
+    return "updated", 200

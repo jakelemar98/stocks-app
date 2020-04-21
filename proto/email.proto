@@ -37,6 +37,7 @@ message VerifyRequest {
 
 message CheckRequest {
     string id = 1;
+    int32 code = 2;
 }
 
 message Email {

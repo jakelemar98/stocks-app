@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -57,8 +58,8 @@ public class EmailController {
         return new ResponseEntity<>(jsonString, HttpStatus.OK);
     }
 
-    @GetMapping("/email/checkVerified")
-    public ResponseEntity<String> checkVerificaionCode(@RequestHeader("authorization") String token) {
+    @GetMapping("/email/code")
+    public ResponseEntity<String> checkVerificaionCode(@RequestHeader("authorization") String token, @RequestParam(value = "value") int code) {
         String[] authHeader = token.split("\\s");
         String[] claims = new String[]{"user_id"};
         VerifiedAndClaims vc = tokenVerifier.verifyTokenAndReturnClaims(authHeader[1], claims);
@@ -71,7 +72,7 @@ public class EmailController {
         String[] args = vc.getClaims();
         email.setId(args[0]);
 
-        EmailReply er = ec.checkVerified(email, config.getConfigValue("email.url"));
+        EmailReply er = ec.checkVerified(email, config.getConfigValue("email.url"), code);
         
         String jsonString = "";
         try {

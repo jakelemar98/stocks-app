@@ -24,6 +24,11 @@ class UserServiceStub(object):
         request_serializer=users__pb2.NewUserRequest.SerializeToString,
         response_deserializer=users__pb2.UserResponse.FromString,
         )
+    self.VerifyUser = channel.unary_unary(
+        '/UserService/VerifyUser',
+        request_serializer=users__pb2.VerifyUserRequest.SerializeToString,
+        response_deserializer=users__pb2.VerifyResponse.FromString,
+        )
 
 
 class UserServiceServicer(object):
@@ -44,6 +49,13 @@ class UserServiceServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def VerifyUser(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
 
 def add_UserServiceServicer_to_server(servicer, server):
   rpc_method_handlers = {
@@ -56,6 +68,11 @@ def add_UserServiceServicer_to_server(servicer, server):
           servicer.CreateUser,
           request_deserializer=users__pb2.NewUserRequest.FromString,
           response_serializer=users__pb2.UserResponse.SerializeToString,
+      ),
+      'VerifyUser': grpc.unary_unary_rpc_method_handler(
+          servicer.VerifyUser,
+          request_deserializer=users__pb2.VerifyUserRequest.FromString,
+          response_serializer=users__pb2.VerifyResponse.SerializeToString,
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(

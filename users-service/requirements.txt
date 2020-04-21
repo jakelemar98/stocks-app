@@ -5,4 +5,4 @@ dnspython
 bcrypt
 PyJWT
 cryptography
-
+bson

@@ -13,6 +13,7 @@ import { DialogTemplateComponent } from './components/dialog-template/dialog-tem
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ChartsModule } from 'ng2-charts';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { VerifyDialogComponent } from './components/dashboard/verify-dialog/verify-dialog.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
     RegisterComponent,
     HomeComponent,
     DialogTemplateComponent,
-    DashboardComponent
+    DashboardComponent,
+    VerifyDialogComponent
   ],
   imports: [
     BrowserModule,

@@ -18,7 +18,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=b'\n\x0b\x65mail.proto\"%\n\x0c\x45mailRequest\x12\x15\n\x05\x65mail\x18\x01 \x01(\x0b\x32\x06.Email\"\x1b\n\nEmailReply\x12\r\n\x05reply\x18\x01 \x01(\t\"9\n\x05\x45mail\x12\x11\n\ttoAddress\x18\x01 \x03(\t\x12\x0f\n\x07subject\x18\x02 \x01(\t\x12\x0c\n\x04html\x18\x03 \x01(\t28\n\x0c\x45mailService\x12(\n\x08SendMail\x12\r.EmailRequest\x1a\x0b.EmailReply\"\x00\x62\x06proto3'
+  serialized_pb=b'\n\x0b\x65mail.proto\"%\n\x0c\x45mailRequest\x12\x15\n\x05\x65mail\x18\x01 \x01(\x0b\x32\x06.Email\"*\n\nEmailReply\x12\x0c\n\x04\x62ody\x18\x01 \x01(\t\x12\x0e\n\x06status\x18\x02 \x01(\x05\"*\n\rVerifyRequest\x12\n\n\x02id\x18\x01 \x01(\t\x12\r\n\x05\x65mail\x18\x02 \x01(\t\"(\n\x0c\x43heckRequest\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04\x63ode\x18\x02 \x01(\x05\"9\n\x05\x45mail\x12\x11\n\ttoAddress\x18\x01 \x03(\t\x12\x0f\n\x07subject\x18\x02 \x01(\t\x12\x0c\n\x04html\x18\x03 \x01(\t2k\n\x0c\x45mailService\x12,\n\x0bVerifyEmail\x12\x0e.VerifyRequest\x1a\x0b.EmailReply\"\x00\x12-\n\rCheckVerified\x12\r.CheckRequest\x1a\x0b.EmailReply\"\x00\x62\x06proto3'
 )
 
 
@@ -63,9 +63,16 @@ _EMAILREPLY = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='reply', full_name='EmailReply.reply', index=0,
+      name='body', full_name='EmailReply.body', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='status', full_name='EmailReply.status', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
@@ -82,7 +89,83 @@ _EMAILREPLY = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=54,
-  serialized_end=81,
+  serialized_end=96,
+)
+
+
+_VERIFYREQUEST = _descriptor.Descriptor(
+  name='VerifyRequest',
+  full_name='VerifyRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='id', full_name='VerifyRequest.id', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='email', full_name='VerifyRequest.email', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=98,
+  serialized_end=140,
+)
+
+
+_CHECKREQUEST = _descriptor.Descriptor(
+  name='CheckRequest',
+  full_name='CheckRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='id', full_name='CheckRequest.id', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='code', full_name='CheckRequest.code', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=142,
+  serialized_end=182,
 )
 
 
@@ -126,13 +209,15 @@ _EMAIL = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=83,
-  serialized_end=140,
+  serialized_start=184,
+  serialized_end=241,
 )
 
 _EMAILREQUEST.fields_by_name['email'].message_type = _EMAIL
 DESCRIPTOR.message_types_by_name['EmailRequest'] = _EMAILREQUEST
 DESCRIPTOR.message_types_by_name['EmailReply'] = _EMAILREPLY
+DESCRIPTOR.message_types_by_name['VerifyRequest'] = _VERIFYREQUEST
+DESCRIPTOR.message_types_by_name['CheckRequest'] = _CHECKREQUEST
 DESCRIPTOR.message_types_by_name['Email'] = _EMAIL
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -150,6 +235,20 @@ EmailReply = _reflection.GeneratedProtocolMessageType('EmailReply', (_message.Me
   })
 _sym_db.RegisterMessage(EmailReply)
 
+VerifyRequest = _reflection.GeneratedProtocolMessageType('VerifyRequest', (_message.Message,), {
+  'DESCRIPTOR' : _VERIFYREQUEST,
+  '__module__' : 'email_pb2'
+  # @@protoc_insertion_point(class_scope:VerifyRequest)
+  })
+_sym_db.RegisterMessage(VerifyRequest)
+
+CheckRequest = _reflection.GeneratedProtocolMessageType('CheckRequest', (_message.Message,), {
+  'DESCRIPTOR' : _CHECKREQUEST,
+  '__module__' : 'email_pb2'
+  # @@protoc_insertion_point(class_scope:CheckRequest)
+  })
+_sym_db.RegisterMessage(CheckRequest)
+
 Email = _reflection.GeneratedProtocolMessageType('Email', (_message.Message,), {
   'DESCRIPTOR' : _EMAIL,
   '__module__' : 'email_pb2'
@@ -165,15 +264,24 @@ _EMAILSERVICE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=142,
-  serialized_end=198,
+  serialized_start=243,
+  serialized_end=350,
   methods=[
   _descriptor.MethodDescriptor(
-    name='SendMail',
-    full_name='EmailService.SendMail',
+    name='VerifyEmail',
+    full_name='EmailService.VerifyEmail',
     index=0,
     containing_service=None,
-    input_type=_EMAILREQUEST,
+    input_type=_VERIFYREQUEST,
+    output_type=_EMAILREPLY,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='CheckVerified',
+    full_name='EmailService.CheckVerified',
+    index=1,
+    containing_service=None,
+    input_type=_CHECKREQUEST,
     output_type=_EMAILREPLY,
     serialized_options=None,
   ),

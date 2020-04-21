@@ -16,5 +16,11 @@ class VerifyEmail {
       const verified = await this.collection.findOne(query);
       return verified
     }
+
+    async deleteVerified(id) {
+      var query = { id: id }
+      const verified = await this.collection.deleteOne(query);
+      return verified
+    }
   }
   module.exports = VerifyEmail;

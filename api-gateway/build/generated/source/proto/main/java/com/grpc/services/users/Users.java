@@ -25,6 +25,11 @@ public final class Users {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_NewUserRequest_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_VerifyUserRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_VerifyUserRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_UserLogin_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -42,11 +47,13 @@ public final class Users {
       "\001(\t\022\r\n\005token\030\002 \001(\t\022\016\n\006status\030\003 \001(\005\"V\n\016Ne" +
       "wUserRequest\022\021\n\tfirstname\030\001 \001(\t\022\020\n\010lastn" +
       "ame\030\002 \001(\t\022\r\n\005email\030\003 \001(\t\022\020\n\010password\030\004 \001" +
-      "(\t\",\n\tUserLogin\022\r\n\005email\030\001 \001(\t\022\020\n\010passwo" +
-      "rd\030\002 \001(\t2a\n\013UserService\022$\n\007GetUser\022\n.Use" +
-      "rLogin\032\r.UserResponse\022,\n\nCreateUser\022\017.Ne" +
-      "wUserRequest\032\r.UserResponseB\033\n\027com.grpc." +
-      "services.usersP\001b\006proto3"
+      "(\t\"\037\n\021VerifyUserRequest\022\n\n\002id\030\001 \001(\t\",\n\tU" +
+      "serLogin\022\r\n\005email\030\001 \001(\t\022\020\n\010password\030\002 \001(" +
+      "\t2\222\001\n\013UserService\022$\n\007GetUser\022\n.UserLogin" +
+      "\032\r.UserResponse\022,\n\nCreateUser\022\017.NewUserR" +
+      "equest\032\r.UserResponse\022/\n\nverifyUser\022\022.Ve" +
+      "rifyUserRequest\032\r.UserResponseB\033\n\027com.gr" +
+      "pc.services.usersP\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -72,8 +79,14 @@ public final class Users {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_NewUserRequest_descriptor,
         new java.lang.String[] { "Firstname", "Lastname", "Email", "Password", });
-    internal_static_UserLogin_descriptor =
+    internal_static_VerifyUserRequest_descriptor =
       getDescriptor().getMessageTypes().get(2);
+    internal_static_VerifyUserRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_VerifyUserRequest_descriptor,
+        new java.lang.String[] { "Id", });
+    internal_static_UserLogin_descriptor =
+      getDescriptor().getMessageTypes().get(3);
     internal_static_UserLogin_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_UserLogin_descriptor,

@@ -18,7 +18,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto3',
   serialized_options=b'\n\027com.grpc.services.usersP\001',
-  serialized_pb=b'\n\x0busers.proto\";\n\x0cUserResponse\x12\x0c\n\x04\x62ody\x18\x01 \x01(\t\x12\r\n\x05token\x18\x02 \x01(\t\x12\x0e\n\x06status\x18\x03 \x01(\x05\"V\n\x0eNewUserRequest\x12\x11\n\tfirstname\x18\x01 \x01(\t\x12\x10\n\x08lastname\x18\x02 \x01(\t\x12\r\n\x05\x65mail\x18\x03 \x01(\t\x12\x10\n\x08password\x18\x04 \x01(\t\",\n\tUserLogin\x12\r\n\x05\x65mail\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t2a\n\x0bUserService\x12$\n\x07GetUser\x12\n.UserLogin\x1a\r.UserResponse\x12,\n\nCreateUser\x12\x0f.NewUserRequest\x1a\r.UserResponseB\x1b\n\x17\x63om.grpc.services.usersP\x01\x62\x06proto3'
+  serialized_pb=b'\n\x0busers.proto\";\n\x0cUserResponse\x12\x0c\n\x04\x62ody\x18\x01 \x01(\t\x12\r\n\x05token\x18\x02 \x01(\t\x12\x0e\n\x06status\x18\x03 \x01(\x05\".\n\x0eVerifyResponse\x12\x0c\n\x04\x62ody\x18\x01 \x01(\t\x12\x0e\n\x06status\x18\x02 \x01(\x05\"V\n\x0eNewUserRequest\x12\x11\n\tfirstname\x18\x01 \x01(\t\x12\x10\n\x08lastname\x18\x02 \x01(\t\x12\r\n\x05\x65mail\x18\x03 \x01(\t\x12\x10\n\x08password\x18\x04 \x01(\t\"\x1f\n\x11VerifyUserRequest\x12\n\n\x02id\x18\x01 \x01(\t\",\n\tUserLogin\x12\r\n\x05\x65mail\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t2\x94\x01\n\x0bUserService\x12$\n\x07GetUser\x12\n.UserLogin\x1a\r.UserResponse\x12,\n\nCreateUser\x12\x0f.NewUserRequest\x1a\r.UserResponse\x12\x31\n\nVerifyUser\x12\x12.VerifyUserRequest\x1a\x0f.VerifyResponseB\x1b\n\x17\x63om.grpc.services.usersP\x01\x62\x06proto3'
 )
 
 
@@ -69,6 +69,44 @@ _USERRESPONSE = _descriptor.Descriptor(
 )
 
 
+_VERIFYRESPONSE = _descriptor.Descriptor(
+  name='VerifyResponse',
+  full_name='VerifyResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='body', full_name='VerifyResponse.body', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='status', full_name='VerifyResponse.status', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=76,
+  serialized_end=122,
+)
+
+
 _NEWUSERREQUEST = _descriptor.Descriptor(
   name='NewUserRequest',
   full_name='NewUserRequest',
@@ -116,8 +154,39 @@ _NEWUSERREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=76,
-  serialized_end=162,
+  serialized_start=124,
+  serialized_end=210,
+)
+
+
+_VERIFYUSERREQUEST = _descriptor.Descriptor(
+  name='VerifyUserRequest',
+  full_name='VerifyUserRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='id', full_name='VerifyUserRequest.id', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=212,
+  serialized_end=243,
 )
 
 
@@ -154,12 +223,14 @@ _USERLOGIN = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=164,
-  serialized_end=208,
+  serialized_start=245,
+  serialized_end=289,
 )
 
 DESCRIPTOR.message_types_by_name['UserResponse'] = _USERRESPONSE
+DESCRIPTOR.message_types_by_name['VerifyResponse'] = _VERIFYRESPONSE
 DESCRIPTOR.message_types_by_name['NewUserRequest'] = _NEWUSERREQUEST
+DESCRIPTOR.message_types_by_name['VerifyUserRequest'] = _VERIFYUSERREQUEST
 DESCRIPTOR.message_types_by_name['UserLogin'] = _USERLOGIN
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -170,12 +241,26 @@ UserResponse = _reflection.GeneratedProtocolMessageType('UserResponse', (_messag
   })
 _sym_db.RegisterMessage(UserResponse)
 
+VerifyResponse = _reflection.GeneratedProtocolMessageType('VerifyResponse', (_message.Message,), {
+  'DESCRIPTOR' : _VERIFYRESPONSE,
+  '__module__' : 'users_pb2'
+  # @@protoc_insertion_point(class_scope:VerifyResponse)
+  })
+_sym_db.RegisterMessage(VerifyResponse)
+
 NewUserRequest = _reflection.GeneratedProtocolMessageType('NewUserRequest', (_message.Message,), {
   'DESCRIPTOR' : _NEWUSERREQUEST,
   '__module__' : 'users_pb2'
   # @@protoc_insertion_point(class_scope:NewUserRequest)
   })
 _sym_db.RegisterMessage(NewUserRequest)
+
+VerifyUserRequest = _reflection.GeneratedProtocolMessageType('VerifyUserRequest', (_message.Message,), {
+  'DESCRIPTOR' : _VERIFYUSERREQUEST,
+  '__module__' : 'users_pb2'
+  # @@protoc_insertion_point(class_scope:VerifyUserRequest)
+  })
+_sym_db.RegisterMessage(VerifyUserRequest)
 
 UserLogin = _reflection.GeneratedProtocolMessageType('UserLogin', (_message.Message,), {
   'DESCRIPTOR' : _USERLOGIN,
@@ -193,8 +278,8 @@ _USERSERVICE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=210,
-  serialized_end=307,
+  serialized_start=292,
+  serialized_end=440,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetUser',
@@ -212,6 +297,15 @@ _USERSERVICE = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_NEWUSERREQUEST,
     output_type=_USERRESPONSE,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='VerifyUser',
+    full_name='UserService.VerifyUser',
+    index=2,
+    containing_service=None,
+    input_type=_VERIFYUSERREQUEST,
+    output_type=_VERIFYRESPONSE,
     serialized_options=None,
   ),
 ])
