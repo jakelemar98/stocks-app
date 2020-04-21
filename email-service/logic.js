@@ -32,7 +32,7 @@ module.exports = {
         }        
 
         if (code === record.code) {
-            this.verifyUserLogic(id, async (status, token) => {                
+            this.verifyUserLogic(id, async (status, token) => {                                
                 if (status === 200) {
                     await db.deleteVerified(id)
                     rpc.CheckResult([token, 200], callback)
