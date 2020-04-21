@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { VerifyEmail } from '../../interfaces/verify-email';
 import { environment } from './../../../environments/environment'
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -25,8 +24,12 @@ export class EmailService {
 
   constructor(private http: HttpClient) { }
 
-  sendVerifyEmail(verifyEmail: VerifyEmail) {
-    return this.http.post(this.gatewayURL + "verify", verifyEmail, this.httpOptions).pipe(catchError(this.handleError));
+  sendVerifyEmail() {
+    return this.http.get(this.gatewayURL + "verify", this.httpOptions).pipe(catchError(this.handleError));
+  }
+
+  checkCode(code: number) {
+    return this.http.get(this.gatewayURL + "code?value=" + code, this.httpOptions).pipe(catchError(this.handleError));
   }
 
   private handleError(error: HttpErrorResponse) {

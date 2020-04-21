@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>Verify Your account</h1>
+<div mat-dialog-content>
+  <p></p>
+  <mat-form-field>
+    <mat-label>Insert Code</mat-label>
+    <input matInput [formControl]="codeFormControl" placeholder="123456">
+  </mat-form-field>
+  <mat-error *ngIf="codeFormControl.hasError('required') && codeFormControl.touched">
+    Email is <strong>required</strong>
+  </mat-error>
+  <p>Hint: Code was sent to account Email</p>
+</div>
+<div mat-dialog-actions>
+  <a mat-raised-button (click)="verifyCode()" [disabled]="!codeFormControl.valid" color="accent">Verify</a>
+</div>

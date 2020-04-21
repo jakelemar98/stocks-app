@@ -560,7 +560,8 @@ proto.CheckRequest.prototype.toObject = function(opt_includeInstance) {
  */
 proto.CheckRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, "")
+    id: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    code: jspb.Message.getFieldWithDefault(msg, 2, 0)
   };
 
   if (includeInstance) {
@@ -601,6 +602,10 @@ proto.CheckRequest.deserializeBinaryFromReader = function(msg, reader) {
       var value = /** @type {string} */ (reader.readString());
       msg.setId(value);
       break;
+    case 2:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setCode(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -637,6 +642,13 @@ proto.CheckRequest.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
+  f = message.getCode();
+  if (f !== 0) {
+    writer.writeInt32(
+      2,
+      f
+    );
+  }
 };
 
 
@@ -652,6 +664,21 @@ proto.CheckRequest.prototype.getId = function() {
 /** @param {string} value */
 proto.CheckRequest.prototype.setId = function(value) {
   jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional int32 code = 2;
+ * @return {number}
+ */
+proto.CheckRequest.prototype.getCode = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
+};
+
+
+/** @param {number} value */
+proto.CheckRequest.prototype.setCode = function(value) {
+  jspb.Message.setProto3IntField(this, 2, value);
 };
 
 

@@ -4,7 +4,7 @@ var logic = require('./logic')
 
 module.exports = {
     VerifyEmail: function (call, callback) {  
-        var code = logic.verifyLogic(call.request.array[0 ])         
+        var code = logic.verifyLogic(call.request.array[0])         
         var email = emailer.sendEmail(
             call.request.array[1],
             "Please Verify Your Email",
@@ -24,11 +24,16 @@ module.exports = {
             }
         )
     },
-    CheckVerified: function (call, callback) {
-        console.log(call);
+    CheckVerified: async function (call, callback) {
+    logic.checkLogic(call.request.array, callback)
+    },
+
+    CheckResult: function(res, callback) {        
+        var body = res[0];
+        var status = res[1]; 
         var reply = new messages.EmailReply()
-        reply.setBody("hey call works")
-        reply.setStatus(200)
+        reply.setBody(body)
+        reply.setStatus(status)
         callback(null, reply)
     }
 }

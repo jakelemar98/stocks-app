@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
 import { EmailService } from '../../services/email/email.service';
-import { VerifyEmail } from '../../interfaces/verify-email';
+import { MatDialogRef, MatDialog } from '@angular/material/dialog';
+import { VerifyDialogComponent } from './verify-dialog/verify-dialog.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,24 +12,24 @@ import { VerifyEmail } from '../../interfaces/verify-email';
 export class DashboardComponent implements OnInit {
 
   tokenInfo: Object;
+  response: Object;
+  verifyDialog:  MatDialogRef<VerifyDialogComponent>
 
-
-
-  constructor(public auth: AuthService, private emailService: EmailService) { }
+  constructor(public auth: AuthService, private emailService: EmailService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.tokenInfo = this.auth.decodeToken()
-    console.log(this.tokenInfo);
   }
 
   verifyEmail(): void {
-    const email: VerifyEmail = {
-      id: this.tokenInfo['user_id'],
-      email: this.tokenInfo['email']
-    }
-    console.log(email);
-    this.emailService.sendVerifyEmail(email).subscribe(
-      data => console.log(data),
+    this.emailService.sendVerifyEmail().subscribe(
+      data => {
+        this.response = data;
+        this.verifyDialog = this.dialog.open(VerifyDialogComponent, {
+          width: "250px",
+          data: {code: 12345}
+        });
+      },
       error => console.log(error)
     )
   }

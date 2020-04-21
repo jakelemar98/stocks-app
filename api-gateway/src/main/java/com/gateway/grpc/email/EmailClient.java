@@ -32,13 +32,14 @@ public class EmailClient {
         return response;
     }
 
-    public EmailReply checkVerified(VerifyEmail email, String url) {
+    public EmailReply checkVerified(VerifyEmail email, String url, int code) {
 
         final ManagedChannel channel = ManagedChannelBuilder.forAddress(url, 5001).usePlaintext().build();
         final EmailServiceGrpc.EmailServiceBlockingStub stub = EmailServiceGrpc.newBlockingStub(channel);
     
         response = stub.checkVerified(CheckRequest.newBuilder()
             .setId(email.getId())
+            .setCode(code)
             .build());
         
         channel.shutdown();

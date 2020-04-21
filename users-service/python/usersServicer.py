@@ -19,3 +19,8 @@ class UsersServicer(users_pb2_grpc.UserServiceServicer):
         print("request made to create user")
         body, token, status = db.createUser(request)
         return users_pb2.UserResponse(body = body, token = token, status = status)
+
+    def VerifyUser(self, request, context):
+        print("request made to verify user")
+        body, status = db.verifyUser(request)
+        return users_pb2.VerifyResponse(body = body, status = status)

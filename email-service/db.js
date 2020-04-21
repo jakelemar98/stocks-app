@@ -5,4 +5,16 @@ async function addVerify(verifyInfo) {
     return verify;
 }
 
-module.exports = { addVerify }
+async function checkVerified(id) {
+    const { Verify } = require('./mongo');
+    const record = await Verify.checkVerified(id);
+    return record;
+}
+
+async function deleteVerified(id) {
+    const { Verify } = require('./mongo');
+    const record = await Verify.deleteVerified(id);
+    return record;
+}
+
+module.exports = { addVerify, checkVerified, deleteVerified }
