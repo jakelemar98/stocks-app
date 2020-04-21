@@ -1,6 +1,8 @@
 package com.gateway.grpc.email;
 
 import com.gateway.models.VerifyEmail;
+import com.grpc.services.email.CheckRequest;
+import com.grpc.services.email.Email;
 import com.grpc.services.email.EmailReply;
 import com.grpc.services.email.EmailServiceGrpc;
 import com.grpc.services.email.VerifyRequest;
@@ -17,12 +19,25 @@ public class EmailClient {
     private EmailReply response;
 
     public EmailReply verifyEmail(VerifyEmail email, String url) {
-        System.out.println(url);
+
         final ManagedChannel channel = ManagedChannelBuilder.forAddress(url, 5001).usePlaintext().build();
         final EmailServiceGrpc.EmailServiceBlockingStub stub = EmailServiceGrpc.newBlockingStub(channel);
     
         response = stub.verifyEmail(VerifyRequest.newBuilder()
             .setEmail(email.getEmail())
+            .setId(email.getId())
+            .build());
+        
+        channel.shutdown();
+        return response;
+    }
+
+    public EmailReply checkVerified(VerifyEmail email, String url) {
+
+        final ManagedChannel channel = ManagedChannelBuilder.forAddress(url, 5001).usePlaintext().build();
+        final EmailServiceGrpc.EmailServiceBlockingStub stub = EmailServiceGrpc.newBlockingStub(channel);
+    
+        response = stub.checkVerified(CheckRequest.newBuilder()
             .setId(email.getId())
             .build());
         

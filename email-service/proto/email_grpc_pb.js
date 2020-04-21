@@ -20,6 +20,17 @@
 var grpc = require('grpc');
 var email_pb = require('./email_pb.js');
 
+function serialize_CheckRequest(arg) {
+  if (!(arg instanceof email_pb.CheckRequest)) {
+    throw new Error('Expected argument of type CheckRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_CheckRequest(buffer_arg) {
+  return email_pb.CheckRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_EmailReply(arg) {
   if (!(arg instanceof email_pb.EmailReply)) {
     throw new Error('Expected argument of type EmailReply');
@@ -52,6 +63,17 @@ var EmailServiceService = exports.EmailServiceService = {
     responseType: email_pb.EmailReply,
     requestSerialize: serialize_VerifyRequest,
     requestDeserialize: deserialize_VerifyRequest,
+    responseSerialize: serialize_EmailReply,
+    responseDeserialize: deserialize_EmailReply,
+  },
+  checkVerified: {
+    path: '/EmailService/CheckVerified',
+    requestStream: false,
+    responseStream: false,
+    requestType: email_pb.CheckRequest,
+    responseType: email_pb.EmailReply,
+    requestSerialize: serialize_CheckRequest,
+    requestDeserialize: deserialize_CheckRequest,
     responseSerialize: serialize_EmailReply,
     responseDeserialize: deserialize_EmailReply,
   },

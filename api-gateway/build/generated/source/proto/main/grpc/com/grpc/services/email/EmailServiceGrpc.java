@@ -59,6 +59,38 @@ public final class EmailServiceGrpc {
      return getVerifyEmailMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<com.grpc.services.email.CheckRequest,
+      com.grpc.services.email.EmailReply> getCheckVerifiedMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "CheckVerified",
+      requestType = com.grpc.services.email.CheckRequest.class,
+      responseType = com.grpc.services.email.EmailReply.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.grpc.services.email.CheckRequest,
+      com.grpc.services.email.EmailReply> getCheckVerifiedMethod() {
+    io.grpc.MethodDescriptor<com.grpc.services.email.CheckRequest, com.grpc.services.email.EmailReply> getCheckVerifiedMethod;
+    if ((getCheckVerifiedMethod = EmailServiceGrpc.getCheckVerifiedMethod) == null) {
+      synchronized (EmailServiceGrpc.class) {
+        if ((getCheckVerifiedMethod = EmailServiceGrpc.getCheckVerifiedMethod) == null) {
+          EmailServiceGrpc.getCheckVerifiedMethod = getCheckVerifiedMethod = 
+              io.grpc.MethodDescriptor.<com.grpc.services.email.CheckRequest, com.grpc.services.email.EmailReply>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(
+                  "EmailService", "CheckVerified"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.grpc.services.email.CheckRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.grpc.services.email.EmailReply.getDefaultInstance()))
+                  .setSchemaDescriptor(new EmailServiceMethodDescriptorSupplier("CheckVerified"))
+                  .build();
+          }
+        }
+     }
+     return getCheckVerifiedMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -93,6 +125,13 @@ public final class EmailServiceGrpc {
       asyncUnimplementedUnaryCall(getVerifyEmailMethod(), responseObserver);
     }
 
+    /**
+     */
+    public void checkVerified(com.grpc.services.email.CheckRequest request,
+        io.grpc.stub.StreamObserver<com.grpc.services.email.EmailReply> responseObserver) {
+      asyncUnimplementedUnaryCall(getCheckVerifiedMethod(), responseObserver);
+    }
+
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -102,6 +141,13 @@ public final class EmailServiceGrpc {
                 com.grpc.services.email.VerifyRequest,
                 com.grpc.services.email.EmailReply>(
                   this, METHODID_VERIFY_EMAIL)))
+          .addMethod(
+            getCheckVerifiedMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                com.grpc.services.email.CheckRequest,
+                com.grpc.services.email.EmailReply>(
+                  this, METHODID_CHECK_VERIFIED)))
           .build();
     }
   }
@@ -131,6 +177,14 @@ public final class EmailServiceGrpc {
       asyncUnaryCall(
           getChannel().newCall(getVerifyEmailMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void checkVerified(com.grpc.services.email.CheckRequest request,
+        io.grpc.stub.StreamObserver<com.grpc.services.email.EmailReply> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getCheckVerifiedMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -156,6 +210,13 @@ public final class EmailServiceGrpc {
     public com.grpc.services.email.EmailReply verifyEmail(com.grpc.services.email.VerifyRequest request) {
       return blockingUnaryCall(
           getChannel(), getVerifyEmailMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public com.grpc.services.email.EmailReply checkVerified(com.grpc.services.email.CheckRequest request) {
+      return blockingUnaryCall(
+          getChannel(), getCheckVerifiedMethod(), getCallOptions(), request);
     }
   }
 
@@ -184,9 +245,18 @@ public final class EmailServiceGrpc {
       return futureUnaryCall(
           getChannel().newCall(getVerifyEmailMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.grpc.services.email.EmailReply> checkVerified(
+        com.grpc.services.email.CheckRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(getCheckVerifiedMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_VERIFY_EMAIL = 0;
+  private static final int METHODID_CHECK_VERIFIED = 1;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -207,6 +277,10 @@ public final class EmailServiceGrpc {
       switch (methodId) {
         case METHODID_VERIFY_EMAIL:
           serviceImpl.verifyEmail((com.grpc.services.email.VerifyRequest) request,
+              (io.grpc.stub.StreamObserver<com.grpc.services.email.EmailReply>) responseObserver);
+          break;
+        case METHODID_CHECK_VERIFIED:
+          serviceImpl.checkVerified((com.grpc.services.email.CheckRequest) request,
               (io.grpc.stub.StreamObserver<com.grpc.services.email.EmailReply>) responseObserver);
           break;
         default:
@@ -271,6 +345,7 @@ public final class EmailServiceGrpc {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new EmailServiceFileDescriptorSupplier())
               .addMethod(getVerifyEmailMethod())
+              .addMethod(getCheckVerifiedMethod())
               .build();
         }
       }

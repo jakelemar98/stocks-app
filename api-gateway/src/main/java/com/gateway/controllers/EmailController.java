@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.google.protobuf.util.*; 
 import com.grpc.services.email.EmailReply;
@@ -28,7 +29,7 @@ public class EmailController {
     @Autowired
     ConfigProperties config;
 
-    @PostMapping("/email/verify")
+    @GetMapping("/email/verify")
 	public ResponseEntity<String> sendVerificationEmail(@RequestHeader("authorization") String token) {
 
         String[] authHeader = token.split("\\s");
@@ -53,10 +54,32 @@ public class EmailController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
         return new ResponseEntity<>(jsonString, HttpStatus.OK);
     }
 
-   
+    @GetMapping("/email/checkVerified")
+    public ResponseEntity<String> checkVerificaionCode(@RequestHeader("authorization") String token) {
+        String[] authHeader = token.split("\\s");
+        String[] claims = new String[]{"user_id"};
+        VerifiedAndClaims vc = tokenVerifier.verifyTokenAndReturnClaims(authHeader[1], claims);
+
+        if (!vc.getVerified()) {
+            return new ResponseEntity<>("token is malformed", HttpStatus.UNAUTHORIZED);
+        }
+
+        VerifyEmail email = new VerifyEmail();
+        String[] args = vc.getClaims();
+        email.setId(args[0]);
+
+        EmailReply er = ec.checkVerified(email, config.getConfigValue("email.url"));
+        
+        String jsonString = "";
+        try {
+            jsonString = JsonFormat.printer().print(er);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return new ResponseEntity<>(jsonString, HttpStatus.OK);
+    }
 }
