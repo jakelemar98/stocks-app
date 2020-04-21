@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
 import { EmailService } from '../../services/email/email.service';
-import { MatDialogRef, MatDialog } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { VerifyDialogComponent } from './verify-dialog/verify-dialog.component';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,10 +16,10 @@ export class DashboardComponent implements OnInit {
   response: Object;
   verified: Boolean;
 
-  constructor(public auth: AuthService, private emailService: EmailService, private dialog: MatDialog) { }
+  constructor(public auth: AuthService, private emailService: EmailService, private dialog: MatDialog, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    this.tokenInfo = this.auth.decodeToken()
+    this.tokenInfo = this.auth.decodeToken()    
     this.verified = this.tokenInfo['verified'];
   }
 
@@ -38,9 +39,15 @@ export class DashboardComponent implements OnInit {
 
     verifyDialog.afterClosed().subscribe( result => {
       if (result.event['status'] === 200) {
-        this.verified = true
+        this.verified = true;
+        this.verifiedSnackBar("Account Verified!", "close");
       }
     })
+  }
 
+  verifiedSnackBar(message: string, action: string): void {
+    this._snackBar.open(message, action, {
+      duration: 3000,
+    })
   }
 }

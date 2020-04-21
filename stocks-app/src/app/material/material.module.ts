@@ -16,6 +16,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatTabsModule, MatTab } from '@angular/material/tabs';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   imports: [ 
@@ -35,7 +36,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
     MatDialogModule,
     MatTabsModule,
     MatMenuModule,
-    MatGridListModule
+    MatGridListModule,
+    MatSnackBarModule
    ],
   exports: [ 
     MatAutocompleteModule,
@@ -54,7 +56,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
     MatDialogModule,
     MatTabsModule,
     MatMenuModule,
-    MatGridListModule
+    MatGridListModule,
+    MatSnackBarModule
   ]
 })
 
