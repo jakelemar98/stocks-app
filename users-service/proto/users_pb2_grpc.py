@@ -27,7 +27,7 @@ class UserServiceStub(object):
     self.VerifyUser = channel.unary_unary(
         '/UserService/VerifyUser',
         request_serializer=users__pb2.VerifyUserRequest.SerializeToString,
-        response_deserializer=users__pb2.VerifyResponse.FromString,
+        response_deserializer=users__pb2.UserResponse.FromString,
         )
 
 
@@ -72,7 +72,7 @@ def add_UserServiceServicer_to_server(servicer, server):
       'VerifyUser': grpc.unary_unary_rpc_method_handler(
           servicer.VerifyUser,
           request_deserializer=users__pb2.VerifyUserRequest.FromString,
-          response_serializer=users__pb2.VerifyResponse.SerializeToString,
+          response_serializer=users__pb2.UserResponse.SerializeToString,
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(

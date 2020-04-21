@@ -37,9 +37,14 @@ export class VerifyDialogComponent {
   verifyCode(): void {
     var code = this.codeFormControl.value;
     this.emailService.checkCode(code).subscribe(
-      data => console.log(data),
+      data => this.closeDialog(data),
       error => console.log(error)
     );
+  }
+
+  closeDialog(data){
+    localStorage.setItem("token", data.body)    
+    this.dialogRef.close({event: data});
   }
 
 }

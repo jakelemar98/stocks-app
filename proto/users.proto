@@ -21,18 +21,13 @@ option java_package = 'com.grpc.services.users';
 service UserService {
     rpc GetUser(UserLogin) returns (UserResponse);
     rpc CreateUser(NewUserRequest) returns (UserResponse);
-    rpc VerifyUser(VerifyUserRequest) returns (VerifyResponse);
+    rpc VerifyUser(VerifyUserRequest) returns (UserResponse);
 }
 
 message UserResponse {
     string body = 1;
     string token = 2;
     int32 status = 3;
-}
-
-message VerifyResponse {
-    string body = 1;
-    int32 status = 2;
 }
 
 message NewUserRequest {

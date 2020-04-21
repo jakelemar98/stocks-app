@@ -22,33 +22,32 @@ module.exports = {
         id = id.substring(1, id.length - 1)        
         var record = await db.checkVerified(id)
         if (!record) {
-            rpc.CheckResult(["user verification does not exist", 401], callback)
+            rpc.CheckResult(["", 401], callback)
         }        
         var time = new Date();
         time = time.getTime();
 
         if (!(time < record.expiration)) {
-            rpc.CheckResult(["expired code", 419], callback)
+            rpc.CheckResult(["", 419], callback)
         }        
 
         if (code === record.code) {
-            this.verifyUserLogic(id, async res => {
-                console.log(res);
-                if (res === 200) {
+            this.verifyUserLogic(id, async (status, token) => {                
+                if (status === 200) {
                     await db.deleteVerified(id)
-                    rpc.CheckResult(["code is correct, account verified", 200], callback)
+                    rpc.CheckResult([token, 200], callback)
                 } else {
-                    rpc.CheckResult(['user could not be verified', 500], callback)
+                    rpc.CheckResult(["", 500], callback)
                 }
             })
         } else {
-            rpc.CheckResult["code is incorrect", 401]
+            rpc.CheckResult(["code is incorrect", 401], callback)
         }
     },
 
     verifyUserLogic: function (id, calllback) {
-        userService.verifyUser(id, res => {
-            calllback(res);
+        userService.verifyUser(id, (status, token) => {
+            calllback(status, token);
         })
     }
 }

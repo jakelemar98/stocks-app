@@ -13,24 +13,34 @@ export class DashboardComponent implements OnInit {
 
   tokenInfo: Object;
   response: Object;
-  verifyDialog:  MatDialogRef<VerifyDialogComponent>
+  verified: Boolean;
 
   constructor(public auth: AuthService, private emailService: EmailService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.tokenInfo = this.auth.decodeToken()
+    this.verified = this.tokenInfo['verified'];
   }
 
   verifyEmail(): void {
     this.emailService.sendVerifyEmail().subscribe(
-      data => {
-        this.response = data;
-        this.verifyDialog = this.dialog.open(VerifyDialogComponent, {
-          width: "250px",
-          data: {code: 12345}
-        });
-      },
+      data => this.openDialog(data),
       error => console.log(error)
     )
+  }
+
+  openDialog(data): void {
+    this.response = data;
+    const verifyDialog = this.dialog.open(VerifyDialogComponent, {
+      width: "350px",
+      data: {code: 12345}
+    });
+
+    verifyDialog.afterClosed().subscribe( result => {
+      if (result.event['status'] === 200) {
+        this.verified = true
+      }
+    })
+
   }
 }

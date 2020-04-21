@@ -52,17 +52,6 @@ function deserialize_UserResponse(buffer_arg) {
   return users_pb.UserResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
-function serialize_VerifyResponse(arg) {
-  if (!(arg instanceof users_pb.VerifyResponse)) {
-    throw new Error('Expected argument of type VerifyResponse');
-  }
-  return Buffer.from(arg.serializeBinary());
-}
-
-function deserialize_VerifyResponse(buffer_arg) {
-  return users_pb.VerifyResponse.deserializeBinary(new Uint8Array(buffer_arg));
-}
-
 function serialize_VerifyUserRequest(arg) {
   if (!(arg instanceof users_pb.VerifyUserRequest)) {
     throw new Error('Expected argument of type VerifyUserRequest');
@@ -103,11 +92,11 @@ var UserServiceService = exports.UserServiceService = {
     requestStream: false,
     responseStream: false,
     requestType: users_pb.VerifyUserRequest,
-    responseType: users_pb.VerifyResponse,
+    responseType: users_pb.UserResponse,
     requestSerialize: serialize_VerifyUserRequest,
     requestDeserialize: deserialize_VerifyUserRequest,
-    responseSerialize: serialize_VerifyResponse,
-    responseDeserialize: deserialize_VerifyResponse,
+    responseSerialize: serialize_UserResponse,
+    responseDeserialize: deserialize_UserResponse,
   },
 };
 

@@ -22,5 +22,5 @@ class UsersServicer(users_pb2_grpc.UserServiceServicer):
 
     def VerifyUser(self, request, context):
         print("request made to verify user")
-        body, status = db.verifyUser(request)
-        return users_pb2.VerifyResponse(body = body, status = status)
+        body, token, status = db.verifyUser(request)
+        return users_pb2.UserResponse(body = body, token=token, status = status)

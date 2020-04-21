@@ -16,11 +16,11 @@ module.exports = {
       to: to,
       subject: subject,
       html: body
-    };
+    };    
     transport.sendMail(message, (err, info) => {
-        if (err) {
+        if (err) {          
           callback(null, err)
-        } else {          
+        } else {                    
           callback(info, null);
         }
     });    

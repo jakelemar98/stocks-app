@@ -22,6 +22,7 @@ def createUser(request):
         "first": request.firstname,
         "last": request.lastname,
         "email": request.email,
+        "verified": False,
         "password": hashed
     }
 
@@ -74,9 +75,15 @@ def verifyUser(request):
     id = request.id
 
     query = { '_id': ObjectId(id) }
-    
+
     newField = {"$set": {"verified": True}}
 
-    result = collection.update_one(query, newField)
+    collection.update_one(query, newField)
 
-    return "updated", 200
+    user = collection.find_one(query)
+
+    encoded_id = encoder.JSONEncoder().encode(user['_id'])
+
+    token = tokenGen.createJWT(encoded_id, user)
+
+    return "updated", token, 200
