@@ -14,6 +14,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ChartsModule } from 'ng2-charts';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { VerifyDialogComponent } from './components/dashboard/verify-dialog/verify-dialog.component';
+import { AddStockComponent } from './components/dashboard/add-stock/add-stock.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { VerifyDialogComponent } from './components/dashboard/verify-dialog/veri
     HomeComponent,
     DialogTemplateComponent,
     DashboardComponent,
-    VerifyDialogComponent
+    VerifyDialogComponent,
+    AddStockComponent
   ],
   imports: [
     BrowserModule,

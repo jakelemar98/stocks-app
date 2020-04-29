@@ -17,6 +17,8 @@ import { MatTabsModule, MatTab } from '@angular/material/tabs';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatListModule } from '@angular/material/list'
 
 @NgModule({
   imports: [ 
@@ -37,7 +39,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatTabsModule,
     MatMenuModule,
     MatGridListModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDividerModule,
+    MatListModule
    ],
   exports: [ 
     MatAutocompleteModule,
@@ -57,7 +61,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatTabsModule,
     MatMenuModule,
     MatGridListModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDividerModule,
+    MatListModule
   ]
 })
 

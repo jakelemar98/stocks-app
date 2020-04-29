@@ -1,0 +1,22 @@
+<h1 mat-dialog-title>Select A Stock</h1>
+<div mat-dialog-content>
+    <form [formGroup]="stateCtrl" class="example-form">
+        <mat-form-field class="example-full-width">
+          <input matInput
+                 placeholder="Stock"
+                 aria-label="Stock"
+                 [matAutocomplete]="auto"
+                 [formControl]="stateCtrl">
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let state of filteredStates | async" [value]="state.name">
+              <img class="example-option-img" aria-hidden [src]="state.flag" height="25">
+              <span>{{state.name}}</span> |
+              <small>Population: {{state.population}}</small>
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </form>
+</div>
+<div mat-dialog-actions>
+  <a mat-raised-button color="accent">Verify</a>
+</div>

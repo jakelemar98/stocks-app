@@ -5,7 +5,54 @@
     </button>
 </div>
 <ng-template #dashboard>
-    <mat-card>
-        <mat-card-title>Welcome to the Dashboard</mat-card-title>
-    </mat-card>
+    <div class="container">
+        <div fxLayout="row" fxLayoutAlign="center center" class="content">
+          <mat-card class="card" >
+            <mat-card-title style="text-align: center;" fxLayout.gt-xs="row" fxLayout.xs="column">
+              <h1>{{ userName }}'s Dashboard</h1>
+            </mat-card-title>
+            <mat-card-content>
+                <mat-list>
+                    <mat-list-item>
+                        <h2>Stock Watcher</h2>
+                    </mat-list-item>
+
+                    <mat-list-item>
+                        <div *ngIf="stocks.exists">
+                            Lets get you some stocks to watch
+                        </div>
+                        <div>
+                            <button mat-raised-button (click)="openAddDialog()" color="accent"> 
+                                <mat-icon>add</mat-icon>
+                                Add Stocks
+                            </button>
+                        </div>
+                    </mat-list-item>
+
+                    <mat-divider></mat-divider>
+
+                    <mat-list-item class="trader">
+                        <h2>Paper Trading</h2>
+                    </mat-list-item>
+
+                    <mat-list-item>
+                        <div *ngIf="paperTrader; else trader">
+                            <button mat-raised-button color="accent"> 
+                                <mat-icon>launch</mat-icon>
+                                Paper Trading Portal
+                            </button>
+                        </div>
+                        <ng-template #trader>
+                            <button mat-raised-button color="accent"> 
+                                <mat-icon>add</mat-icon>
+                                Enable Paper Trading
+                            </button>
+                        </ng-template> 
+                    </mat-list-item>
+
+                </mat-list>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
 </ng-template>
