@@ -1,6 +1,6 @@
 export interface stockInfo {
     exists: boolean;
-    data: stockData;
+    data: stockData[];
 }
 
 interface stockData {

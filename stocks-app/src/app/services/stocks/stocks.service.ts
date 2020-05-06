@@ -17,8 +17,8 @@ export class StocksService {
     return this.http.get(this.gatewayURL + "matches?symbol=penn");
   }
 
-  getStockPrice(){
-    return this.http.get(this.gatewayURL + "price?symbol=msft")
+  getStockPrice(symbol){
+    return this.http.get(this.gatewayURL + "price?symbol=" + symbol)
   }
 
   getTimeSeries(time, symbol){

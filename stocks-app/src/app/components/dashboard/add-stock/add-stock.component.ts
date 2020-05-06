@@ -2,11 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormsModule} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
-export interface State {
-  flag: string;
+import stocksJson from '../../../../assets/data/stocks.json'
+import { StocksService } from '../../../services/stocks/stocks.service'
+import { MatDialogRef } from '@angular/material/dialog';
+
+export interface Stock {
+  symbol: string;
   name: string;
-  population: string;
 }
+
 @Component({
   selector: 'app-add-stock',
   templateUrl: './add-stock.component.html',
@@ -14,38 +18,34 @@ export interface State {
 })
 export class AddStockComponent implements OnInit {
 
-  stateCtrl = new FormControl();
-  filteredStates: Observable<State[]>;
+  stockCtrl = new FormControl();
+  filteredStocks: Observable<Stock[]>;
+  
+  stocks: Stock[] = stocksJson
 
-  states: State[] = [
-    {
-      name: 'Arkansas',
-      population: '2.978M',
-      // https://commons.wikimedia.org/wiki/File:Flag_of_Arkansas.svg
-      flag: 'https://upload.wikimedia.org/wikipedia/commons/9/9d/Flag_of_Arkansas.svg'
-    },
-    {
-      name: 'California',
-      population: '39.14M',
-      // https://commons.wikimedia.org/wiki/File:Flag_of_California.svg
-      flag: 'https://upload.wikimedia.org/wikipedia/commons/0/01/Flag_of_California.svg'
-    }
-  ];
-
-  constructor() {
-    this.filteredStates = this.stateCtrl.valueChanges
+  constructor( private stocksService: StocksService, public dialogRef: MatDialogRef<AddStockComponent> ) {
+    this.filteredStocks = this.stockCtrl.valueChanges
     .pipe(
       startWith(''),
-      map(state => state ? this._filterStates(state) : this.states.slice())
+      map(stock => stock ? this._filterStocks(stock) : this.stocks.slice())
     );
+    console.log(this.stocks);
+
   }
 
-  private _filterStates(value: string): State[] {
+  private _filterStocks(value: string): Stock[] {
     const filterValue = value.toLowerCase();
 
-    return this.states.filter(state => state.name.toLowerCase().indexOf(filterValue) === 0);
+    return this.stocks.filter(stock => stock.name.toLowerCase().indexOf(filterValue) === 0);
   }
 
   ngOnInit(): void {
+  }
+
+  onSubmit() {
+    console.log(this.stockCtrl.value);
+    this.stocksService.getStockPrice(this.stockCtrl.value).subscribe( data => {
+      this.dialogRef.close({event: data});
+    })
   }
 }

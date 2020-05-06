@@ -22,12 +22,7 @@ export class DashboardComponent implements OnInit {
   addStock: Boolean = true;
   stocks: stockInfo = {
     exists:  false,
-    data: {
-      symbol: "msft",
-      price: 173.00,
-      open: 171.00,
-      close:  173.00
-    }
+    data: []
   };
 
   constructor(public auth: AuthService, private emailService: EmailService, private dialog: MatDialog, private _snackBar: MatSnackBar) { }
@@ -66,6 +61,21 @@ export class DashboardComponent implements OnInit {
     const stockDialog = this.dialog.open(AddStockComponent, {
       width: "350px",
     });
+
+    stockDialog.afterClosed().subscribe( result => {
+      var data = JSON.parse(result.event.response)
+      console.log(data);
+      var obj = {
+        symbol: data[0],
+        price: data[4],
+        open: data[1],
+        close: data[7]
+      }
+      this.stocks.data.push(obj)
+      this.stocks.exists = true
+      console.log(this.stocks);
+      
+    })
   }
 
   verifiedSnackBar(message: string, action: string): void {
