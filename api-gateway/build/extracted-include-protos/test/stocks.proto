@@ -8,10 +8,16 @@ service StockService {
     rpc GetStockOptions(Request) returns (Response);
     rpc GetTimeSeries(TimeRequest) returns (Response);
     rpc GetCryptoPrice(Request) returns (Response);
+    rpc AddStockWatch(WatchRequest) returns (Response);
 }
 
 message Request {
     string stockSymbol = 1;
+}
+
+message WatchRequest {
+    string symbol = 1;
+    string id = 2;
 }
 
 message TimeRequest {

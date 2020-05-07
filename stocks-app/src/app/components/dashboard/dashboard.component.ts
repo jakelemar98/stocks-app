@@ -6,6 +6,9 @@ import { VerifyDialogComponent } from './verify-dialog/verify-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { stockInfo } from  '../../interfaces/stocks';
 import { AddStockComponent } from './add-stock/add-stock.component'
+import { StocksService } from "../../services/stocks/stocks.service";
+import { Watcher } from 'src/app/interfaces/watcher';
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -18,6 +21,7 @@ export class DashboardComponent implements OnInit {
   response: Object;
   verified: Boolean;
   userName: string;
+  id: string;
   paperTrader: Boolean = true;
   addStock: Boolean = true;
   stocks: stockInfo = {
@@ -25,7 +29,7 @@ export class DashboardComponent implements OnInit {
     data: []
   };
 
-  constructor(public auth: AuthService, private emailService: EmailService, private dialog: MatDialog, private _snackBar: MatSnackBar) { }
+  constructor(public auth: AuthService, private emailService: EmailService, private stockService: StocksService, private dialog: MatDialog, private _snackBar: MatSnackBar) { }
 
   
 
@@ -33,6 +37,8 @@ export class DashboardComponent implements OnInit {
     this.tokenInfo = this.auth.decodeToken()
     this.verified = this.tokenInfo['verified'];
     this.userName = this.tokenInfo['first'] + " " + this.tokenInfo['last'];
+    
+    this.id = this.tokenInfo['user_id']
   }
 
   verifyEmail(): void {
@@ -64,7 +70,6 @@ export class DashboardComponent implements OnInit {
 
     stockDialog.afterClosed().subscribe( result => {
       var data = JSON.parse(result.event.response)
-      console.log(data);
       var obj = {
         symbol: data[0],
         price: data[4],
@@ -73,8 +78,7 @@ export class DashboardComponent implements OnInit {
       }
       this.stocks.data.push(obj)
       this.stocks.exists = true
-      console.log(this.stocks);
-      
+      this.addStockWatcher(data[0])
     })
   }
 
@@ -83,4 +87,12 @@ export class DashboardComponent implements OnInit {
       duration: 3000,
     })
   }
+
+  addStockWatcher(symbol: string): void {
+    this.stockService.addStockWatcher(symbol).subscribe( data => {
+      data => console.log(data);
+      
+    })
+  }
+
 }

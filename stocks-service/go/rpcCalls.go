@@ -41,3 +41,12 @@ func (s *server) GetCryptoPrice(c context.Context, req *pb.Request) (*pb.Respons
 	}
 	return response, nil
 }
+
+func (s *server) AddStockWatch(c context.Context, req *pb.WatchRequest) (*pb.Response, error) {
+	res := addWatch(req.Symbol, req.Id)
+	response := &pb.Response{
+		Response: res,
+		Status:   200,
+	}
+	return response, nil
+}

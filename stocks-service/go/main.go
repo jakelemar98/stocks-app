@@ -10,7 +10,9 @@ import (
 )
 
 var (
-	port = flag.String("port", "8000", "port")
+	port    = flag.String("port", "8000", "port")
+	apiBase = "https://www.alphavantage.co/query?function="
+	apiKey  = "N8ECE7S8XE8QTU03"
 )
 
 func init() {

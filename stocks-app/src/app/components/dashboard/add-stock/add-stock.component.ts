@@ -29,8 +29,6 @@ export class AddStockComponent implements OnInit {
       startWith(''),
       map(stock => stock ? this._filterStocks(stock) : this.stocks.slice())
     );
-    console.log(this.stocks);
-
   }
 
   private _filterStocks(value: string): Stock[] {
@@ -43,7 +41,6 @@ export class AddStockComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.stockCtrl.value);
     this.stocksService.getStockPrice(this.stockCtrl.value).subscribe( data => {
       this.dialogRef.close({event: data});
     })

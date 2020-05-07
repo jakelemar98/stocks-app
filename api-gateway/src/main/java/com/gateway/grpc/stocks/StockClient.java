@@ -5,6 +5,8 @@ import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import com.grpc.services.stocks.StockServiceGrpc;
 import com.grpc.services.stocks.TimeRequest;
+import com.grpc.services.stocks.WatchRequest;
+import com.gateway.models.Watcher;
 import com.grpc.services.stocks.Request;
 import com.grpc.services.stocks.Response;
 
@@ -41,6 +43,20 @@ public class StockClient {
                 .build());
         }
          
+
+        channel.shutdown();
+        return response;
+    }
+
+    public Response watcherResponse(final Watcher req, final String url) {
+        final ManagedChannel channel = ManagedChannelBuilder.forAddress(url, 8000).usePlaintext().build();
+
+        final StockServiceGrpc.StockServiceBlockingStub stub = StockServiceGrpc.newBlockingStub(channel);
+
+        response = stub.addStockWatch(WatchRequest.newBuilder()
+        .setSymbol(req.getSymbol())
+        .setId(req.getId())
+        .build());
 
         channel.shutdown();
         return response;

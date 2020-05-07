@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { environment } from './../../../environments/environment'
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { Watcher } from 'src/app/interfaces/watcher';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,14 @@ import { catchError } from 'rxjs/operators';
 export class StocksService {
 
   gatewayURL: string = environment.apiUrl + "/stocks/"
+
+  token: string = localStorage.getItem('token')
+  
+  headers_object: Object = new HttpHeaders({
+    'Authorization': "Bearer "+ this.token,
+    'Content-Type': 'application/json'
+  });
+
 
   constructor(private http: HttpClient) { }
 
@@ -23,6 +32,17 @@ export class StocksService {
 
   getTimeSeries(time, symbol){
     return this.http.get(this.gatewayURL + "timeSeries?symbol=" + symbol + "&time=" + time).pipe(catchError(this.handleError))
+  }
+
+  addStockWatcher(symbol: string){
+  const watcher: Watcher = {
+    symbol: symbol,
+    id: ""
+  }
+  const httpOptions: Object = {
+    headers: this.headers_object,
+  };
+    return this.http.post(this.gatewayURL + "watchers", watcher, httpOptions).pipe(catchError(this.handleError))
   }
 
   private handleError(error: HttpErrorResponse) {

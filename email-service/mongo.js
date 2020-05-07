@@ -3,7 +3,7 @@ const Verify = require('./verifyEmail');
 
 class MongoBot {
   constructor() {
-    const url = "mongodb+srv://user-service:lFWXM1Icmscg4RCE@stocks-cluster-ciiim.gcp.mongodb.net/test?retryWrites=true&w=majority";
+    const url = "mongodb+srv://email-service:aYkB0LriVyuDswrV@stocks-cluster-ciiim.gcp.mongodb.net/test?retryWrites=true&w=majority";
 
     this.client = new MongoClient(url);
   }

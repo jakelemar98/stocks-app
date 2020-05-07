@@ -20,6 +20,11 @@ public final class Stocks {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_Request_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_WatchRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_WatchRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_TimeRequest_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -39,14 +44,16 @@ public final class Stocks {
   static {
     java.lang.String[] descriptorData = {
       "\n\014stocks.proto\"\036\n\007Request\022\023\n\013stockSymbol" +
-      "\030\001 \001(\t\"+\n\013TimeRequest\022\016\n\006Symbol\030\001 \001(\t\022\014\n" +
-      "\004time\030\002 \001(\t\",\n\010Response\022\020\n\010response\030\001 \001(" +
-      "\t\022\016\n\006status\030\002 \001(\0052\255\001\n\014StockService\022$\n\rGe" +
-      "tStockPrice\022\010.Request\032\t.Response\022&\n\017GetS" +
-      "tockOptions\022\010.Request\032\t.Response\022(\n\rGetT" +
-      "imeSeries\022\014.TimeRequest\032\t.Response\022%\n\016Ge" +
-      "tCryptoPrice\022\010.Request\032\t.ResponseB\034\n\030com" +
-      ".grpc.services.stocksP\001b\006proto3"
+      "\030\001 \001(\t\"*\n\014WatchRequest\022\016\n\006symbol\030\001 \001(\t\022\n" +
+      "\n\002id\030\002 \001(\t\"+\n\013TimeRequest\022\016\n\006Symbol\030\001 \001(" +
+      "\t\022\014\n\004time\030\002 \001(\t\",\n\010Response\022\020\n\010response\030" +
+      "\001 \001(\t\022\016\n\006status\030\002 \001(\0052\330\001\n\014StockService\022$" +
+      "\n\rGetStockPrice\022\010.Request\032\t.Response\022&\n\017" +
+      "GetStockOptions\022\010.Request\032\t.Response\022(\n\r" +
+      "GetTimeSeries\022\014.TimeRequest\032\t.Response\022%" +
+      "\n\016GetCryptoPrice\022\010.Request\032\t.Response\022)\n" +
+      "\rAddStockWatch\022\r.WatchRequest\032\t.Response" +
+      "B\034\n\030com.grpc.services.stocksP\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -66,14 +73,20 @@ public final class Stocks {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Request_descriptor,
         new java.lang.String[] { "StockSymbol", });
-    internal_static_TimeRequest_descriptor =
+    internal_static_WatchRequest_descriptor =
       getDescriptor().getMessageTypes().get(1);
+    internal_static_WatchRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_WatchRequest_descriptor,
+        new java.lang.String[] { "Symbol", "Id", });
+    internal_static_TimeRequest_descriptor =
+      getDescriptor().getMessageTypes().get(2);
     internal_static_TimeRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_TimeRequest_descriptor,
         new java.lang.String[] { "Symbol", "Time", });
     internal_static_Response_descriptor =
-      getDescriptor().getMessageTypes().get(2);
+      getDescriptor().getMessageTypes().get(3);
     internal_static_Response_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Response_descriptor,
