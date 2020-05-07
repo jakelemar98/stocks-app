@@ -10,6 +10,7 @@ export class AuthService {
   constructor(public jwtHelper: JwtHelperService) { }
 
   public isAuthenticated(): boolean {
+    console.log(this.jwtHelper.isTokenExpired(this.token))
     return !this.jwtHelper.isTokenExpired(this.token)
   }
 
