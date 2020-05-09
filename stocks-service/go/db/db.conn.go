@@ -5,14 +5,15 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"log"
-	"time"
 )
 
 // GetDBConn gets db conn for mongo stocks db
-func GetDBConn() (*mongo.Database, context.Context) {
+func GetDBConn() *mongo.Client {
 
 	// Set client options
-	clientOptions := options.Client().ApplyURI("mongodb+srv://stock-service:tTubGkePzhAxNYZa@stocks-cluster-ciiim.gcp.mongodb.net/test?retryWrites=true&w=majority")
+	clientOptions := options.Client().ApplyURI(
+		"mongodb://stock-service:tTubGkePzhAxNYZa@stocks-cluster-shard-00-00-ciiim.gcp.mongodb.net:27017,stocks-cluster-shard-00-01-ciiim.gcp.mongodb.net:27017,stocks-cluster-shard-00-02-ciiim.gcp.mongodb.net:27017/test?ssl=true&replicaSet=stocks-cluster-shard-0&authSource=admin&retryWrites=true&w=majority",
+	)
 
 	// Connect to MongoDB
 	client, err := mongo.Connect(context.TODO(), clientOptions)
@@ -27,13 +28,6 @@ func GetDBConn() (*mongo.Database, context.Context) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
-	err = client.Connect(ctx)
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer client.Disconnect(ctx)
-	database := client.Database("stocks-database")
 
-	return database, ctx
+	return client
 }

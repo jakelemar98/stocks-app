@@ -61,4 +61,20 @@ public class StockClient {
         channel.shutdown();
         return response;
     }
+
+    public Response getWatcherResponse(final String id, final String url) {
+        final ManagedChannel channel = ManagedChannelBuilder.forAddress(url, 8000).usePlaintext().build();
+
+        final StockServiceGrpc.StockServiceBlockingStub stub = StockServiceGrpc.newBlockingStub(channel);
+
+        response = stub.getWatching(WatchRequest.newBuilder()
+        .setId(id)
+        .setSymbol("")
+        .build());
+
+        channel.shutdown();
+        return response;
+    }
+
+
 }

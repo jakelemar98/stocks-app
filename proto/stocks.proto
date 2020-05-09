@@ -16,6 +16,7 @@ service StockService {
     rpc GetTimeSeries(TimeRequest) returns (Response);
     rpc GetCryptoPrice(Request) returns (Response);
     rpc AddStockWatch(WatchRequest) returns (Response);
+    rpc GetWatching(WatchRequest) returns (Response);
 }
 
 message Request {

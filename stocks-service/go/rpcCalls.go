@@ -50,3 +50,12 @@ func (s *server) AddStockWatch(c context.Context, req *pb.WatchRequest) (*pb.Res
 	}
 	return response, nil
 }
+
+func (s *server) GetWatching(c context.Context, req *pb.WatchRequest) (*pb.Response, error) {
+	res := getWatching(req.Id)
+	response := &pb.Response{
+		Response: res,
+		Status:   200,
+	}
+	return response, nil
+}

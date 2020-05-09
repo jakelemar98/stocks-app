@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { environment } from './../../../environments/environment'
-import { throwError } from 'rxjs';
+import { throwError, Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Watcher } from 'src/app/interfaces/watcher';
 
@@ -19,6 +19,9 @@ export class StocksService {
     'Content-Type': 'application/json'
   });
 
+  httpOptions: Object = {
+    headers: this.headers_object,
+  };
 
   constructor(private http: HttpClient) { }
 
@@ -39,10 +42,11 @@ export class StocksService {
     symbol: symbol,
     id: ""
   }
-  const httpOptions: Object = {
-    headers: this.headers_object,
-  };
-    return this.http.post(this.gatewayURL + "watchers", watcher, httpOptions).pipe(catchError(this.handleError))
+    return this.http.post(this.gatewayURL + "watchers", watcher, this.httpOptions).pipe(catchError(this.handleError))
+  }
+
+  getWatchingData(): Observable<any> {
+    return this.http.get(this.gatewayURL + "watchers", this.httpOptions).pipe(catchError(this.handleError))
   }
 
   private handleError(error: HttpErrorResponse) {

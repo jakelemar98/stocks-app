@@ -5,24 +5,55 @@
   width: 80%;
 }
 
-.container {
+.cardList {
   display: flex;
-  flex-direction: column;
-  max-height: 500px;
-  min-width: 100%;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+/* Column Gap */
+.cardList > * {
+  box-sizing: border-box;
+}
+.cardList > *:not(:last-child) {
+  margin-right: 32px;
+}
+/* Item sizing */
+.cardListItem {
+  flex: 0 1 calc(33.3% - 32px);
 }
 
-.mat-table {
-  overflow: auto;
-  max-height: 500px;
+// .container {
+//   display: flex;
+//   flex-direction: column;
+//   max-height: 500px;
+//   min-width: 100%;
+// }
+
+// .mat-table {
+//   overflow: auto;
+//   max-height: 500px;
+// }
+
+// a {
+//   cursor: pointer;
+// }
+
+// .trader {
+//   margin-top: 1;
+//   padding: 150px;
+// }
+
+.card-deck-container {
+  width: 100%;
+  position: relative;
+  border-radius: 2px;
+  padding-top: 10px;
+  margin: 0 auto;
 }
 
-a {
-  cursor: pointer;
-}
-
-.trader {
-  margin-top: 1;
-  padding: 150px;
+.card-item {
+  margin: 0 auto;
+  padding: 5px 5px 5px 5px;
 }
 

@@ -187,6 +187,38 @@ public final class StockServiceGrpc {
      return getAddStockWatchMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<com.grpc.services.stocks.WatchRequest,
+      com.grpc.services.stocks.Response> getGetWatchingMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "GetWatching",
+      requestType = com.grpc.services.stocks.WatchRequest.class,
+      responseType = com.grpc.services.stocks.Response.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.grpc.services.stocks.WatchRequest,
+      com.grpc.services.stocks.Response> getGetWatchingMethod() {
+    io.grpc.MethodDescriptor<com.grpc.services.stocks.WatchRequest, com.grpc.services.stocks.Response> getGetWatchingMethod;
+    if ((getGetWatchingMethod = StockServiceGrpc.getGetWatchingMethod) == null) {
+      synchronized (StockServiceGrpc.class) {
+        if ((getGetWatchingMethod = StockServiceGrpc.getGetWatchingMethod) == null) {
+          StockServiceGrpc.getGetWatchingMethod = getGetWatchingMethod = 
+              io.grpc.MethodDescriptor.<com.grpc.services.stocks.WatchRequest, com.grpc.services.stocks.Response>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(
+                  "StockService", "GetWatching"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.grpc.services.stocks.WatchRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.grpc.services.stocks.Response.getDefaultInstance()))
+                  .setSchemaDescriptor(new StockServiceMethodDescriptorSupplier("GetWatching"))
+                  .build();
+          }
+        }
+     }
+     return getGetWatchingMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -249,6 +281,13 @@ public final class StockServiceGrpc {
       asyncUnimplementedUnaryCall(getAddStockWatchMethod(), responseObserver);
     }
 
+    /**
+     */
+    public void getWatching(com.grpc.services.stocks.WatchRequest request,
+        io.grpc.stub.StreamObserver<com.grpc.services.stocks.Response> responseObserver) {
+      asyncUnimplementedUnaryCall(getGetWatchingMethod(), responseObserver);
+    }
+
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -286,6 +325,13 @@ public final class StockServiceGrpc {
                 com.grpc.services.stocks.WatchRequest,
                 com.grpc.services.stocks.Response>(
                   this, METHODID_ADD_STOCK_WATCH)))
+          .addMethod(
+            getGetWatchingMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                com.grpc.services.stocks.WatchRequest,
+                com.grpc.services.stocks.Response>(
+                  this, METHODID_GET_WATCHING)))
           .build();
     }
   }
@@ -347,6 +393,14 @@ public final class StockServiceGrpc {
       asyncUnaryCall(
           getChannel().newCall(getAddStockWatchMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void getWatching(com.grpc.services.stocks.WatchRequest request,
+        io.grpc.stub.StreamObserver<com.grpc.services.stocks.Response> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getGetWatchingMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -400,6 +454,13 @@ public final class StockServiceGrpc {
     public com.grpc.services.stocks.Response addStockWatch(com.grpc.services.stocks.WatchRequest request) {
       return blockingUnaryCall(
           getChannel(), getAddStockWatchMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public com.grpc.services.stocks.Response getWatching(com.grpc.services.stocks.WatchRequest request) {
+      return blockingUnaryCall(
+          getChannel(), getGetWatchingMethod(), getCallOptions(), request);
     }
   }
 
@@ -460,6 +521,14 @@ public final class StockServiceGrpc {
       return futureUnaryCall(
           getChannel().newCall(getAddStockWatchMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.grpc.services.stocks.Response> getWatching(
+        com.grpc.services.stocks.WatchRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(getGetWatchingMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_GET_STOCK_PRICE = 0;
@@ -467,6 +536,7 @@ public final class StockServiceGrpc {
   private static final int METHODID_GET_TIME_SERIES = 2;
   private static final int METHODID_GET_CRYPTO_PRICE = 3;
   private static final int METHODID_ADD_STOCK_WATCH = 4;
+  private static final int METHODID_GET_WATCHING = 5;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -503,6 +573,10 @@ public final class StockServiceGrpc {
           break;
         case METHODID_ADD_STOCK_WATCH:
           serviceImpl.addStockWatch((com.grpc.services.stocks.WatchRequest) request,
+              (io.grpc.stub.StreamObserver<com.grpc.services.stocks.Response>) responseObserver);
+          break;
+        case METHODID_GET_WATCHING:
+          serviceImpl.getWatching((com.grpc.services.stocks.WatchRequest) request,
               (io.grpc.stub.StreamObserver<com.grpc.services.stocks.Response>) responseObserver);
           break;
         default:
@@ -571,6 +645,7 @@ public final class StockServiceGrpc {
               .addMethod(getGetTimeSeriesMethod())
               .addMethod(getGetCryptoPriceMethod())
               .addMethod(getAddStockWatchMethod())
+              .addMethod(getGetWatchingMethod())
               .build();
         }
       }

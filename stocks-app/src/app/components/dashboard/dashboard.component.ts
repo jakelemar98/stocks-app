@@ -37,8 +37,8 @@ export class DashboardComponent implements OnInit {
     this.tokenInfo = this.auth.decodeToken()
     this.verified = this.tokenInfo['verified'];
     this.userName = this.tokenInfo['first'] + " " + this.tokenInfo['last'];
-    
     this.id = this.tokenInfo['user_id']
+    this.fetchWatchingData()
   }
 
   verifyEmail(): void {
@@ -46,6 +46,29 @@ export class DashboardComponent implements OnInit {
       data => this.openDialog(data),
       error => console.log(error)
     )
+  }
+
+  fetchWatchingData(): void {
+    this.stockService.getWatchingData().subscribe( 
+        data => {
+          var res = JSON.parse(data.response)
+          var size = Object.keys(res).length;
+          
+          for (let i = 0; i < size; i++) {
+            const element = res[i];
+            var row = JSON.parse(element)
+            var obj = {
+              symbol: row[0],
+              price: row[4],
+              open: row[1],
+              close: row[7]
+            }
+            this.stocks.data.push(obj)
+            this.stocks.exists = true
+          }
+        },
+        error => console.log(error)
+      )
   }
 
   openDialog(data): void {

@@ -92,15 +92,11 @@ public class StockController {
     @PostMapping("/stocks/watchers")
     public ResponseEntity<String> addWatcher(@RequestHeader("Authorization") String token, @RequestBody Watcher body) {
 
-        String[] authHeader = token.split("\\s");
-        String[] claims = new String[]{"user_id"};
-        VerifiedAndClaims vc = tokenVerifier.verifyTokenAndReturnClaims(authHeader[1], claims);
+        String[] args = tokenExtraction(token, new String[]{"user_id"});
 
-        if (!vc.getVerified()) {
-            return new ResponseEntity<>("token is malformed", HttpStatus.UNAUTHORIZED);
+        if (args[0].equals("bad token")){
+            new ResponseEntity<>("token is malformed", HttpStatus.UNAUTHORIZED);
         }
-
-        String[] args = vc.getClaims();
 
         body.setId(args[0]);
 
@@ -114,6 +110,41 @@ public class StockController {
         }
 
         return new ResponseEntity<>(jsonString, HttpStatus.ACCEPTED);
+    }
+
+    @GetMapping("stocks/watchers")
+    public ResponseEntity<String> getWatching(@RequestHeader("Authorization") String token) {
+
+        String[] args = tokenExtraction(token, new String[]{"user_id"});
+
+        if (args[0].equals("bad token")){
+            new ResponseEntity<>("token is malformed", HttpStatus.UNAUTHORIZED);
+        }
+
+        Response messageResponse = sc.getWatcherResponse(args[0], config.getConfigValue("stocks.url"));
+
+        String jsonString = "";
+        try {
+            jsonString = JsonFormat.printer().print(messageResponse);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return new ResponseEntity<>(jsonString, HttpStatus.ACCEPTED);
+    }
+
+    private String[] tokenExtraction(String token, String[] claims) {
+        
+        String[] authHeader = token.split("\\s");
+        
+        VerifiedAndClaims vc = tokenVerifier.verifyTokenAndReturnClaims(authHeader[1], claims);
+
+        if (!vc.getVerified()) {
+            return new String[]{"bad token"};
+        }
+        
+        String[] args = vc.getClaims();
+        return args;
     }
     
 }
