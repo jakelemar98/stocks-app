@@ -9,7 +9,7 @@
       <a mat-raised-button style="background-color: #F89C4B;" routerLink="/login">Login</a>
     </div>
     <ng-template #notShow>
-      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="menu">
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
@@ -33,6 +33,11 @@
             <span>Stock Information</span>
           </button>
         </ng-template>
+        <mat-divider></mat-divider>
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>logout</mat-icon>
+          <span>Logout</span>
+        </button>
       </mat-menu>
       </ng-template>
   </mat-toolbar-row>

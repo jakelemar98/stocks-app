@@ -23,7 +23,8 @@ def createUser(request):
         "last": request.lastname,
         "email": request.email,
         "verified": False,
-        "password": hashed
+        "password": hashed,
+        "roles": ['user']
     }
 
     result = collection.insert_one(user)

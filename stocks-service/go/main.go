@@ -1,19 +1,24 @@
 package main
 
 import (
-	"flag"
-	"log"
-	"net"
-
 	pbS "../proto/stocks"
+	"flag"
 	"google.golang.org/grpc"
+	"log"
+	"math/rand"
+	"net"
 )
 
 var (
 	port    = flag.String("port", "8000", "port")
 	apiBase = "https://www.alphavantage.co/query?function="
-	apiKey  = "N8ECE7S8XE8QTU03"
+	apiKeys = [3]string{"N8ECE7S8XE8QTU03", "31F5E2JCSVEGY11D", "XVK5WJEDTOJQY1QJ"}
 )
+
+func randAPIKey() string {
+	randNum := rand.Intn(3)
+	return apiKeys[randNum]
+}
 
 func init() {
 	flag.Parse()

@@ -8,7 +8,7 @@ import { NewUser } from '../../interfaces/new-user'
 import { User } from '../../interfaces/user';
 import { DialogTemplateComponent } from '../dialog-template/dialog-template.component'
 import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
-
+import { AuthService } from 'src/app/services/auth/auth.service'
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -34,10 +34,12 @@ export class RegisterComponent implements OnInit {
 
   
 
-  constructor(private fb: FormBuilder, private userHttp: UsersService, private dialog: MatDialog) { }
+  constructor(private fb: FormBuilder, private userHttp: UsersService, private dialog: MatDialog, private auth: AuthService) { }
 
   ngOnInit(): void {
-
+    if (this.auth.isAuthenticated()) {
+      this.auth.decideRoute()
+    } 
   }
 
   onRegister() {
@@ -60,7 +62,7 @@ export class RegisterComponent implements OnInit {
         });
 
         this.dialogTemplate.afterClosed().subscribe(result => {
-          console.log('The dialog was closed');
+          window.location.reload()
         });
       },
       error =>  {
@@ -74,11 +76,5 @@ export class RegisterComponent implements OnInit {
       }
     )    
   }
-
-  private success(data){
-    this.response = data
-      console.log(this.response);
-  }
-
 }
 

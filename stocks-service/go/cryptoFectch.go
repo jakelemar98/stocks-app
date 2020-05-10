@@ -14,7 +14,7 @@ type CryptoQuote struct {
 func cryptoPriceFetch(symbol string) string {
 	log.Println("cryptoPrice request.....")
 	var returnVal string
-	url := apiBase + "CURRENCY_EXCHANGE_RATE&from_currency=" + symbol + "&to_currency=USD&apikey=" + apiKey
+	url := apiBase + "CURRENCY_EXCHANGE_RATE&from_currency=" + symbol + "&to_currency=USD&apikey=" + randAPIKey()
 	response, err := http.Get(url)
 	if err != nil {
 		log.Fatalf("server error -> %s\n", err)

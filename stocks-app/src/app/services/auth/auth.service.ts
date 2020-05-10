@@ -1,20 +1,36 @@
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { Router } from '@angular/router'
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  token: string = localStorage.getItem('token')
 
-  constructor(public jwtHelper: JwtHelperService) { }
+  constructor(public jwtHelper: JwtHelperService, private router: Router) { }
 
   public isAuthenticated(): boolean {
-    console.log(this.jwtHelper.isTokenExpired(this.token))
-    return !this.jwtHelper.isTokenExpired(this.token)
+    const token: string = localStorage.getItem('token')
+    
+    return !this.jwtHelper.isTokenExpired(token)
   }
 
   public decodeToken(): Object {
-    return this.jwtHelper.decodeToken(this.token)
+    const token: string = localStorage.getItem('token')
+
+    return this.jwtHelper.decodeToken(token)
+  }
+
+  public decideRoute(): void {
+    const token: string = localStorage.getItem('token')
+
+    const tokenData: Object = this.jwtHelper.decodeToken(token)
+    
+    if (tokenData["role"] === "admin") {
+      this.router.navigate(["admin"])
+    } else {
+      this.router.navigate(["dashboard"])
+    }
+    
   }
 }

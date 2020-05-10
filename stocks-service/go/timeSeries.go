@@ -43,7 +43,7 @@ func timeSeriesFetch(symbol string, time string) string {
 
 	var returnVal string
 
-	response := apiFetch("TIME_SERIES_" + strings.ToUpper(time) + "&symbol=" + symbol + "&outputsize=compact&apikey=" + apiKey)
+	response := apiFetch("TIME_SERIES_" + strings.ToUpper(time) + "&symbol=" + symbol + "&outputsize=compact&apikey=" + randAPIKey())
 
 	switch time {
 	case "monthly":

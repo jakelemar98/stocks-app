@@ -14,7 +14,7 @@ type GlobalQuote struct {
 func stockPriceFetch(symbol string) string {
 	log.Println("stockPrice request.....")
 	var returnVal string
-	url := apiBase + "GLOBAL_QUOTE&symbol=" + symbol + "&apikey=" + apiKey
+	url := apiBase + "GLOBAL_QUOTE&symbol=" + symbol + "&apikey=" + randAPIKey()
 	response, err := http.Get(url)
 	if err != nil {
 		log.Fatalf("server error -> %s\n", err)

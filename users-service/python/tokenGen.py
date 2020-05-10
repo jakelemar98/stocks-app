@@ -22,6 +22,7 @@ def createJWT(user_id, user):
         'last': user['last'],
         'email': user['email'],
         'verified': user['verified'],
+        'role':user['roles'][0],
         'exp': datetime.utcnow() + timedelta(seconds=JWT_EXP_DELTA_SECONDS)
     }
     jwt_token = jwt.encode(payload, private_key, JWT_ALGORITHM)

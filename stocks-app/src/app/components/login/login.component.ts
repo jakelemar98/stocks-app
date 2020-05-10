@@ -5,7 +5,7 @@ import { Login } from '../../interfaces/login';
 import { UsersService } from '../../services/users/users.service';
 import { DialogTemplateComponent } from '../dialog-template/dialog-template.component';
 import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
@@ -42,10 +42,8 @@ export class LoginComponent {
       data => {
         this.data = data
         this.token =  this.data.token
-        this.data = JSON.parse(this.data.body);        
         localStorage.setItem("token", this.token)
-        this.navigate("dashboard")
-        window.location.reload();
+        window.location.reload()
       },
       error => {
         this.error = error
@@ -65,7 +63,7 @@ export class LoginComponent {
 
   ngOnInit() {
     if (this.auth.isAuthenticated()) {
-      this.navigate("dashboard")
+      this.auth.decideRoute()
     }
   }
 

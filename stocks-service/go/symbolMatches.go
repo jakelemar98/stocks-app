@@ -14,7 +14,7 @@ type BestMatches struct {
 func stockOptionsFetch(symbol string) string {
 	log.Println("stockOptions request.....")
 	var returnVal string
-	url := apiBase + "SYMBOL_SEARCH&keywords=" + symbol + "&apikey=" + apiKey
+	url := apiBase + "SYMBOL_SEARCH&keywords=" + symbol + "&apikey=" + randAPIKey()
 	response, err := http.Get(url)
 	if err != nil {
 		log.Fatalf("server error -> %s\n", err)
