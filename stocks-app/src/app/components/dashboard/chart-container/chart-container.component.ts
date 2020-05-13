@@ -31,27 +31,39 @@ export class ChartContainerComponent {
 
   constructor(private stockService: StocksService) { }    
 
-  ngAfterViewInit(): void {
-    this.getChartData()
+  ngAfterViewInit(): void {    
+    this.getChartData(true, 0)
   }
 
   changeEvent($event){
     var id = $event.index
     if (id != 0) {
-      if (!this.chartObj[id].built) {
-        console.log("chart not built");
-        this.createChart(this.stocks.data[id].symbol, this.chartObj[id].labels, this.chartObj[id].data, id)
+      if(this.chartObj[id]) {
+        if (!this.chartObj[id].built) {
+          this.createChart(this.stocks.data[id].symbol, this.chartObj[id].labels, this.chartObj[id].data, id)
+        }
+      } else {
+        this.getChartData(false, id)
       }
+      
     }
   }
 
-  getChartData(): void {    
-    for (let index = 0; index < Object.keys(this.stocks.data).length; index++) {      
-      this.stockService.getTimeSeries("daily", this.stocks.data[index]["symbol"]).subscribe(
-        data => this.organizeData(data, 29, index),
+  getChartData(onLoad: Boolean, pos: number): void {
+    if (onLoad) {
+      for (let index = 0; index < Object.keys(this.stocks.data).length; index++) {      
+        this.stockService.getTimeSeries("daily", this.stocks.data[index]["symbol"]).subscribe(
+          data => this.organizeData(data, 29, index, false),
+          error => console.log(error)
+        )
+      }
+    } else {
+      this.stockService.getTimeSeries("daily", this.stocks.data[pos]["symbol"]).subscribe(
+        data => this.organizeData(data, 29, pos, true),
         error => console.log(error)
       )
     }
+    
   }
 
   createChart(chartId, labels, data, index) {
@@ -91,7 +103,7 @@ export class ChartContainerComponent {
     this.chartObj[index].built = true
   }
 
-  organizeData(data, length, tabIndex) {    
+  organizeData(data: Object, length: number, tabIndex: number, create: Boolean) {    
     this.chartRes = data
     this.chartRes = JSON.parse(this.chartRes.response)    
     var labelArr = new Array()
@@ -104,7 +116,7 @@ export class ChartContainerComponent {
       dataArr[length - index] = intPrice  
     }
     this.chartObj[tabIndex] = {labels: labelArr, data: dataArr, built: false }
-    if (tabIndex == 0) {
+    if (tabIndex == 0 || create) {
       this.createChart(this.stocks.data[tabIndex]["symbol"], labelArr, dataArr, tabIndex)
     }
   }
