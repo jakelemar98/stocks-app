@@ -16,7 +16,7 @@ import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { VerifyDialogComponent } from './components/dashboard/verify-dialog/verify-dialog.component';
 import { AddStockComponent } from './components/dashboard/add-stock/add-stock.component';
 import { AdminComponent } from './components/admin/admin.component';
-
+import { DashboardModule } from './components/dashboard/dashboard.module'
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +27,7 @@ import { AdminComponent } from './components/admin/admin.component';
     DashboardComponent,
     VerifyDialogComponent,
     AddStockComponent,
-    AdminComponent
+    AdminComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,7 +36,8 @@ import { AdminComponent } from './components/admin/admin.component';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MaterialModule,
-    ChartsModule
+    ChartsModule,
+    DashboardModule
   ],
   providers: [
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },

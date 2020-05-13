@@ -1,8 +1,12 @@
 
-.card {
+.contianer {
   margin: 0 auto;
-  background-color: blanchedalmond;
-  width: 80%;
+}
+
+.center {
+  margin: auto;
+  width: 50%;
+  padding: 25px;
 }
 
 .cardList {
@@ -24,15 +28,25 @@
 }
 
 .card-deck-container {
-  width: 100%;
   position: relative;
-  border-radius: 2px;
   padding-top: 10px;
   margin: 0 auto;
 }
+
 
 .card-item {
   margin: 0 auto;
   padding: 5px 5px 5px 5px;
 }
 
+.icon {
+  padding: 0 14px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+.rounded-border {
+  border: 2px solid;
+  border-radius: 5px;
+}

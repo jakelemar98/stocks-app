@@ -7,7 +7,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { stockInfo } from  '../../interfaces/stocks';
 import { AddStockComponent } from './add-stock/add-stock.component'
 import { StocksService } from "../../services/stocks/stocks.service";
-import { Watcher } from 'src/app/interfaces/watcher';
+
+interface WatchButton {
+  text: string;
+  icon: string;
+  mode: string;
+}
 
 @Component({
   selector: 'app-dashboard',
@@ -19,19 +24,25 @@ export class DashboardComponent implements OnInit {
 
   tokenInfo: Object;
   response: Object;
-  verified: Boolean;
+
+  viewSwitch: string = "cards";
   userName: string;
   id: string;
-  paperTrader: Boolean = true;
+
   addStock: Boolean = true;
+  verified: Boolean;
+
   stocks: stockInfo = {
     exists:  false,
     data: []
   };
+  watcherButton: WatchButton = {
+    text: 'Visualize',
+    icon: "trending_up",
+    mode: "chart"
+  }
 
   constructor(public auth: AuthService, private emailService: EmailService, private stockService: StocksService, private dialog: MatDialog, private _snackBar: MatSnackBar) { }
-
-  
 
   ngOnInit(): void {    
     this.tokenInfo = this.auth.decodeToken()
@@ -114,8 +125,24 @@ export class DashboardComponent implements OnInit {
   addStockWatcher(symbol: string): void {
     this.stockService.addStockWatcher(symbol).subscribe( data => {
       data => console.log(data);
-      
     })
   }
 
+  switchClick(mode: string): void {
+    if (mode === "chart") {
+      this.watcherButton = {
+        text: 'Cards',
+        icon: "info",
+        mode: "cards"
+      }
+      this.viewSwitch = mode
+    } else {
+      this.watcherButton = {
+        text: 'Visualize',
+        icon: "trending_up",
+        mode: "chart"
+      }
+      this.viewSwitch = mode
+    }
+  }
 }

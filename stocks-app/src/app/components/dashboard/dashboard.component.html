@@ -4,50 +4,30 @@
         Verify Email
     </button>
 </div>
+
 <ng-template #dashboard>
-    <div class="container">
-        <mat-card class="card" >
-            <mat-card-title style="text-align: center;" fxLayout.gt-xs="row" fxLayout.xs="column">
-                <h1>{{ userName }}'s Dashboard</h1>
-            </mat-card-title>
-            <mat-card-content>
-                <h2>Stock Watcher</h2>
-                <button mat-raised-button (click)="openAddDialog()" color="accent"> 
-                    <mat-icon>add</mat-icon>
-                    Add Stocks
-                </button>
-                <div  style="display:flex; flex-wrap:wrap; justify-content:flex-start" class="card-deck-container">
-                    <div *ngFor="let stock of stocks.data" class="card-item">
-                        <mat-card style="width: 300px;" >
-                            <mat-card-title style="text-align: center;">
-                                    {{ stock.symbol }}
-                            </mat-card-title>
-                            <mat-card-content>
-                                <mat-list>
-                                    <div mat-subheader> Stock Information </div>
-                                    <mat-list-item>
-                                            <mat-icon mat-list-icon>attach_money</mat-icon>
-                                            <div mat-line>Price</div>
-                                            <div mat-line> {{ stock.price }} </div>
-                                    </mat-list-item>
-                                    <mat-list-item>
-                                        <mat-icon mat-list-icon>info</mat-icon>
-                                        <div mat-line>Open</div>
-                                        <div mat-line> {{ stock.open }} </div>
-                                    </mat-list-item>
-                                    <mat-list-item>
-                                        <mat-icon mat-list-icon>info</mat-icon>
-                                        <div mat-line>Close</div>
-                                        <div mat-line> {{ stock.close }} </div>
-                                    </mat-list-item>
-                                </mat-list>
-                            </mat-card-content>
-                        </mat-card>
-                    </div>
-                </div>
-                <div>
-                </div>
-            </mat-card-content>
-        </mat-card>
+    <h1 style="color: rgb(243, 236, 236); margin: auto;">{{ userName }}'s Dashboard</h1>
+    <mat-toolbar style="background-color:#4BAEF8; margin: 0 auto; width: 80%;" class="rounded-border">
+        <mat-toolbar-row>
+            <h2>Stock Watcher</h2>
+            <span class="spacer"></span>
+            <button mat-raised-button style="background-color: #F89C4B; margin-right: 12px;" (click)="switchClick(watcherButton.mode)"> 
+                <mat-icon>{{watcherButton.icon}}</mat-icon>
+                {{watcherButton.text}}
+            </button>   
+            <button mat-raised-button (click)="openAddDialog()" style="background-color: #F89C4B;" > 
+                <mat-icon>add</mat-icon>
+                Add Stocks
+            </button>        
+        </mat-toolbar-row>
+    </mat-toolbar>
+    <div [ngSwitch]="viewSwitch">
+        <div *ngSwitchCase="'chart'">
+            <app-chart-container [stocks]="this.stocks"></app-chart-container>
+        </div>
+        <div *ngSwitchCase="'cards'">
+            <app-card-container [stocks]="this.stocks"></app-card-container>
+        </div>
     </div>
+    
 </ng-template>
