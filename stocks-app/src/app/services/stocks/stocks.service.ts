@@ -49,6 +49,10 @@ export class StocksService {
     return this.http.get(this.gatewayURL + "watchers", this.httpOptions).pipe(catchError(this.handleError))
   }
 
+  deleteStockWatcher(symbol: string): Observable<any> {
+    return this.http.put(this.gatewayURL + "watchers", symbol, this.httpOptions).pipe(catchError(this.handleError))
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.

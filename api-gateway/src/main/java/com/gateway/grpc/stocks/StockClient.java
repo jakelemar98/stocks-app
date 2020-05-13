@@ -48,7 +48,7 @@ public class StockClient {
         return response;
     }
 
-    public Response watcherResponse(final Watcher req, final String url) {
+    public Response postWatcherResponse(final Watcher req, final String url) {
         final ManagedChannel channel = ManagedChannelBuilder.forAddress(url, 8000).usePlaintext().build();
 
         final StockServiceGrpc.StockServiceBlockingStub stub = StockServiceGrpc.newBlockingStub(channel);
@@ -70,6 +70,20 @@ public class StockClient {
         response = stub.getWatching(WatchRequest.newBuilder()
         .setId(id)
         .setSymbol("")
+        .build());
+
+        channel.shutdown();
+        return response;
+    }
+
+    public Response putWatcherResponse(final String id, final String symbol, final String url) {
+        final ManagedChannel channel = ManagedChannelBuilder.forAddress(url, 8000).usePlaintext().build();
+
+        final StockServiceGrpc.StockServiceBlockingStub stub = StockServiceGrpc.newBlockingStub(channel);
+
+        response = stub.updateWatching(WatchRequest.newBuilder()
+        .setId(id)
+        .setSymbol(symbol)
         .build());
 
         channel.shutdown();

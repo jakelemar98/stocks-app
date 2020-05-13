@@ -50,7 +50,6 @@ public class JWTVerify {
             for (int i = 0; i < claims.length; i++) {
                 String claimVal = jwt.getClaim(claims[i]).asString();
                 returnClaims[i] = claimVal;
-                System.out.println(returnClaims[i]);
             }
         } catch (Exception e) {
             e.printStackTrace();

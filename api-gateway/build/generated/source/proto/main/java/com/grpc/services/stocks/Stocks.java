@@ -47,14 +47,16 @@ public final class Stocks {
       "\030\001 \001(\t\"*\n\014WatchRequest\022\016\n\006symbol\030\001 \001(\t\022\n" +
       "\n\002id\030\002 \001(\t\"+\n\013TimeRequest\022\016\n\006Symbol\030\001 \001(" +
       "\t\022\014\n\004time\030\002 \001(\t\",\n\010Response\022\020\n\010response\030" +
-      "\001 \001(\t\022\016\n\006status\030\002 \001(\0052\201\002\n\014StockService\022$" +
+      "\001 \001(\t\022\016\n\006status\030\002 \001(\0052\255\002\n\014StockService\022$" +
       "\n\rGetStockPrice\022\010.Request\032\t.Response\022&\n\017" +
       "GetStockOptions\022\010.Request\032\t.Response\022(\n\r" +
       "GetTimeSeries\022\014.TimeRequest\032\t.Response\022%" +
       "\n\016GetCryptoPrice\022\010.Request\032\t.Response\022)\n" +
       "\rAddStockWatch\022\r.WatchRequest\032\t.Response" +
       "\022\'\n\013GetWatching\022\r.WatchRequest\032\t.Respons" +
-      "eB\034\n\030com.grpc.services.stocksP\001b\006proto3"
+      "e\022*\n\016UpdateWatching\022\r.WatchRequest\032\t.Res" +
+      "ponseB\034\n\030com.grpc.services.stocksP\001b\006pro" +
+      "to3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

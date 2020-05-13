@@ -81,4 +81,20 @@ func getWatching(id string) string {
 	return string(json)
 }
 
+func updateWatching(symbol string, id string) string {
+	log.Print("Update Watchers Request")
+	result, err := collection.UpdateOne(
+		context.TODO(),
+		bson.M{"user": id},
+		bson.D{
+			{"$pull", bson.M{"stocks": symbol}},
+		},
+	)
+	if err != nil {
+		log.Fatal(err)
+	}
+	res := fmt.Sprintf("document %v Updated", result.UpsertedID)
+	return res
+}
+
 //

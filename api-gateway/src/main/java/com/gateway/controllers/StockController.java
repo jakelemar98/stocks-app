@@ -16,6 +16,7 @@ import com.gateway.utils.JWTVerify;
 import com.gateway.utils.VerifiedAndClaims;
 import com.gateway.models.Watcher;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 
@@ -36,12 +37,7 @@ public class StockController {
 	public String getStockPrice(@RequestParam(value = "symbol") String symbol) {
         Response messageResponse = sc.getResponse(symbol, config.getConfigValue("stocks.url"),"price", "NA");
 
-        String jsonString = "";
-        try {
-            jsonString = JsonFormat.printer().print(messageResponse);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        String jsonString = serializeReturn(messageResponse);
 
         return jsonString;
     }
@@ -51,12 +47,7 @@ public class StockController {
 	public String getMatches(@RequestParam(value = "symbol") String symbol) {
         Response messageResponse = sc.getResponse(symbol, config.getConfigValue("stocks.url"), "matches", "NA");
 
-        String jsonString = "";
-        try {
-            jsonString = JsonFormat.printer().print(messageResponse);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        String jsonString = serializeReturn(messageResponse);
 
         return jsonString;
     }
@@ -65,12 +56,9 @@ public class StockController {
     @Cacheable("getTimeSeries")
     public String getTimeSeries(@RequestParam(value = "symbol") String symbol, @RequestParam(value = "time") String time) {
         Response sr = sc.getResponse(symbol, config.getConfigValue("stocks.url"),"time", time);
-        String jsonString = "";
-        try {
-            jsonString = JsonFormat.printer().print(sr);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        
+        String jsonString = serializeReturn(sr);
+
         return jsonString;
     }
 
@@ -79,12 +67,7 @@ public class StockController {
 	public String getCrypto(@RequestParam(value = "symbol") String symbol) {
         Response messageResponse = sc.getResponse(symbol, config.getConfigValue("stocks.url"),"crypto", "NA");
 
-        String jsonString = "";
-        try {
-            jsonString = JsonFormat.printer().print(messageResponse);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        String jsonString = serializeReturn(messageResponse);
 
         return jsonString;
     }
@@ -100,16 +83,11 @@ public class StockController {
 
         body.setId(args[0]);
 
-        Response messageResponse = sc.watcherResponse(body, config.getConfigValue("stocks.url"));
+        Response messageResponse = sc.postWatcherResponse(body, config.getConfigValue("stocks.url"));
 
-        String jsonString = "";
-        try {
-            jsonString = JsonFormat.printer().print(messageResponse);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        String jsonString = serializeReturn(messageResponse);
 
-        return new ResponseEntity<>(jsonString, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(jsonString, HttpStatus.CREATED);
     }
 
     @GetMapping("stocks/watchers")
@@ -123,14 +101,26 @@ public class StockController {
 
         Response messageResponse = sc.getWatcherResponse(args[0], config.getConfigValue("stocks.url"));
 
-        String jsonString = "";
-        try {
-            jsonString = JsonFormat.printer().print(messageResponse);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        String jsonString = serializeReturn(messageResponse);
+
 
         return new ResponseEntity<>(jsonString, HttpStatus.ACCEPTED);
+    }
+
+    @PutMapping("stocks/watchers")
+    public ResponseEntity<String> updateWatching(@RequestHeader("Authorization") String token ,@RequestBody String symbol) {
+        
+        String[] args = tokenExtraction(token, new String[]{"user_id"});
+
+        if (args[0].equals("bad token")){
+            new ResponseEntity<>("token is malformed", HttpStatus.UNAUTHORIZED);
+        }
+
+        Response res = sc.putWatcherResponse(args[0], symbol, config.getConfigValue("stocks.url"));
+
+        String jsonString = serializeReturn(res);
+
+        return new ResponseEntity<>(jsonString, HttpStatus.OK);
     }
 
     private String[] tokenExtraction(String token, String[] claims) {
@@ -145,6 +135,16 @@ public class StockController {
         
         String[] args = vc.getClaims();
         return args;
+    }
+
+    private String serializeReturn(Response req) {
+        String res = "";
+        try {
+            res = JsonFormat.printer().print(req);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return res;
     }
     
 }

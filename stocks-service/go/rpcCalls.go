@@ -59,3 +59,12 @@ func (s *server) GetWatching(c context.Context, req *pb.WatchRequest) (*pb.Respo
 	}
 	return response, nil
 }
+
+func (s *server) UpdateWatching(c context.Context, req *pb.WatchRequest) (*pb.Response, error) {
+	res := updateWatching(req.Symbol, req.Id)
+	response := &pb.Response{
+		Response: res,
+		Status:   200,
+	}
+	return response, nil
+}
