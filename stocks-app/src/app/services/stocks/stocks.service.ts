@@ -33,7 +33,7 @@ export class StocksService {
     return this.http.get(this.gatewayURL + "price?symbol=" + symbol)
   }
 
-  getTimeSeries(time, symbol){
+  getTimeSeries(time: string, symbol: string){
     return this.http.get(this.gatewayURL + "timeSeries?symbol=" + symbol + "&time=" + time).pipe(catchError(this.handleError))
   }
 

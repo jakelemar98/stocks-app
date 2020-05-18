@@ -3,13 +3,24 @@ import { stockInfo } from 'src/app/interfaces/stocks';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { MatDialog } from '@angular/material/dialog'
 import { StocksService } from 'src/app/services/stocks/stocks.service';
+
+interface flipped {
+  flipped: Boolean;
+}
+
 @Component({
   selector: 'app-card-container',
   templateUrl: './card-container.component.html',
   styleUrls: ['./card-container.component.scss']
 })
 export class CardContainerComponent {
-  @Input() stocks: stockInfo
+  @Input() stocks: stockInfo;
+  cardsFlipped: flipped[] = [
+    {flipped: false},
+    {flipped: false},
+    {flipped: false},
+    {flipped: false}
+  ];
   constructor(private dialog: MatDialog, private stockService: StocksService) { }
 
   deleteStock(symbol: string, index: number): void {
@@ -33,7 +44,9 @@ export class CardContainerComponent {
       },
       error => console.log(error),
     )
-
   }
 
+  flipCard(id: number): void {
+    this.cardsFlipped[id] = {flipped: !this.cardsFlipped[id].flipped}
+  }
 }

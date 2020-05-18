@@ -7,6 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { stockInfo } from  '../../interfaces/stocks';
 import { AddStockComponent } from './add-stock/add-stock.component'
 import { StocksService } from "../../services/stocks/stocks.service";
+import { CalculationService } from "../../services/stocks/calculation.service";
 
 interface WatchButton {
   text: string;
@@ -34,7 +35,9 @@ export class DashboardComponent implements OnInit {
 
   stocks: stockInfo = {
     exists:  false,
-    data: []
+    data: [],
+    historical: [],
+    length: 0
   };
   watcherButton: WatchButton = {
     text: 'Visualize',
@@ -42,7 +45,11 @@ export class DashboardComponent implements OnInit {
     mode: "chart"
   }
 
-  constructor(public auth: AuthService, private emailService: EmailService, private stockService: StocksService, private dialog: MatDialog, private _snackBar: MatSnackBar) { }
+  constructor(
+              public auth: AuthService, private emailService: EmailService,
+              private stockService: StocksService, private dialog: MatDialog,
+              private _snackBar: MatSnackBar, private calcService: CalculationService
+            ) { }
 
   ngOnInit(): void {    
     this.tokenInfo = this.auth.decodeToken()
@@ -75,11 +82,44 @@ export class DashboardComponent implements OnInit {
               close: row[7]
             }
             this.stocks.data.push(obj)
-            this.stocks.exists = true
+            this.stocks.exists = true   
+            this.stocks.length++         
           }
+          this.fetchHistoricalData("loop", "")
         },
         error => console.log(error)
       )
+  }
+
+  fetchHistoricalData(method: string, sym: string): void {
+    if (method === "loop") {
+      for (let index = 0; index < this.stocks.data.length; index++) {
+        const symbol = this.stocks.data[index].symbol.toLowerCase()
+        
+        this.stockService.getTimeSeries("monthly", symbol).subscribe(
+          data => {
+            const response: Object = data
+            var res = JSON.parse(response['response'])
+            
+            this.stocks.historical.push(this.calcService.calcMonthlyChanges([3,6,12], res))                   
+          },
+          error => console.log(error)
+          
+        )
+      }
+    } else {
+      this.stockService.getTimeSeries("monthly", sym).subscribe(
+        data => {
+          const response: Object = data
+          var res = JSON.parse(response['response'])
+          
+          this.stocks.historical.push(this.calcService.calcMonthlyChanges([3,6,12], res))                   
+        },
+        error => console.log(error)
+        
+      )
+    }
+   
   }
 
   openDialog(data): void {
@@ -98,22 +138,28 @@ export class DashboardComponent implements OnInit {
   }
 
   openAddDialog(): void {
-    const stockDialog = this.dialog.open(AddStockComponent, {
-      width: "350px",
-    });
+    if (this.stocks.data.length >= 4) {
+      alert("sorry, no more then 4 stocks can be watched at a time")
+    } else {
+      const stockDialog = this.dialog.open(AddStockComponent, {
+        width: "350px",
+      });
 
-    stockDialog.afterClosed().subscribe( result => {
-      var data = JSON.parse(result.event.response)
-      var obj = {
-        symbol: data[0],
-        price: data[4],
-        open: data[1],
-        close: data[7]
-      }
-      this.stocks.data.push(obj)
-      this.stocks.exists = true
-      this.addStockWatcher(data[0])
-    })
+      stockDialog.afterClosed().subscribe( result => {
+        var data = JSON.parse(result.event.response)
+        var obj = {
+          symbol: data[0],
+          price: data[4],
+          open: data[1],
+          close: data[7]
+        }
+        this.stocks.data.push(obj)
+        this.stocks.exists = true
+        this.stocks.length++
+        this.fetchHistoricalData("single", obj.symbol)
+        this.addStockWatcher(data[0])
+      })
+    }
   }
 
   verifiedSnackBar(message: string, action: string): void {

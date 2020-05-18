@@ -1,39 +1,89 @@
-<div  style="display:flex; flex-wrap:wrap; justify-content:flex-start; background-color: rgba(255, 255, 255, 0); margin: 0 auto; width: 80%;" class="card-deck-container">
+<div *ngIf="this.stocks.historical[0]; else loading" style="display:flex; flex-wrap:wrap; justify-content:flex-start; background-color: rgba(255, 255, 255, 0); margin: 0 auto; width: 80%;" class="card-deck-container">
     <div *ngFor="let stock of stocks.data; let i=index;" class="card-item">
-        <mat-card style="width: 250px;" >
-            <mat-card-title style="text-align: center;">
-                    {{ stock.symbol }}
-            </mat-card-title>
-            <mat-divider></mat-divider>
-
-            <mat-card-content>
-                <mat-list>
-                    <div mat-header> Stock Information </div>
-                    <mat-list-item>
-                            <mat-icon mat-list-icon>attach_money</mat-icon>
-                            <div mat-line>Price</div>
-                            <div mat-line> {{ stock.price }} </div>
-                    </mat-list-item>
+        <div class="card-container">
+            <div class="flippable-card flipped" [ngClass]="{'flipped': cardsFlipped[i].flipped}">
+                <mat-card style="width: 250px; height: 350px;">
+                    <mat-card-title style="text-align: center;">
+                            {{ stock.symbol }}
+                    </mat-card-title>
                     <mat-divider></mat-divider>
-                    <mat-list-item>
-                        <mat-icon mat-list-icon>info</mat-icon>
-                        <div mat-line>Open</div>
-                        <div mat-line> {{ stock.open }} </div>
-                    </mat-list-item>
-                    <mat-divider></mat-divider>
-                    <mat-list-item>
-                        <mat-icon mat-list-icon>info</mat-icon>
-                        <div mat-line>Close</div>
-                        <div mat-line> {{ stock.close }} </div>
-                    </mat-list-item>
-                    <mat-divider></mat-divider>
-                </mat-list>
-            </mat-card-content>
-            <mat-card-actions>
-                <button mat-raised-button (click)="deleteStock(stock.symbol, i)" style="background-color: whitesmoke;"> 
-                    <mat-icon>delete</mat-icon>
-                </button>
-            </mat-card-actions>
-        </mat-card>
+        
+                    <mat-card-content>
+                        <mat-list>
+                            <div mat-header> Stock Information </div>
+                            <mat-list-item>
+                                    <mat-icon mat-list-icon>attach_money</mat-icon>
+                                    <div mat-line>Price</div>
+                                    <div mat-line> {{ stock.price }} </div>
+                            </mat-list-item>
+                            <mat-divider></mat-divider>
+                            <mat-list-item>
+                                <mat-icon mat-list-icon>info</mat-icon>
+                                <div mat-line>Open</div>
+                                <div mat-line> {{ stock.open }} </div>
+                            </mat-list-item>
+                            <mat-divider></mat-divider>
+                            <mat-list-item>
+                                <mat-icon mat-list-icon>info</mat-icon>
+                                <div mat-line>Previous Close</div>
+                                <div mat-line> {{ stock.close }} </div>
+                            </mat-list-item>
+                            <mat-divider></mat-divider>
+                        </mat-list>
+                    </mat-card-content>
+                    <mat-card-actions>
+                        <button mat-raised-button (click)="deleteStock(stock.symbol, i)" style="background-color: whitesmoke;"> 
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                        <button mat-raised-button (click)="flipCard(i)" style="background-color: whitesmoke;"> 
+                                <mat-icon>flip_to_back</mat-icon>
+                            </button>
+                    </mat-card-actions>
+                </mat-card>
+                <div *ngIf="this.stocks.historical[i]">
+                        <mat-card style="width: 250px;" class="back">
+                                <mat-card-title style="text-align: center;">
+                                        {{ stock.symbol }}
+                                </mat-card-title>
+                                <mat-divider></mat-divider>
+                    
+                                <mat-card-content>
+                                    <mat-list>
+                                        <div mat-header> Stock History </div>
+                                        <mat-list-item>
+                                                <mat-icon mat-list-icon>trending_up</mat-icon>
+                                                <div mat-line>3 months</div>
+                                                <div mat-line> {{ stocks.historical[i][0] }} </div>
+                                        </mat-list-item>
+                                        <mat-divider></mat-divider>
+                                        <mat-list-item>
+                                            <mat-icon mat-list-icon>trending_up</mat-icon>
+                                            <div mat-line>6 months</div>
+                                            <div mat-line> {{ stocks.historical[i][1] }} </div>
+                                        </mat-list-item>
+                                        <mat-divider></mat-divider>
+                                        <mat-list-item>
+                                            <mat-icon mat-list-icon>trending_up</mat-icon>
+                                            <div mat-line>1 year</div>
+                                            <div mat-line> {{ stocks.historical[i][2] }} </div>
+                                        </mat-list-item>
+                                        <mat-divider></mat-divider>
+                                    </mat-list>
+                                </mat-card-content>
+                                <mat-card-actions>
+                                    <button mat-raised-button (click)="deleteStock(stock.symbol, i)" style="background-color: whitesmoke;"> 
+                                        <mat-icon>delete</mat-icon>
+                                    </button>
+                                    <button mat-raised-button (click)="flipCard(i)" style="background-color: whitesmoke;"> 
+                                            <mat-icon>flip_to_front</mat-icon>
+                                        </button>
+                                </mat-card-actions>
+                        </mat-card>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+<ng-template #loading>
+    <h1>Loading</h1>
+</ng-template>

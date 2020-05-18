@@ -73,7 +73,7 @@ func monthLogic(response *http.Response) string {
 	m := make(map[int]Item)
 	i := 0
 	for _, k := range keys {
-		if i >= (length - 12) {
+		if i >= (length - 13) {
 			r := results.Monthly[k]
 			r.Date = k
 			results.Monthly[k] = r
@@ -82,6 +82,7 @@ func monthLogic(response *http.Response) string {
 		}
 		i++
 	}
+	log.Print(m)
 	jsonString, _ := json.Marshal(m)
 	return string(jsonString)
 }

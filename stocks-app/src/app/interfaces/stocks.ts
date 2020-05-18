@@ -1,6 +1,8 @@
 export interface stockInfo {
     exists: boolean;
     data: stockData[];
+    historical: any[]
+    length: number;
 }
 
 interface stockData {
@@ -9,4 +11,3 @@ interface stockData {
     open: number;
     close: number;
 }
-  
