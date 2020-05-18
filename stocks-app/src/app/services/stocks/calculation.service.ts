@@ -13,7 +13,7 @@ export class CalculationService {
     const newObj: Object = []
     for (let index = 0; index < months.length; index++) {
       const newNum: number = data[months[index]]['4. close']
-      const change: number = comparison - newNum
+      const change: number = newNum - comparison
       const percent: number = (change / comparison) * 100
       newObj[index] = percent.toFixed(2)
     }
