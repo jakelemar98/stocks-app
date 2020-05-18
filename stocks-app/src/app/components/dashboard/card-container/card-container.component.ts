@@ -29,7 +29,6 @@ export class CardContainerComponent {
       data: {symbol: this.stocks.data[index].symbol}
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed', result);
       if (result == 1) {
         this.deleteStockData(symbol, index)
       }
@@ -39,7 +38,6 @@ export class CardContainerComponent {
   deleteStockData(symbol: string, index: number): void {
     this.stockService.deleteStockWatcher(symbol).subscribe(
       data => {
-        console.log(data)
         this.stocks.data.splice(index, 1)
       },
       error => console.log(error),

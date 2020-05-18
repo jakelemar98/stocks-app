@@ -82,7 +82,6 @@ func monthLogic(response *http.Response) string {
 		}
 		i++
 	}
-	log.Print(m)
 	jsonString, _ := json.Marshal(m)
 	return string(jsonString)
 }
